@@ -3,137 +3,342 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ほぐし処 こもれび（制作サンプル）</title>
+<title>こもれび｜リラクゼーションサロン（制作サンプル）</title>
 <meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #faf7f2; --ink: #2d2a26; --sub: #6b645b; --line: #e6dfd4;
-    --green: #4f7a5a; --green-dark: #3b5e44; --cream: #f1ebe0;
+    --paper: #f6f1e9; --paper-2: #efe7da; --ink: #2b2722; --sub: #6f665b;
+    --green: #3e5b48; --green-dark: #2f4637; --gold: #b08a5a; --gold-text: #7f6138; --line: #e2d8c8;
+    --serif: "Shippori Mincho", "Yu Mincho", serif;
+    --sans: "Noto Sans JP", "Yu Gothic", sans-serif;
   }
   * { box-sizing: border-box; }
-  body { margin: 0; background: var(--bg); color: var(--ink);
-    font-family: "Hiragino Sans", "Noto Sans JP", "Yu Gothic", sans-serif; line-height: 1.8; }
-  .notice { background: #2d2a26; color: #fff; font-size: 13px; text-align: center; padding: 8px 16px; }
-  .wrap { max-width: 960px; margin: 0 auto; padding: 0 16px; }
-  section { padding: 64px 0; }
-  h1, h2, h3 { line-height: 1.4; margin: 0; }
-  h2 { font-size: 26px; text-align: center; margin-bottom: 32px; }
-  h2 small { display: block; font-size: 13px; color: var(--green); letter-spacing: .15em; margin-bottom: 4px; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans);
+    line-height: 1.9; letter-spacing: .03em; -webkit-font-smoothing: antialiased; word-break: auto-phrase; }
+  img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  a { color: inherit; }
+  h1, h2, h3 { font-family: var(--serif); font-weight: 700; line-height: 1.5; margin: 0; letter-spacing: .04em; word-break: auto-phrase; text-wrap: balance; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+  section { padding: 96px 0; }
+  .eyebrow { font-family: var(--serif); color: var(--gold-text); font-size: 13px; letter-spacing: .3em; display: block; margin-bottom: 12px; }
+  .heading { text-align: center; margin-bottom: 56px; }
+  .heading h2 { font-size: clamp(24px, 4.6vw, 34px); }
 
-  .hero { background: linear-gradient(160deg, #e7efe4 0%, #faf7f2 70%); padding: 80px 0 72px; text-align: center; }
-  .hero .tag { display: inline-block; font-size: 13px; color: var(--green-dark); border: 1px solid var(--green); border-radius: 99px; padding: 2px 14px; }
-  .hero h1 { font-size: clamp(28px, 6vw, 44px); margin: 20px 0 16px; }
-  .hero p { color: var(--sub); margin: 0 0 32px; }
-  .btn { display: inline-block; background: var(--green); color: #fff; text-decoration: none; font-weight: bold;
-    padding: 14px 36px; border-radius: 99px; box-shadow: 0 4px 0 var(--green-dark); }
-  .btn:hover { background: var(--green-dark); }
-  .btn:focus-visible { outline: 3px solid #d9a441; outline-offset: 3px; }
+  /* sample notice */
+  .notice { background: var(--ink); color: #f6f1e9; font-size: 12px; text-align: center; padding: 6px 16px; letter-spacing: .05em; }
 
-  .worries { background: #fff; }
-  .worries ul { list-style: none; padding: 0; margin: 0 auto; max-width: 560px; }
-  .worries li { padding: 14px 0 14px 36px; border-bottom: 1px dashed var(--line); position: relative; }
-  .worries li::before { content: "✓"; position: absolute; left: 6px; color: var(--green); font-weight: bold; }
+  /* header */
+  header.site { position: absolute; z-index: 10; left: 0; right: 0; padding: 20px 0; color: #fff; }
+  header.site .wrap { display: flex; align-items: center; justify-content: space-between; }
+  .logo { font-family: var(--serif); font-size: 24px; font-weight: 700; letter-spacing: .2em; text-decoration: none; }
+  .logo small { display: block; font-size: 10px; letter-spacing: .35em; opacity: .8; margin-top: -4px; }
+  .nav { display: none; gap: 28px; font-size: 14px; }
+  .nav a { text-decoration: none; opacity: .9; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none;
+    background: var(--green); color: #fff; font-weight: 700; letter-spacing: .1em; border-radius: 99px;
+    padding: 16px 40px; transition: background .2s, transform .2s; }
+  .btn:hover { background: var(--green-dark); transform: translateY(-2px); }
+  :focus-visible { outline: 3px solid var(--green-dark); outline-offset: 3px; }
+  header.site :focus-visible, .hero :focus-visible, .cta :focus-visible { outline-color: #fff; }
+  .btn.small { padding: 10px 22px; font-size: 14px; }
+  .btn.light { background: #fff; color: var(--green-dark); }
+  .btn.light:hover { background: var(--paper); }
 
-  .points { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
-  .point { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 24px; }
-  .point .num { color: var(--green); font-weight: bold; font-size: 14px; }
-  .point h3 { font-size: 18px; margin: 4px 0 8px; }
-  .point p { margin: 0; color: var(--sub); font-size: 15px; }
+  /* hero */
+  .hero { position: relative; min-height: 640px; height: 92svh; max-height: 900px; color: #fff; overflow: hidden; }
+  .hero > img { position: absolute; inset: 0; transform: scale(1.06); animation: drift 18s ease-out forwards; }
+  .hero::after { content: ""; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(30,24,16,.45) 0%, rgba(30,24,16,.30) 40%, rgba(30,24,16,.80) 100%); }
+  .hero .inner { position: relative; z-index: 1; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 72px; }
+  .hero h1 { font-size: clamp(32px, 8.4vw, 56px); text-shadow: 0 2px 16px rgba(0,0,0,.45); }
+  .hero p { margin: 20px 0 32px; font-size: 16px; opacity: .92; }
+  .hero .actions { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  @keyframes drift { to { transform: scale(1); } }
 
-  .price { background: var(--cream); }
-  table { width: 100%; max-width: 560px; margin: 0 auto; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; }
-  th, td { padding: 16px; border-bottom: 1px solid var(--line); text-align: left; }
-  td:last-child { text-align: right; font-weight: bold; white-space: nowrap; }
-  .first { text-align: center; margin-top: 16px; color: var(--green-dark); font-weight: bold; }
+  /* concept */
+  .concept .grid { display: grid; gap: 40px; align-items: center; }
+  .concept .photo { aspect-ratio: 4 / 5; border-radius: 4px; overflow: hidden; }
+  .concept h2, .access h2 { font-size: clamp(24px, 5vw, 34px); margin-bottom: 24px; }
+  .concept p { color: var(--sub); margin: 0 0 16px; }
 
-  .flow ol { list-style: none; counter-reset: s; padding: 0; margin: 0 auto; max-width: 560px; }
-  .flow li { counter-increment: s; display: flex; gap: 16px; padding: 12px 0; }
-  .flow li::before { content: counter(s); flex: 0 0 36px; height: 36px; border-radius: 50%; background: var(--green);
-    color: #fff; display: grid; place-items: center; font-weight: bold; }
+  /* worries */
+  .worries { background: var(--paper-2); }
+  .worries ul { list-style: none; padding: 0; margin: 0 auto; max-width: 760px; display: grid; gap: 14px; }
+  .worries li { background: #fff; border-radius: 4px; padding: 20px 24px 20px 64px; position: relative; }
+  .worries li::before { content: ""; position: absolute; left: 24px; top: 50%; width: 22px; height: 22px; margin-top: -11px;
+    border-radius: 50%; border: 1.5px solid var(--gold);
+    background: radial-gradient(circle, var(--gold) 0 4px, transparent 5px); }
+  .worries .answer { text-align: center; margin-top: 48px; font-family: var(--serif); font-size: clamp(20px, 4vw, 26px); }
+  .worries .answer em { font-style: normal; color: var(--green); border-bottom: 2px solid var(--gold); }
 
-  .cta { background: var(--green); color: #fff; text-align: center; }
-  .cta h2 { margin-bottom: 12px; }
-  .cta p { margin: 0 0 28px; }
-  .cta .btn { background: #fff; color: var(--green-dark); box-shadow: 0 4px 0 #c9d6cb; }
-  .info { font-size: 14px; color: var(--sub); text-align: center; padding: 32px 16px; }
-  .info dl { display: inline-grid; grid-template-columns: auto auto; gap: 4px 16px; text-align: left; margin: 0; }
-  .info dt { font-weight: bold; }
-  .info dd { margin: 0; }
+  /* features */
+  .feature { display: grid; gap: 28px; margin-bottom: 72px; align-items: center; }
+  .feature:last-child { margin-bottom: 0; }
+  .feature .photo { aspect-ratio: 3 / 2; border-radius: 4px; overflow: hidden; }
+  .feature .num { font-family: var(--serif); font-size: 56px; line-height: 1; color: var(--gold-text); }
+  .feature h3 { font-size: clamp(21px, 4vw, 26px); margin: 8px 0 14px; }
+  .feature p { color: var(--sub); margin: 0; }
+
+  /* menu */
+  .menu { background: var(--paper-2); }
+  .menu .cards { display: grid; gap: 20px; }
+  .course { background: #fff; border-radius: 4px; padding: 32px 28px; position: relative; border: 1px solid transparent; }
+  .course.pop { border-color: var(--gold); }
+  .course .tag { position: absolute; top: -13px; left: 28px; background: var(--gold-text); color: #fff; font-size: 12px; font-weight: 700; padding: 3px 14px; border-radius: 99px; letter-spacing: .1em; }
+  .course h3 { font-size: 20px; }
+  .course .time { color: var(--sub); font-size: 14px; }
+  .course .price { font-family: var(--serif); font-size: 32px; margin: 12px 0; }
+  .course .price small { font-size: 14px; margin-left: 4px; color: var(--sub); }
+  .course p { margin: 0; color: var(--sub); font-size: 15px; border-top: 1px solid var(--line); padding-top: 14px; }
+  .first { margin-top: 32px; background: var(--green); color: #fff; border-radius: 4px; padding: 24px; text-align: center; font-family: var(--serif); font-size: 18px; }
+  .first b { color: #f0d9b5; font-size: 24px; margin: 0 4px; }
+
+  /* voices */
+  .voices .cards { display: grid; gap: 20px; }
+  .voice { background: #fff; border-radius: 4px; padding: 28px; }
+  .voice p { margin: 0 0 16px; }
+  .voice .who { font-size: 13px; color: var(--sub); }
+  .voices .note { text-align: center; font-size: 12px; color: var(--sub); margin-top: 20px; }
+
+  /* flow */
+  .flow { background: var(--paper-2); }
+  .flow ol { list-style: none; counter-reset: s; padding: 0; margin: 0; display: grid; gap: 16px; }
+  .flow li { counter-increment: s; background: #fff; border-radius: 4px; padding: 24px; }
+  .flow li::before { content: "STEP " counter(s); display: block; font-family: var(--serif); color: var(--gold-text); font-size: 13px; letter-spacing: .2em; }
+  .flow h3 { font-size: 18px; margin: 4px 0 6px; }
+  .flow p { margin: 0; color: var(--sub); font-size: 15px; }
+
+  /* faq */
+  .faq .list { max-width: 760px; margin: 0 auto; }
+  details { border-bottom: 1px solid var(--line); }
+  summary { cursor: pointer; list-style: none; padding: 22px 40px 22px 36px; position: relative; font-weight: 700; }
+  summary::-webkit-details-marker { display: none; }
+  summary::before { content: "Q"; position: absolute; left: 0; font-family: var(--serif); color: var(--gold-text); font-size: 20px; top: 18px; }
+  summary::after { content: "+"; position: absolute; right: 8px; top: 18px; font-size: 22px; color: var(--sub); transition: transform .2s; }
+  details[open] summary::after { transform: rotate(45deg); }
+  details p { margin: 0 0 22px; padding-left: 36px; color: var(--sub); }
+
+  /* access */
+  .access .grid { display: grid; gap: 32px; }
+  .access dl { margin: 0; display: grid; grid-template-columns: 5em 1fr; gap: 12px 16px; }
+  .access dt { font-weight: 700; }
+  .access dd { margin: 0; color: var(--sub); }
+  .map { aspect-ratio: 4 / 3; background: var(--paper-2); border: 1px solid var(--line); border-radius: 4px;
+    display: grid; place-items: center; color: var(--sub); font-size: 14px; }
+
+  /* final cta */
+  .cta { position: relative; color: #fff; text-align: center; overflow: hidden; }
+  .cta > img { position: absolute; inset: 0; }
+  .cta::after { content: ""; position: absolute; inset: 0; background: rgba(28,22,15,.62); }
+  .cta .wrap { position: relative; z-index: 1; }
+  .cta h2 { font-size: clamp(24px, 5vw, 34px); }
+  .cta p { margin: 16px 0 32px; opacity: .9; }
+
+  footer { text-align: center; padding: 40px 20px 120px; font-size: 12px; color: var(--sub); }
+  footer .logo { color: var(--ink); display: inline-block; margin-bottom: 12px; }
+
+  /* mobile sticky bar */
+  .sticky { position: fixed; z-index: 20; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: 1fr 1.6fr; gap: 8px;
+    padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); background: rgba(246,241,233,.95); backdrop-filter: blur(8px);
+    border-top: 1px solid var(--line); }
+  .sticky a { text-align: center; text-decoration: none; font-weight: 700; border-radius: 99px; padding: 12px 0; font-size: 14px; }
+  .sticky .tel { border: 1px solid var(--green); color: var(--green); }
+  .sticky .web { background: var(--green); color: #fff; }
+
+  /* reveal on scroll (only when JS runs) */
+  .js .reveal { opacity: 0; transform: translateY(24px); transition: opacity .9s ease, transform .9s ease; }
+  .js .reveal.in { opacity: 1; transform: none; }
+
+  @media (min-width: 900px) {
+    section { padding: 112px 0; }
+    .nav { display: flex; }
+    .hero .inner { flex-direction: row; justify-content: space-between; align-items: center; padding-bottom: 0; }
+    .hero h1 { writing-mode: vertical-rl; white-space: nowrap; font-size: clamp(40px, 4.2vw, 54px); letter-spacing: .2em; order: 2; margin-right: 6%; }
+    .hero .copy { order: 1; align-self: flex-end; padding-bottom: 96px; max-width: 420px; }
+    .concept .grid { grid-template-columns: 5fr 6fr; gap: 80px; }
+    .feature { grid-template-columns: 6fr 5fr; gap: 56px; }
+    .feature:nth-child(even) .photo { order: 2; }
+    .menu .cards, .voices .cards { grid-template-columns: repeat(3, 1fr); }
+    .flow ol { grid-template-columns: repeat(4, 1fr); }
+    .access .grid { grid-template-columns: 1fr 1fr; align-items: center; }
+    .sticky { display: none; }
+    footer { padding-bottom: 40px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero > img { animation: none; transform: none; }
+    .js .reveal { opacity: 1; transform: none; transition: none; }
+    html { scroll-behavior: auto; }
+    .btn:hover { transform: none; }
+  }
 </style>
+<script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
-  <div class="notice">これはLP制作のサンプルです。店舗・料金・住所はすべて架空です。</div>
+  <div class="notice">これはLP制作のサンプルです。店舗・料金・住所・お客様の声はすべて架空です。</div>
 
-  <header class="hero">
+  <header class="site">
     <div class="wrap">
-      <span class="tag">駅から徒歩3分・完全予約制</span>
-      <h1>がんばった体に、<br>ひと休みの60分を。</h1>
-      <p>肩や腰の重さが気になる方のための、<br>静かなリラクゼーションサロンです。</p>
-      <a class="btn" href="#reserve">空き状況を見る</a>
+      <a class="logo" href="#">こもれび<small>RELAXATION SALON</small></a>
+      <nav class="nav" aria-label="ページ内"><a href="#features">特徴</a><a href="#menu">メニュー</a><a href="#faq">よくある質問</a><a href="#access">アクセス</a></nav>
+      <a class="btn small" href="#reserve">Web予約</a>
     </div>
   </header>
 
-  <section class="worries">
-    <div class="wrap">
-      <h2><small>FOR YOU</small>こんな方に選ばれています</h2>
-      <ul>
-        <li>デスクワークで、夕方になると肩がずっしり重い</li>
-        <li>マッサージ店のにぎやかな雰囲気が苦手</li>
-        <li>仕事帰りの遅い時間に通える場所を探している</li>
-        <li>毎回ちがう人ではなく、同じ担当に任せたい</li>
-      </ul>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <h2><small>POINT</small>こもれびの3つの特徴</h2>
-      <div class="points">
-        <div class="point"><span class="num">01</span><h3>1日5名までの貸し切り</h3><p>施術中はほかのお客様と顔を合わせません。着替えも個室でできます。</p></div>
-        <div class="point"><span class="num">02</span><h3>夜21時まで受付</h3><p>平日は21時が最終受付です。仕事帰りに寄れます。</p></div>
-        <div class="point"><span class="num">03</span><h3>担当はずっと同じ人</h3><p>前回の体の状態をメモしておき、毎回そこから始めます。</p></div>
+  <main>
+    <div class="hero">
+      <img src="https://images.unsplash.com/photo-1773774235180-de511ea41bbe?w=1200&q=70&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1773774235180-de511ea41bbe?w=800&q=70&auto=format&fit=crop 800w, https://images.unsplash.com/photo-1773774235180-de511ea41bbe?w=1200&q=70&auto=format&fit=crop 1200w, https://images.unsplash.com/photo-1773774235180-de511ea41bbe?w=1800&q=70&auto=format&fit=crop 1800w" sizes="100vw" fetchpriority="high" alt="カーテンに落ちる葉の影">
+      <div class="wrap inner">
+        <h1>木もれ日の中で、<br>ほどける六十分。</h1>
+        <div class="copy">
+          <p>〇〇駅3分。平日21時まで受付、1日5名まで。毎回同じ担当がお迎えする、静かなリラクゼーションサロンです。</p>
+          <div class="actions">
+            <a class="btn" href="#reserve">空き状況を見る</a>
+          </div>
+        </div>
       </div>
     </div>
-  </section>
 
-  <section class="price">
-    <div class="wrap">
-      <h2><small>PRICE</small>料金</h2>
-      <table>
-        <tr><th>じっくりコース</th><td>60分 6,600円</td></tr>
-        <tr><th>しっかりコース</th><td>90分 9,350円</td></tr>
-        <tr><th>肩・首だけコース</th><td>30分 3,850円</td></tr>
-      </table>
-      <p class="first">はじめての方は、どのコースも1,000円引き</p>
-    </div>
-  </section>
+    <section class="concept">
+      <div class="wrap grid">
+        <div class="photo reveal"><img src="https://images.unsplash.com/photo-1613578519724-22fdb5d06388?w=900&q=70&auto=format&fit=crop" alt="日差しの入る窓辺" loading="lazy"></div>
+        <div class="reveal">
+          <span class="eyebrow">CONCEPT</span>
+          <h2>話しかけすぎず、<br>放っておきすぎず。</h2>
+          <p>仕事に、家のことに。気づけば一日じゅう力が入っている。こもれびは、そんな体と気持ちを、ゆっくりゆるめるためのサロンです。</p>
+          <p>窓から入るやわらかな光と、静かな音楽。会話は、あなたが話したいときだけ。あなたのペースで過ごしてください。</p>
+        </div>
+      </div>
+    </section>
 
-  <section class="flow">
-    <div class="wrap">
-      <h2><small>FLOW</small>ご予約からの流れ</h2>
-      <ol>
-        <li><div><strong>Webで予約</strong><br>24時間、空いている時間を選べます。</div></li>
-        <li><div><strong>体の状態をお聞きします</strong><br>気になる所と、強さの好みを5分ほどうかがいます。</div></li>
-        <li><div><strong>施術</strong><br>途中で強さを変えたい時は、いつでもお声がけください。</div></li>
-        <li><div><strong>お会計</strong><br>現金・カード・QR決済が使えます。</div></li>
-      </ol>
-    </div>
-  </section>
+    <section class="worries">
+      <div class="wrap">
+        <div class="heading reveal"><span class="eyebrow">FOR YOU</span><h2>こんな夕方、ありませんか？</h2></div>
+        <ul class="reveal">
+          <li>仕事のあと、まっすぐ帰る前にひと息つきたい</li>
+          <li>にぎやかなお店だと、かえって疲れてしまう</li>
+          <li>仕事帰りの遅い時間に、通える場所がない</li>
+          <li>毎回ちがう人に、一から説明するのが面倒</li>
+        </ul>
+        <p class="answer reveal">こもれびは、<em>この夕方のために</em>つくったサロンです。</p>
+      </div>
+    </section>
 
-  <section class="cta" id="reserve">
-    <div class="wrap">
-      <h2>今週の空き状況を見てみる</h2>
-      <p>予約は1分で終わります。キャンセルは前日まで無料です。</p>
-      <a class="btn" href="#reserve">Webで予約する</a>
-    </div>
-  </section>
+    <section id="features">
+      <div class="wrap">
+        <div class="heading reveal"><span class="eyebrow">FEATURES</span><h2>静かに過ごすための、3つの決めごと</h2></div>
+        <div class="feature reveal">
+          <div class="photo"><img src="https://images.unsplash.com/photo-1712638932314-e2b185ca0930?w=1000&q=70&auto=format&fit=crop" alt="白いタオルの上でのボディケア" loading="lazy"></div>
+          <div><div class="num">01</div><h3>1日5名まで、おひとりずつ</h3><p>ご利用中に、ほかのお客様と顔を合わせることはありません。着替えも個室で。まわりを気にせず、ゆったり過ごせます。</p></div>
+        </div>
+        <div class="feature reveal">
+          <div class="photo"><img src="https://images.unsplash.com/photo-1598901986949-f593ff2a31a6?w=1000&q=70&auto=format&fit=crop" alt="あたたかな明かりの中でのボディケア" loading="lazy"></div>
+          <div><div class="num">02</div><h3>平日は、夜21時まで受付</h3><p>仕事帰りに、そのまま寄れる時間まで開けています。照明を落とした夜は、昼よりいっそう静かです。</p></div>
+        </div>
+        <div class="feature reveal">
+          <div class="photo"><img src="https://images.unsplash.com/photo-1757689314932-bec6e9c39e51?w=1000&q=70&auto=format&fit=crop" alt="腕をほぐす手元" loading="lazy"></div>
+          <div><div class="num">03</div><h3>担当は、ずっと同じ人</h3><p>前回の強さの好みや、時間をかけた所を記録しておきます。2回目からは、説明なしで「いつもの」から始められます。</p></div>
+        </div>
+      </div>
+    </section>
 
-  <footer class="info">
-    <dl>
-      <dt>店名</dt><dd>ほぐし処 こもれび（架空）</dd>
-      <dt>営業</dt><dd>平日 11:00〜21:00 ／ 土日 10:00〜18:00</dd>
-      <dt>住所</dt><dd>〇〇市〇〇町1-2-3（架空）</dd>
-    </dl>
+    <section class="menu" id="menu">
+      <div class="wrap">
+        <div class="heading reveal"><span class="eyebrow">MENU</span><h2>メニューと料金</h2></div>
+        <div class="cards reveal">
+          <div class="course"><h3>ショートコース</h3><div class="time">30分</div><div class="price">3,850<small>円（税込）</small></div><p>お昼休みや、買い物の合間に。</p></div>
+          <div class="course pop"><span class="tag">迷ったらこれ</span><h3>じっくりコース</h3><div class="time">60分</div><div class="price">6,600<small>円（税込）</small></div><p>全身をひと通り。はじめての方にもおすすめです。</p></div>
+          <div class="course"><h3>しっかりコース</h3><div class="time">90分</div><div class="price">9,350<small>円（税込）</small></div><p>気になる所に時間をかけたい方に。</p></div>
+        </div>
+        <div class="first reveal">初回は、どのコースも<b>1,000円</b>引き（60分なら初回5,600円、2回目から6,600円・税込）</div>
+        <p class="reveal" style="text-align:center;margin-top:32px"><a class="btn" href="#reserve">空き状況を見る</a></p>
+      </div>
+    </section>
+
+    <section class="voices">
+      <div class="wrap">
+        <div class="heading reveal"><span class="eyebrow">VOICE</span><h2>お客様の声</h2></div>
+        <div class="cards reveal">
+          <div class="voice"><p>「仕事帰りに寄れるのが本当に助かります。帰る前に、一度ひと息つけるのがうれしいです。」</p><div class="who">30代・会社員</div></div>
+          <div class="voice"><p>「静かで、ほかのお客さんに会わないのがいい。気をつかわずに寝てしまいます。」</p><div class="who">40代・自営業</div></div>
+          <div class="voice"><p>「毎回同じ方なので、前回の話の続きから始められます。説明がいらないのが楽です。」</p><div class="who">50代・パート</div></div>
+        </div>
+        <p class="note">※制作サンプルのため架空の文章です。実際の制作では、掲載の許可をいただいた本物の声だけを載せます。</p>
+      </div>
+    </section>
+
+    <section class="flow">
+      <div class="wrap">
+        <div class="heading reveal"><span class="eyebrow">FLOW</span><h2>ご予約からの流れ</h2></div>
+        <ol class="reveal">
+          <li><h3>Webで予約</h3><p>24時間、空いている時間をその場で選べます。</p></li>
+          <li><h3>お好みをお聞きします</h3><p>強さの好みと、時間をかけたい所を5分ほど。</p></li>
+          <li><h3>ボディケア</h3><p>強さを変えたい時は、いつでもお声がけください。</p></li>
+          <li><h3>お会計</h3><p>現金・カード・QR決済に対応しています。</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="faq" id="faq">
+      <div class="wrap">
+        <div class="heading reveal"><span class="eyebrow">FAQ</span><h2>よくある質問</h2></div>
+        <div class="list reveal">
+          <details><summary>着替えは必要ですか？</summary><p>お店でお着替えをご用意しています。お仕事帰りの服装のままお越しください。</p></details>
+          <details><summary>男性も利用できますか？</summary><p>はい、どなたでもご利用いただけます。</p></details>
+          <details><summary>キャンセルはできますか？</summary><p>前日までのご連絡で、キャンセル料はかかりません。当日のキャンセルは、料金の50%を頂いています。</p></details>
+          <details><summary>治療やケガの相談はできますか？</summary><p>こもれびはリラクゼーションサロンで、治療を目的としたお店ではありません。通院中の方は、医師にご相談のうえお越しください。</p></details>
+          <details><summary>駐車場はありますか？</summary><p>専用の駐車場はありません。近くのコインパーキングをご利用ください。</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="access" id="access">
+      <div class="wrap grid">
+        <div class="reveal">
+          <span class="eyebrow">ACCESS</span>
+          <h2>アクセス</h2>
+          <dl>
+            <dt>住所</dt><dd>〇〇市〇〇町1-2-3 こもれびビル2F（架空）</dd>
+            <dt>最寄り</dt><dd>〇〇駅 東口から徒歩3分</dd>
+            <dt>営業</dt><dd>平日 11:00〜21:00（最終受付）<br>土日祝 10:00〜18:00</dd>
+            <dt>定休日</dt><dd>毎週水曜日</dd>
+          </dl>
+        </div>
+        <div class="map reveal">地図（サンプルのため省略）</div>
+      </div>
+    </section>
+
+    <section class="cta" id="reserve">
+      <img src="https://images.unsplash.com/photo-1773774235180-de511ea41bbe?w=1200&q=70&auto=format&fit=crop" alt="" loading="lazy">
+      <div class="wrap reveal">
+        <h2>今週の空き状況を、<br>見てみませんか。</h2>
+        <p>平日は21時まで受付。キャンセルは前日まで無料です。</p>
+        <a class="btn light" href="#reserve">今週の空きを見る（24時間受付）</a>
+        <p style="font-size:13px;margin:12px 0 0">※サンプルのため、予約ページにはつながりません</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <a class="logo" href="#">こもれび<small>RELAXATION SALON</small></a>
+    <div>このページは制作サンプルです</div>
+    <div>写真（Unsplash）：<a href="https://unsplash.com/photos/8oW6gov8-7c">1</a> <a href="https://unsplash.com/photos/2vKgG0pSKkM">2</a> <a href="https://unsplash.com/photos/yBLLzNcA6GU">3</a> <a href="https://unsplash.com/photos/WAm_HaI4W2E">4</a> <a href="https://unsplash.com/photos/YBfzGCJjLuI">5</a>（2026-10-20確認）</div>
   </footer>
+
+  <nav class="sticky" aria-label="予約">
+    <a class="tel" href="#menu">メニュー</a>
+    <a class="web" href="#reserve">空きを見る</a>
+  </nav>
+
+<script>
+  // ponytail: one observer for all fade-ins; no library
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  }), { rootMargin: '0px 0px -10% 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
 </body>
 </html>
