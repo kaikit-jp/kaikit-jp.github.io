@@ -1,41 +1,99 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KAIKIT</title>
-  <meta name="description" content="KAIKIT develops simple and useful applications.">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KAIKIT</title>
+<meta name="description" content="KAIKIT は Android アプリを作っている個人デベロッパーです。">
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #fbfaf7;
+    --fg: #1f1d1a;
+    --muted: #6b675f;
+    --line: #e3ded4;
+    --card: #ffffff;
+    --accent: #b8741a;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #16150f;
+      --fg: #eceae4;
+      --muted: #a29c90;
+      --line: #33302a;
+      --card: #201e18;
+      --accent: #e0a852;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 0 20px;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
+                 "Noto Sans JP", "Yu Gothic UI", sans-serif;
+    line-height: 1.8;
+    -webkit-text-size-adjust: 100%;
+  }
+  .wrap { max-width: 680px; margin: 0 auto; padding-block: 64px 80px; }
+  header { margin-bottom: 56px; }
+  .logo {
+    font-size: 30px; font-weight: 700; letter-spacing: 0.16em; margin: 0;
+  }
+  .tagline { color: var(--muted); margin: 8px 0 0; font-size: 15px; }
+  h2 {
+    font-size: 14px; letter-spacing: 0.1em; color: var(--muted);
+    font-weight: 600; margin: 48px 0 16px; text-transform: uppercase;
+  }
+  .app {
+    display: block; text-decoration: none; color: inherit;
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 22px 24px;
+  }
+  .app-name { font-size: 20px; font-weight: 700; margin: 0; }
+  .app-desc { color: var(--muted); margin: 6px 0 0; font-size: 15px; }
+  .links { margin: 14px 0 0; padding: 0; list-style: none; font-size: 14px; }
+  .links li { margin-top: 4px; }
+  a { color: var(--accent); }
+  dl { margin: 0; }
+  dt { color: var(--muted); font-size: 13px; margin-top: 14px; }
+  dd { margin: 2px 0 0; }
+  footer {
+    margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--line);
+    color: var(--muted); font-size: 13px;
+  }
+</style>
 </head>
 <body>
-  <main>
-    <h1>KAIKIT</h1>
+<div class="wrap">
 
-    <p>
-      KAIKITは、シンプルで使いやすいアプリを開発しています。
-    </p>
+<header>
+  <h1 class="logo">KAIKIT</h1>
+  <p class="tagline">毎日ちょっと楽になる Android アプリを作っています。</p>
+</header>
 
-    <section>
-      <h2>Kakimo</h2>
-      <p>
-        Kakimoは、すばやくメモを作成、保存、共有できる
-        シンプルなメモ帳アプリです。
-      </p>
+<h2>アプリ</h2>
+<div class="app">
+  <p class="app-name">カキモ（Kakimo）</p>
+  <p class="app-desc">手書きとキーボード入力、どちらでも書けるメモ帳。ホーム画面のウィジェットに貼りつけて、タップすればそのまま書き足せます。</p>
+  <ul class="links">
+    <li><a href="/privacy/kakimo/">プライバシーポリシー</a></li>
+  </ul>
+</div>
 
-      <p>
-        <a href="/privacy/kakimo/">
-          Kakimo プライバシーポリシー
-        </a>
-      </p>
-    </section>
+<h2>お問い合わせ</h2>
+<dl>
+  <dt>メール</dt>
+  <dd><a href="mailto:support.kaikit@gmail.com">support.kaikit@gmail.com</a></dd>
+  <dt>デベロッパー</dt>
+  <dd>KAIKIT</dd>
+</dl>
 
-    <section>
-      <h2>お問い合わせ</h2>
-      <p>
-        <a href="mailto:support.kaikit@gmail.com">
-          support.kaikit@gmail.com
-        </a>
-      </p>
-    </section>
-  </main>
+<footer>
+  &copy; 2026 KAIKIT
+</footer>
+
+</div>
 </body>
 </html>

@@ -1,187 +1,255 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Kakimo privacy policy / Kakimo プライバシーポリシー">
-  <title>Kakimo プライバシーポリシー | KAIKIT</title>
-  <style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>カキモ（Kakimo）プライバシーポリシー | KAIKIT</title>
+<meta name="description" content="Android アプリ「カキモ（Kakimo）」のプライバシーポリシー。Privacy Policy for Kakimo.">
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #fbfaf7;
+    --fg: #1f1d1a;
+    --muted: #6b675f;
+    --line: #e3ded4;
+    --card: #ffffff;
+    --accent: #b8741a;
+  }
+  @media (prefers-color-scheme: dark) {
     :root {
-      color-scheme: light dark;
-      --bg: #f7f8fa;
-      --card: #ffffff;
-      --text: #202124;
-      --muted: #5f6368;
-      --accent: #69b821;
-      --border: #e2e5e9;
+      --bg: #16150f;
+      --fg: #eceae4;
+      --muted: #a29c90;
+      --line: #33302a;
+      --card: #201e18;
+      --accent: #e0a852;
     }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #111315;
-        --card: #1b1e21;
-        --text: #f1f3f4;
-        --muted: #bdc1c6;
-        --border: #34383d;
-      }
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans JP", sans-serif;
-      line-height: 1.75;
-    }
-    main {
-      width: min(900px, calc(100% - 32px));
-      margin: 40px auto;
-      padding: 32px;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-    }
-    h1 { margin-top: 0; line-height: 1.35; }
-    h2 { margin-top: 2em; line-height: 1.45; }
-    h3 { margin-top: 1.5em; }
-    a { color: var(--accent); }
-    .meta, .note { color: var(--muted); }
-    .language-nav { margin: 1.5rem 0; }
-    .language-nav a { margin-right: 1rem; }
-    hr { margin: 3rem 0; border: 0; border-top: 1px solid var(--border); }
-    footer { margin-top: 3rem; color: var(--muted); }
-    @media (max-width: 600px) {
-      main { margin: 16px auto; padding: 22px; border-radius: 14px; }
-      h1 { font-size: 1.65rem; }
-    }
-  </style>
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 0 20px;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
+                 "Noto Sans JP", "Yu Gothic UI", sans-serif;
+    line-height: 1.85;
+    -webkit-text-size-adjust: 100%;
+  }
+  .wrap { max-width: 680px; margin: 0 auto; padding-block: 56px 80px; }
+  .home { font-size: 13px; letter-spacing: 0.14em; text-decoration: none; color: var(--muted); }
+  h1 { font-size: 26px; margin: 24px 0 4px; line-height: 1.4; }
+  .date { color: var(--muted); font-size: 13px; margin: 0 0 8px; }
+  .langbar { margin: 24px 0 40px; font-size: 14px; }
+  .langbar a { margin-right: 14px; }
+  h2 {
+    font-size: 18px; margin: 44px 0 10px; padding-top: 20px;
+    border-top: 1px solid var(--line);
+  }
+  h3 { font-size: 15px; margin: 24px 0 6px; }
+  p, li { font-size: 15px; }
+  ul { padding-left: 1.3em; }
+  li { margin: 4px 0; }
+  a { color: var(--accent); }
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.92em;
+  }
+  .note {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 12px; padding: 16px 20px; margin: 20px 0;
+  }
+  .note p { margin: 0; }
+  table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 14px; }
+  th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+  .tablewrap { overflow-x: auto; }
+  footer {
+    margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--line);
+    color: var(--muted); font-size: 13px;
+  }
+</style>
 </head>
 <body>
-  <main>
-    <p><a href="/">&larr; KAIKIT</a></p>
-    <h1>Kakimo プライバシーポリシー</h1>
-    <p class="meta">制定日・最終更新日：2026年9月14日</p>
-    <nav class="language-nav" aria-label="Language">
-      <a href="#ja">日本語</a>
-      <a href="#en">English</a>
-    </nav>
+<div class="wrap">
 
-    <section id="ja" lang="ja">
-      <p>KAIKIT（以下「当方」）は、Androidアプリ「Kakimo」（パッケージ名：jp.kaikit.kakimo。以下「本アプリ」）における利用者情報の取扱いについて、以下のとおり定めます。</p>
+<a class="home" href="/">&larr; KAIKIT</a>
 
-      <h2>1. 本アプリが取り扱う情報</h2>
-      <h3>メモとアプリ設定</h3>
-      <p>利用者が作成したメモ、ウィジェットに表示する内容、表示設定、広告非表示期限などは、原則として利用者の端末内に保存されます。当方は、メモ本文を当方のサーバーへ送信、収集または保管しません。本アプリの利用にアカウント登録は必要ありません。</p>
-      <p>利用者が共有機能を操作した場合、選択したメモはAndroidの共有機能を通じて、利用者が選んだ外部アプリまたはサービスへ渡されます。その後の取扱いには、当該外部サービスのプライバシーポリシーが適用されます。</p>
+<h1>カキモ（Kakimo）プライバシーポリシー</h1>
+<p class="date">制定日：2026年9月14日</p>
 
-      <h3>広告に関する情報</h3>
-      <p>本アプリは、広告配信のためGoogle AdMob（Google Mobile Ads SDK）を利用します。Googleは、IPアドレス、アプリの利用状況や広告との操作、診断情報、広告IDなどの端末識別子を自動的に収集または処理する場合があります。これらは、広告配信、効果測定、分析、不正利用の防止などに使用されます。地域や利用者の同意状況に応じて、パーソナライズ広告または非パーソナライズ広告が表示されます。メモ本文が広告配信のためにGoogleへ送信されることはありません。</p>
+<p class="langbar"><a href="#ja">日本語</a><a href="#en">English</a></p>
 
-      <h3>同意に関する情報</h3>
-      <p>本アプリは、広告に関する同意の取得・管理にGoogle User Messaging Platform（UMP）を利用します。同意の選択内容や関連する端末情報がGoogleによって処理される場合があります。</p>
+<section id="ja">
 
-      <h3>購入に関する情報</h3>
-      <p>永久広告削除などのアプリ内購入はGoogle Playの決済機能を利用します。決済はGoogleが処理し、当方がクレジットカード番号などの支払情報を取得することはありません。本アプリは、購入済み機能を提供・復元するため、商品IDや購入状態をGoogle Playから確認する場合があります。</p>
+<div class="note">
+  <p>カキモは、書いたメモを<strong>端末の中だけ</strong>に保存します。KAIKIT がメモの内容を受け取ることはありません。広告を表示するため、Google AdMob が広告IDなどを取得します。</p>
+</div>
 
-      <h2>2. 利用目的</h2>
-      <ul>
-        <li>本アプリの機能の提供および設定の維持</li>
-        <li>広告の配信、効果測定および不正利用の防止</li>
-        <li>アプリ内購入の処理および購入状態の復元</li>
-        <li>不具合への対応および品質改善</li>
-        <li>利用者からのお問い合わせへの対応</li>
-      </ul>
+<h2>1. このポリシーについて</h2>
+<p>KAIKIT（以下「当方」）が提供する Android アプリ「カキモ（Kakimo）」（パッケージ名 <code>jp.kaikit.kakimo</code>、以下「本アプリ」）における、利用者の情報の取り扱いについて定めます。</p>
 
-      <h2>3. 第三者サービス</h2>
-      <p>本アプリは、Google AdMob、Google User Messaging PlatformおよびGoogle Play Billingを利用します。第三者サービスによる情報の取扱いについては、以下をご確認ください。</p>
-      <ul>
-        <li><a href="https://policies.google.com/privacy">Google プライバシーポリシー</a></li>
-        <li><a href="https://policies.google.com/technologies/ads">Google 広告に関するポリシー</a></li>
-        <li><a href="https://policies.google.com/technologies/partner-sites">Googleのサービスを使用するサイトやアプリから収集した情報の使用</a></li>
-        <li><a href="https://developers.google.com/admob/android/privacy/play-data-disclosure">Google Mobile Ads SDKのデータ開示</a></li>
-      </ul>
-      <p>Googleは、各社の方針に従い、利用者の居住国外を含む地域で情報を処理する場合があります。</p>
+<h2>2. 当方が取得しない情報</h2>
+<p>本アプリは、利用者登録もログインも必要としません。当方は次の情報を<strong>取得しません</strong>。</p>
+<ul>
+  <li>メモの本文、手書きの内容、タイトル</li>
+  <li>アプリ内の設定（背景色、ペンの太さ、並び順など）</li>
+  <li>氏名、メールアドレス、電話番号、住所などの個人情報</li>
+  <li>連絡先、写真、位置情報、通話履歴</li>
+</ul>
+<p>これらはすべて端末内にのみ保存され、外部のサーバーへ送信されることはありません。当方はサーバーを運用しておらず、メモの内容を見ることはできません。</p>
 
-      <h2>4. 第三者提供・販売</h2>
-      <p>当方は、メモ本文を第三者に販売または提供しません。ただし、利用者自身による共有操作、法令に基づく場合、または上記の第三者サービスがその機能提供に必要な範囲で情報を処理する場合を除きます。</p>
+<h2>3. バックアップとメモの共有について</h2>
+<p>本アプリには、メモをファイルに書き出す機能と、画像として共有する機能があります。</p>
+<ul>
+  <li>これらは<strong>利用者が操作したときだけ</strong>実行されます。</li>
+  <li>書き出し先や共有先（他のアプリ、クラウドストレージなど）は利用者が選びます。</li>
+  <li>選ばれた先での取り扱いは、その提供元のプライバシーポリシーに従います。当方はその内容に関与できません。</li>
+</ul>
 
-      <h2>5. 保存期間と削除</h2>
-      <p>端末内のメモは、利用者が本アプリ上で削除するまで保存されます。アプリのデータ消去またはアンインストールによって端末内データは通常削除されますが、端末やOSのバックアップ設定により復元される場合があります。広告関連情報および購入履歴の保存期間は、Googleのポリシーに従います。</p>
+<h2>4. 広告について</h2>
+<p>本アプリは、Google LLC が提供する広告配信サービス「Google AdMob」を利用しています。</p>
+<div class="tablewrap">
+<table>
+  <tr><th>広告の種類</th><td>バナー広告（メモ一覧画面の下部）／リワード広告（利用者が自ら選んで視聴する動画）</td></tr>
+  <tr><th>取得される情報</th><td>広告ID（Advertising ID）、IPアドレス、端末の種類やOSのバージョン、広告の表示・操作の記録</td></tr>
+  <tr><th>目的</th><td>広告の配信、広告の効果測定、不正な操作の防止</td></tr>
+  <tr><th>取得する主体</th><td>Google LLC（当方ではありません）</td></tr>
+</table>
+</div>
+<p>Google によるデータの取り扱いについては、次をご確認ください。</p>
+<ul>
+  <li><a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">Google のサービスを使用するサイトやアプリから収集した情報の Google による使用</a></li>
+  <li><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google プライバシー ポリシー</a></li>
+</ul>
+<p>広告IDは、Android の「設定 → プライバシー → 広告」からいつでもリセット、または削除できます。</p>
 
-      <h2>6. 子どもの利用</h2>
-      <p>本アプリは一般利用者向けであり、13歳未満の子どもを対象として設計されたものではありません。居住地域の法令により保護者の同意が必要な場合は、保護者の同意のもとで利用してください。</p>
+<h3>広告の非表示について</h3>
+<p>本アプリでは、リワード広告を最後まで視聴すると一定時間、広告が表示されなくなります。また、アプリ内課金「広告を永久に削除」をご購入いただくと、以後は広告を表示せず、広告のための通信も行いません。この状態を記録する情報は端末内にのみ保存されます。</p>
 
-      <h2>7. 安全管理</h2>
-      <p>当方は、取り扱う情報を保護するため合理的な安全対策に努めます。ただし、電子的な保存または通信の完全な安全性を保証するものではありません。</p>
+<h2>5. 同意の取得（欧州経済領域・英国・スイスの利用者）</h2>
+<p>欧州経済領域（EEA）、英国、スイスの利用者に対しては、Google が提供する User Messaging Platform（UMP）を用いて、パーソナライズド広告などに関する同意を確認します。</p>
+<p>同意の内容は、アプリ内の「設定」画面からいつでも変更できます。</p>
 
-      <h2>8. 本ポリシーの変更</h2>
-      <p>本ポリシーは、機能の変更、法令または第三者サービスの変更などに応じて改定することがあります。重要な変更がある場合は、本ページへの掲載など適切な方法でお知らせし、最終更新日を更新します。</p>
+<h2>6. アプリ内課金について</h2>
+<p>本アプリは、買い切りのアプリ内課金「広告を永久に削除」（商品ID <code>remove_ads_forever</code>）を提供しています。</p>
+<ul>
+  <li>決済はすべて Google Play が処理します。</li>
+  <li>当方はクレジットカード番号などの決済情報を受け取らず、保存もしません。</li>
+  <li>購入の記録は Google Play アカウントに紐づくため、機種変更時などは「購入を復元」から引き継げます。</li>
+</ul>
+<p>Google Play における取り扱いは <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google プライバシー ポリシー</a>に従います。</p>
 
-      <h2>9. お問い合わせ</h2>
-      <p>本ポリシーまたは本アプリの情報取扱いに関するお問い合わせ：</p>
-      <p>KAIKIT<br><a href="mailto:support.kaikit@gmail.com">support.kaikit@gmail.com</a></p>
-    </section>
+<h2>7. 権限について</h2>
+<div class="tablewrap">
+<table>
+  <tr><th>インターネット接続</th><td>広告の取得と、アプリ内課金の確認に使用します。</td></tr>
+  <tr><th>ファイルの読み書き</th><td>バックアップの書き出しと復元のときだけ、利用者が選んだファイルに対して使用します。</td></tr>
+</table>
+</div>
 
-    <hr>
+<h2>8. お子様の利用について</h2>
+<p>本アプリは、13歳未満のお子様を対象として設計されたものではありません。当方が、お子様から意図的に個人情報を取得することはありません。</p>
 
-    <section id="en" lang="en">
-      <h1>Kakimo Privacy Policy</h1>
-      <p class="meta">Effective and last updated: September 14, 2026</p>
-      <p>KAIKIT ("we," "us," or "our") establishes this Privacy Policy for the Android application Kakimo (package name: jp.kaikit.kakimo; the "App").</p>
+<h2>9. 本ポリシーの変更</h2>
+<p>法令の改正や機能の追加にともない、本ポリシーを変更することがあります。重要な変更を行う場合は、本ページに変更後の内容と日付を掲載します。</p>
 
-      <h2>1. Information handled by the App</h2>
-      <h3>Notes and app settings</h3>
-      <p>Notes created by users, content displayed in the home-screen widget, display settings, and the ad-free expiration time are generally stored locally on the user's device. We do not transmit, collect, or store note contents on our own servers. No account registration is required to use the App.</p>
-      <p>When a user chooses to share a note, the selected content is sent through Android's share function to an external app or service selected by the user. The privacy policy of that external service then applies.</p>
+<h2>10. お問い合わせ</h2>
+<p>本ポリシーや本アプリについてのご質問は、次までご連絡ください。</p>
+<ul>
+  <li>デベロッパー：KAIKIT</li>
+  <li>メール：<a href="mailto:support.kaikit@gmail.com">support.kaikit@gmail.com</a></li>
+</ul>
 
-      <h3>Advertising data</h3>
-      <p>The App uses Google AdMob (Google Mobile Ads SDK) to serve advertisements. Google may automatically collect or process information such as IP address, app and ad interactions, diagnostic information, and device identifiers such as the advertising ID. This information may be used for ad delivery, measurement, analytics, and fraud prevention. Personalized or non-personalized ads may be shown depending on the user's region and consent choices. Note contents are not sent to Google for advertising.</p>
+</section>
 
-      <h3>Consent information</h3>
-      <p>The App uses Google User Messaging Platform (UMP) to obtain and manage advertising consent. Google may process consent choices and related device information.</p>
+<section id="en">
 
-      <h3>Purchase information</h3>
-      <p>In-app purchases, such as permanent ad removal, are processed by Google Play. We do not receive payment details such as credit card numbers. To provide or restore purchased features, the App may verify product identifiers and purchase status with Google Play.</p>
+<h1>Privacy Policy for Kakimo</h1>
+<p class="date">Effective date: September 14, 2026</p>
 
-      <h2>2. Purposes of use</h2>
-      <ul>
-        <li>Providing App features and retaining settings</li>
-        <li>Serving and measuring ads and preventing abuse</li>
-        <li>Processing in-app purchases and restoring purchase status</li>
-        <li>Troubleshooting and improving quality</li>
-        <li>Responding to user inquiries</li>
-      </ul>
+<div class="note">
+  <p>Kakimo keeps your notes <strong>on your device only</strong>. KAIKIT never receives the content of your notes. Google AdMob collects advertising identifiers in order to serve ads.</p>
+</div>
 
-      <h2>3. Third-party services</h2>
-      <p>The App uses Google AdMob, Google User Messaging Platform, and Google Play Billing. Please review the following pages for information about how these services handle data:</p>
-      <ul>
-        <li><a href="https://policies.google.com/privacy">Google Privacy Policy</a></li>
-        <li><a href="https://policies.google.com/technologies/ads">Google Advertising Policies</a></li>
-        <li><a href="https://policies.google.com/technologies/partner-sites">How Google uses information from sites or apps that use its services</a></li>
-        <li><a href="https://developers.google.com/admob/android/privacy/play-data-disclosure">Google Mobile Ads SDK data disclosure</a></li>
-      </ul>
-      <p>Google may process information in countries outside the user's country of residence in accordance with its policies.</p>
+<h2>1. About this policy</h2>
+<p>This policy explains how the Android app &ldquo;Kakimo&rdquo; (package name <code>jp.kaikit.kakimo</code>, the &ldquo;App&rdquo;), provided by KAIKIT (&ldquo;we&rdquo;), handles your information.</p>
 
-      <h2>4. Sharing and sale</h2>
-      <p>We do not sell or provide note contents to third parties, except when the user initiates sharing, when required by law, or when the third-party services listed above process information as necessary to provide their services.</p>
+<h2>2. Information we do not collect</h2>
+<p>The App requires no account and no sign-in. We do <strong>not</strong> collect:</p>
+<ul>
+  <li>The text, handwriting, or titles of your notes</li>
+  <li>Your in-app settings (background colour, pen width, sort order, and so on)</li>
+  <li>Your name, email address, phone number, or postal address</li>
+  <li>Contacts, photos, location, or call history</li>
+</ul>
+<p>All of the above is stored on your device only and is never sent to any server. We operate no server and cannot see your notes.</p>
 
-      <h2>5. Retention and deletion</h2>
-      <p>Notes stored on the device remain until deleted by the user in the App. Clearing the App's data or uninstalling it normally removes local data, although data may be restored depending on device or operating-system backup settings. Retention of advertising information and purchase history is governed by Google's policies.</p>
+<h2>3. Backups and sharing</h2>
+<p>The App can export your notes to a file and share a note as an image.</p>
+<ul>
+  <li>These happen <strong>only when you ask for them</strong>.</li>
+  <li>You choose the destination (another app, cloud storage, and so on).</li>
+  <li>Once exported, the data is handled under the privacy policy of the destination you chose. We have no control over it.</li>
+</ul>
 
-      <h2>6. Children</h2>
-      <p>The App is intended for a general audience and is not designed specifically for children under 13. Where local law requires parental consent, children should use the App only with the consent of a parent or guardian.</p>
+<h2>4. Advertising</h2>
+<p>The App uses Google AdMob, an advertising service provided by Google LLC.</p>
+<div class="tablewrap">
+<table>
+  <tr><th>Ad formats</th><td>Banner ad at the bottom of the note list; rewarded video that you choose to watch</td></tr>
+  <tr><th>Data collected</th><td>Advertising ID, IP address, device model and OS version, records of ad impressions and interactions</td></tr>
+  <tr><th>Purpose</th><td>Serving ads, measuring ad performance, preventing fraud</td></tr>
+  <tr><th>Collected by</th><td>Google LLC (not by us)</td></tr>
+</table>
+</div>
+<p>For details on how Google uses this data, see:</p>
+<ul>
+  <li><a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">How Google uses information from sites or apps that use our services</a></li>
+  <li><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a></li>
+</ul>
+<p>You can reset or delete your advertising ID at any time from Android <em>Settings &rarr; Privacy &rarr; Ads</em>.</p>
 
-      <h2>7. Security</h2>
-      <p>We take reasonable measures to protect the information handled by the App. However, no method of electronic storage or transmission can be guaranteed to be completely secure.</p>
+<h3>Removing ads</h3>
+<p>Watching a rewarded video to the end hides ads for a period of time. Purchasing the in-app product &ldquo;Remove ads forever&rdquo; stops ads entirely, and the App then makes no ad-related network requests. The record of this state is stored on your device only.</p>
 
-      <h2>8. Changes to this Policy</h2>
-      <p>We may update this Policy in response to changes in App features, laws, or third-party services. Material changes will be announced by an appropriate method, such as posting them on this page, and the last updated date will be revised.</p>
+<h2>5. Consent (EEA, UK and Switzerland)</h2>
+<p>For users in the European Economic Area, the United Kingdom and Switzerland, we ask for consent regarding personalised advertising through Google&rsquo;s User Messaging Platform (UMP).</p>
+<p>You can change your choice at any time from the Settings screen in the App.</p>
 
-      <h2>9. Contact</h2>
-      <p>For questions about this Policy or the App's handling of information:</p>
-      <p>KAIKIT<br><a href="mailto:support.kaikit@gmail.com">support.kaikit@gmail.com</a></p>
-    </section>
+<h2>6. In-app purchases</h2>
+<p>The App offers a one-time purchase, &ldquo;Remove ads forever&rdquo; (product ID <code>remove_ads_forever</code>).</p>
+<ul>
+  <li>All payments are processed by Google Play.</li>
+  <li>We never receive or store your card number or any other payment details.</li>
+  <li>The purchase is tied to your Google Play account, so you can bring it to a new device with &ldquo;Restore purchase&rdquo;.</li>
+</ul>
+<p>Google Play&rsquo;s handling of your data is governed by the <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a>.</p>
 
-    <footer>&copy; 2026 KAIKIT</footer>
-  </main>
+<h2>7. Permissions</h2>
+<div class="tablewrap">
+<table>
+  <tr><th>Internet access</th><td>Used to fetch ads and to verify in-app purchases.</td></tr>
+  <tr><th>File access</th><td>Used only when you export or restore a backup, and only for the file you choose.</td></tr>
+</table>
+</div>
+
+<h2>8. Children</h2>
+<p>The App is not directed at children under 13. We do not knowingly collect personal information from children.</p>
+
+<h2>9. Changes to this policy</h2>
+<p>We may update this policy as the law or the App changes. When we make a significant change, we will post the updated policy and its date on this page.</p>
+
+<h2>10. Contact</h2>
+<ul>
+  <li>Developer: KAIKIT</li>
+  <li>Email: <a href="mailto:support.kaikit@gmail.com">support.kaikit@gmail.com</a></li>
+</ul>
+
+</section>
+
+<footer>&copy; 2026 KAIKIT</footer>
+
+</div>
 </body>
 </html>
