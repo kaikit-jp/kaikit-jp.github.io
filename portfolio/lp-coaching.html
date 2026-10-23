@@ -20,7 +20,7 @@
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 16px;
-    line-height: 1.9; letter-spacing: .03em; -webkit-font-smoothing: antialiased; line-break: strict; overflow-wrap: anywhere; overflow-x: hidden; }
+    line-height: 1.9; letter-spacing: .03em; -webkit-font-smoothing: antialiased; line-break: strict; overflow-wrap: break-word; overflow-x: hidden; }
   img { display: block; width: 100%; height: 100%; object-fit: cover; }
   a { color: inherit; }
   h1, h2, h3, .answer { word-break: auto-phrase; }
@@ -32,6 +32,7 @@
   .tone { background: var(--surface); }
   .heading { margin-bottom: 48px; }
   .heading h2 { font-size: clamp(26px, 5vw, 40px); }
+  .heading p { margin: 14px 0 0; color: var(--sub); }
 
   /* sample notice */
   .notice { background: var(--surface); color: var(--sub); border-bottom: 1px solid var(--line); font-size: 12px; line-height: 1.6;
@@ -44,7 +45,6 @@
   .logo { display: inline-flex; align-items: center; gap: 10px; font-family: var(--display); font-weight: 700; font-size: 24px;
     letter-spacing: .14em; text-decoration: none; line-height: 1; }
   .logo svg { width: 26px; height: 26px; color: var(--cyan); }
-  .logo small { display: block; font-size: 11px; letter-spacing: .3em; color: var(--sub); margin-top: 4px; }
   .nav { display: none; gap: 28px; font-size: 15px; }
   .nav a { text-decoration: none; color: var(--sub); }
   .nav a:hover { color: var(--ink); }
@@ -73,7 +73,8 @@
   .eyebrow { font-family: var(--display); font-weight: 700; color: var(--cyan); font-size: 15px; letter-spacing: .24em;
     text-transform: uppercase; display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
   .eyebrow::before { content: ""; width: 22px; height: 2px; background: var(--cyan); }
-  .hero h1 { font-size: clamp(32px, 8.6vw, 62px); line-height: 1.35; margin: 4px 0 18px; }
+  /* pull the opening 「 back so line 1 aligns with line 2; space-all keeps the browser from also trimming it */
+  .hero h1 { font-size: clamp(32px, 8.6vw, 62px); line-height: 1.35; margin: 4px 0 18px; text-indent: -.5em; text-spacing-trim: space-all; }
   .hero h1 em { font-style: normal; color: var(--cyan); }
   .hero p { margin: 0 0 20px; max-width: 34em; }
   .chips { list-style: none; padding: 0; margin: 0 0 28px; display: flex; flex-wrap: wrap; gap: 8px; }
@@ -100,12 +101,12 @@
   .memo .next { margin: 16px 0 0; }
   .memo .next b { display: block; font-size: 14px; }
   .memo .next span { display: block; }
+  .memo .next b span { font-weight: 400; }
   .covers .cards { display: grid; gap: 16px; }
   .cover { background: var(--card); border: 1px solid var(--line); padding: 28px 24px; position: relative; }
   .cover::before { content: ""; position: absolute; top: -1px; right: -1px; width: 18px; height: 18px;
     border-top: 2px solid var(--cyan); border-right: 2px solid var(--cyan); }
-  .cover .num { font-family: var(--display); font-weight: 700; font-size: 14px; line-height: 1; letter-spacing: .2em; color: var(--cyan); }
-  .cover h3 { font-size: 20px; margin: 10px 0 8px; }
+  .cover h3 { font-size: 20px; margin: 0 0 8px; }
   .cover p { margin: 0; color: var(--sub); }
 
   /* coach */
@@ -116,8 +117,11 @@
   .coach .lead { font-size: 18px; font-weight: 800; margin: 12px 0 16px; }
   .coach ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
   .coach li { padding-left: 26px; position: relative; color: var(--sub); }
-  .coach li::before { content: ""; position: absolute; left: 0; top: .72em; width: 10px; height: 10px; border: 2px solid var(--cyan); transform: rotate(45deg); }
-  .note { font-size: 14px; color: var(--sub); margin: 20px 0 0; }
+  .coach li::before { content: ""; position: absolute; left: 0; top: .95em; width: 12px; height: 2px; background: var(--cyan); }
+  .facts { margin: 28px 0 0; display: grid; grid-template-columns: auto 1fr; border-top: 1px solid var(--line); }
+  .facts dt, .facts dd { margin: 0; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .facts dt { padding-right: 20px; font-size: 14px; line-height: 1.9rem; color: var(--sub); white-space: nowrap; }
+  .note { font-size: 14px; color: var(--sub); margin: 16px 0 0; }
 
   /* plans */
   .plans .cards { display: grid; gap: 20px; }
@@ -156,7 +160,7 @@
   .cta { text-align: center; background: var(--grid-lines), var(--bg); padding: 104px 0 112px; }
   .cta h2 { font-size: clamp(26px, 5.4vw, 42px); }
   .cta p { margin: 16px auto 32px; max-width: 32em; }
-  .dm-note { max-width: 520px; margin: 20px auto 0; font-size: 14px; color: var(--sub); transition: color .3s; }
+  .dm-note { max-width: 520px; margin: 20px auto 0; font-size: 14px; color: var(--sub); transition: color .3s; scroll-margin-top: 50vh; }
   .dm-note:target { color: var(--ink); }
 
   footer { text-align: center; padding: 48px 20px 120px; font-size: 14px; color: var(--sub); border-top: 1px solid var(--line); }
@@ -214,7 +218,7 @@
     <div class="wrap">
       <a class="logo" href="#top" aria-label="SIGHTLINE（ページの先頭へ）">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="7"/><path d="M12 1v6M12 17v6M1 12h6M17 12h6"/></svg>
-        <span>SIGHTLINE<small>FPS COACHING</small></span>
+        <span>SIGHTLINE</span>
       </a>
       <nav class="nav" aria-label="ページ内"><a href="#covers">内容</a><a href="#coach">コーチ</a><a href="#plans">料金</a><a href="#faq">よくある質問</a></nav>
       <a class="btn small" href="#contact">無料で相談する</a>
@@ -228,8 +232,8 @@
         <div class="copy">
           <span class="eyebrow">Online FPS coaching</span>
           <h1>「なんとなく<br>負けた」を、<br><em>言葉にする。</em></h1>
-          <p>バトロワ系FPSのオンラインコーチング<span class="nb">「SIGHTLINE（サイトライン）」</span>。あなたの試合の録画を一緒に見て、次の1試合で試すことを決めていきます。</p>
-          <ul class="chips"><li>1回60分・オンライン</li><li>PC・家庭用ゲーム機</li><li>初回の相談は無料</li></ul>
+          <p>バトロワ系FPSのオンラインコーチング<span class="nb">「SIGHTLINE（サイトライン）」。</span><span class="nb">あなたの試合の録画を</span><span class="nb">一緒に見て、</span><span class="nb">次の1試合で</span><span class="nb">試すことを</span><span class="nb">決めていきます。</span></p>
+          <ul class="chips"><li>1回60分・オンライン</li><li>PC・家庭用ゲーム機</li><li>無料相談（30分）あり</li></ul>
           <div class="actions">
             <a class="btn" href="#contact">無料で相談する</a>
             <a class="btn ghost" href="#plans">料金を見る</a>
@@ -243,19 +247,19 @@
         <div class="heading reveal"><h2>負けた理由、<br>説明できますか。</h2></div>
         <div class="reveal">
           <ul>
-            <li>撃ち合いで勝ったり負けたり。何が悪かったのか分からない</li>
-            <li>終盤まで残れず、移動の途中で倒されることが多い</li>
-            <li>味方と組むと、報告がうまくかみ合わない</li>
-            <li>毎日プレイしているのに、成績が横ばいのまま</li>
+            <li>撃ち合いで<span class="nb">勝ったり負けたり。</span><span class="nb">何が悪かったのか</span><span class="nb">分からない</span></li>
+            <li>終盤まで残れず、<span class="nb">移動の途中で</span><span class="nb">倒されることが多い</span></li>
+            <li>味方と組むと、<span class="nb">報告がうまく</span><span class="nb">かみ合わない</span></li>
+            <li>毎日プレイしているのに、<span class="nb">成績が横ばいのまま</span></li>
           </ul>
-          <p class="answer">原因は、たいてい1つではありません。<br><em>録画を見ながら、<span class="nb">ひとつずつ</span></em><span class="nb">ほどいていきます。</span></p>
+          <p class="answer">原因は、<span class="nb">たいてい1つではありません。</span><br><em>録画を見ながら、<span class="nb">ひとつずつ</span></em><span class="nb">ほどいていきます。</span></p>
         </div>
       </div>
     </section>
 
     <section class="covers tone" id="covers">
       <div class="wrap">
-        <div class="heading reveal"><h2>60分で見るのは、<span class="nb">この4つ。</span></h2></div>
+        <div class="heading reveal"><h2>扱えるテーマは、<span class="nb">この4つ。</span></h2><p>1回のセッションでは、<span class="nb">このうち1〜2つに</span><span class="nb">絞って見ます。</span></p></div>
         <div class="grid">
           <figure class="memo reveal" aria-label="セッション後にお送りする振り返りメモの例">
             <span class="label">サンプル</span>
@@ -266,13 +270,13 @@
               <li><span class="t">07:48</span><div><p>撃ち合いの前に、体を出しすぎていた</p><p>→ 次：撃つ前に、出る位置を決める</p></div></li>
               <li><span class="t">11:30</span><div><p>弾の補充が間に合わず、撃ち負けた</p><p>→ 次：移動の前に補充を済ませる</p></div></li>
             </ol>
-            <p class="next"><b>次の課題：2つ</b><span>1. 縮小の1分前に動き出す</span><span>2. 撃つ前に、出る位置を決める</span></p>
+            <p class="next"><b>次の課題：2つ<span class="nb">（補充は、この2つに慣れてから）</span></b><span>1. 縮小の1分前に動き出す</span><span>2. 撃つ前に、出る位置を決める</span></p>
           </figure>
           <div class="cards">
-            <div class="cover reveal"><div class="num">01</div><h3>録画（VOD）レビュー</h3><p>あなたの試合の録画を一緒に見返します。倒された場面の数秒前に戻って、どこで判断が分かれたかを言葉にします。</p></div>
-            <div class="cover reveal"><div class="num">02</div><h3>エイム</h3><p>感度を変える前に、まず照準を置く高さから見直します。練習メニューは、あなたの癖に合わせて一緒に組みます。</p></div>
-            <div class="cover reveal"><div class="num">03</div><h3>立ち回り・位置取り</h3><p>降りる場所、動き出すタイミング、安全地帯が縮むときの位置取り。マップの図を使って整理します。</p></div>
-            <div class="cover reveal"><div class="num">04</div><h3>チームの連携</h3><p>敵の位置の伝え方、短い報告の型、役割の分け方。次にチームで遊ぶときに試せる形にまとめます。</p></div>
+            <div class="cover reveal"><h3>録画（VOD）レビュー</h3><p>あなたの試合の録画を<span class="nb">一緒に見返します。</span><span class="nb">倒された場面の</span><span class="nb">数秒前に戻って、</span><span class="nb">どこで判断が</span><span class="nb">分かれたかを</span><span class="nb">言葉にします。</span></p></div>
+            <div class="cover reveal"><h3>エイム</h3><p>感度を変える前に、<span class="nb">まず照準を置く高さから</span><span class="nb">見直します。</span><span class="nb">練習メニューは、</span><span class="nb">あなたの癖に合わせて</span><span class="nb">一緒に組みます。</span></p></div>
+            <div class="cover reveal"><h3>立ち回り・位置取り</h3><p>降りる場所、<span class="nb">動き出すタイミング、</span><span class="nb">安全地帯が縮むときの</span><span class="nb">位置取り。</span><span class="nb">マップの図を使って</span><span class="nb">整理します。</span></p></div>
+            <div class="cover reveal"><h3>チームの連携</h3><p>敵の位置の伝え方、<span class="nb">短い報告の型、</span><span class="nb">役割の分け方。</span><span class="nb">次にチームで</span><span class="nb">遊ぶときに</span><span class="nb">試せる形に</span><span class="nb">まとめます。</span></p></div>
           </div>
         </div>
       </div>
@@ -292,14 +296,19 @@
           </svg>
           <div>
             <h3>レイ<small>コーチ</small></h3>
-            <p class="lead">「上手い人のまね」より、「あなたの試合で何が起きたか」から始めます。</p>
+            <p class="lead">「上手い人のまね」より、<span class="nb">「あなたの試合で</span><span class="nb">何が起きたか」から</span><span class="nb">始めます。</span></p>
             <ul>
-              <li>1回のセッションで決める課題は、多くても3つまで</li>
-              <li>録画のどの場面を見たかは、時刻つきでメモに残します</li>
-              <li>話すのは結論から。分かりにくい言葉は、その場で言い換えます</li>
-              <li>進め方が合わないと感じたら、遠慮なく言ってください</li>
+              <li>1回のセッションで<span class="nb">決める課題は、</span><span class="nb">多くても3つまで</span></li>
+              <li>録画のどの場面を見たかは、<span class="nb">時刻つきで</span><span class="nb">メモに残します</span></li>
+              <li>話すのは結論から。<span class="nb">分かりにくい言葉は、</span><span class="nb">その場で言い換えます</span></li>
+              <li>進め方が合わないと感じたら、<span class="nb">遠慮なく</span><span class="nb">言ってください</span></li>
             </ul>
-            <p class="note">※実際のサイトでは、プレイ歴や大会の成績など、ご本人が確認できる事実だけを載せます。</p>
+            <dl class="facts">
+              <dt>対応タイトル</dt><dd>バトロワ系FPS</dd>
+              <dt>対応時間</dt><dd><span class="nb">平日 20:00〜23:00</span>／<span class="nb">土日 10:00〜22:00</span></dd>
+              <dt>使うもの</dt><dd><span class="nb">Discordの通話と</span><span class="nb">画面共有</span></dd>
+            </dl>
+            <p class="note">※プレイ歴・大会成績は、<span class="nb">ご本人が確認できる</span><span class="nb">事実だけを載せる欄です。</span></p>
           </div>
         </div>
       </div>
@@ -309,12 +318,12 @@
       <div class="wrap">
         <div class="heading reveal"><h2>プランと料金</h2></div>
         <div class="cards reveal">
-          <div class="plan"><h3>単発セッション</h3><div class="unit">60分・1回</div><div class="price">4,400<small>円（税込）</small></div><p>録画レビューか、気になるテーマを1つ。まずは1回試したい方に。</p></div>
-          <div class="plan pick"><span class="tag">迷ったらこれ</span><h3>月4回プラン</h3><div class="unit">60分×月4回</div><div class="price">15,400<small>円／月（税込）</small></div><p>1回あたり3,850円。週1回のペースで、前回の課題を振り返りながら続けます。</p></div>
-          <div class="plan"><h3>チームセッション</h3><div class="unit">90分・3名まで</div><div class="price">9,900<small>円（税込）</small></div><p>チームの全員で参加。報告と役割分担の練習が中心です。</p></div>
+          <div class="plan"><h3>単発セッション</h3><div class="unit">60分・1回</div><div class="price">4,400<small>円（税込）</small></div><p>まずは1回、<span class="nb">試してみたい方に。</span></p></div>
+          <div class="plan pick"><span class="tag">迷ったらこれ</span><h3>月4回プラン</h3><div class="unit">60分×月4回</div><div class="price">15,400<small>円／月（税込）</small></div><p><span class="nb">1回あたり3,850円。</span><span class="nb">週1回のペースで、</span><span class="nb">前回の課題を</span><span class="nb">振り返りながら</span><span class="nb">続けます。</span></p></div>
+          <div class="plan"><h3>チームセッション</h3><div class="unit">90分・3名まで</div><div class="price">9,900<small>円（税込）</small></div><p>チームの全員で参加。<span class="nb">報告と役割分担の</span><span class="nb">練習が中心です。</span></p></div>
         </div>
         <div class="after reveal">
-          <p>最初の相談（30分・無料）では、プランを決める必要はありません。月4回プランは、いつでも次の月から止められます。</p>
+          <p><span class="nb">無料相談（30分）では、</span><span class="nb">プランを決める必要はありません。</span><span class="nb">月4回プランは、</span><span class="nb">いつでも次の月から止められます。</span></p>
           <a class="btn" href="#contact">無料で相談する</a>
         </div>
       </div>
@@ -324,10 +333,10 @@
       <div class="wrap">
         <div class="heading reveal"><h2>DMから、<span class="nb">最初のセッションまで</span></h2></div>
         <ol class="reveal">
-          <li><h3>DMで連絡</h3><p>XのDMで、今の悩みとプレイ環境（PCか家庭用ゲーム機か）を教えてください。</p></li>
-          <li><h3>無料相談（30分）</h3><p>候補の日時から選んでいただき、通話で悩みを聞いて、画面共有のつなぎ方を確認します。プランはそのあとで決められます。</p></li>
-          <li><h3>セッション（60分）</h3><p>日程を決めて、通話と画面共有で録画を一緒に見ながら進めます。</p></li>
-          <li><h3>振り返りメモ</h3><p>話した内容と次の課題を、セッションの翌日までにテキストでお送りします。</p></li>
+          <li><h3>DMで連絡</h3><p>XのDMで、<span class="nb">今の悩みと</span><span class="nb">プレイ環境</span><span class="nb">（PCか家庭用ゲーム機か）を</span><span class="nb">教えてください。</span></p></li>
+          <li><h3>無料相談（30分）</h3><p>候補の日時から<span class="nb">選んでいただき、</span><span class="nb">通話で悩みを聞いて、</span><span class="nb">画面共有のつなぎ方を</span><span class="nb">確認します。</span></p></li>
+          <li><h3>セッション</h3><p>日程を決めて、<span class="nb">通話と画面共有で</span><span class="nb">録画を一緒に見ながら</span><span class="nb">進めます。</span></p></li>
+          <li><h3>振り返りメモ</h3><p>話した内容と次の課題を、<span class="nb">セッションの翌日までに</span><span class="nb">テキストで</span><span class="nb">お送りします。</span></p></li>
         </ol>
       </div>
     </section>
@@ -336,20 +345,22 @@
       <div class="wrap">
         <div class="heading reveal"><h2>よくある質問</h2></div>
         <div class="list reveal">
-          <details><summary>家庭用ゲーム機でも受けられますか？</summary><p>はい。画面を共有できる環境があれば、PCでも家庭用ゲーム機でも受けられます。つなぎ方は、最初の相談で一緒に確認します。</p></details>
-          <details><summary>録画がなくても大丈夫ですか？</summary><p>大丈夫です。その場でプレイしてもらいながら進めることもできます。</p></details>
-          <details><summary>ランクが上がることを約束してもらえますか？</summary><p>結果のお約束はできません。セッションでは、次の試合で試せる課題をはっきりさせることを大切にしています。</p></details>
-          <details><summary>始めたばかりの初心者でも受けられますか？</summary><p>はい。操作に慣れていない段階でも、今つまずいている所から始めます。</p></details>
-          <details><summary>キャンセルや日程の変更はできますか？</summary><p>前日までにご連絡いただければ、無料で変更・キャンセルできます。</p></details>
-          <details><summary>18歳未満でも申し込めますか？</summary><p>申し込めます。保護者の方の同意を得てから、ご相談ください。</p></details>
+          <details><summary>家庭用ゲーム機でも<span class="nb">受けられますか？</span></summary><p>はい。<span class="nb">画面を共有できる環境があれば、</span><span class="nb">PCでも家庭用ゲーム機でも</span><span class="nb">受けられます。</span><span class="nb">つなぎ方は、</span><span class="nb">無料相談（30分）で</span><span class="nb">一緒に確認します。</span></p></details>
+          <details><summary>録画がなくても<span class="nb">大丈夫ですか？</span></summary><p>大丈夫です。<span class="nb">その場でプレイしてもらいながら</span><span class="nb">進めることもできます。</span></p></details>
+          <details><summary>ランクが上がることを<span class="nb">約束してもらえますか？</span></summary><p>結果のお約束はできません。<span class="nb">セッションでは、</span><span class="nb">負けた場面で</span><span class="nb">何が起きたかを言葉にして、</span><span class="nb">練習する課題を絞ることを</span><span class="nb">大切にしています。</span></p></details>
+          <details><summary>始めたばかりの<span class="nb">初心者でも</span><span class="nb">受けられますか？</span></summary><p>はい。<span class="nb">操作に慣れていない段階でも、</span><span class="nb">今つまずいている所から</span><span class="nb">始めます。</span></p></details>
+          <details><summary>支払い方法は？</summary><p>クレジットカードか<span class="nb">銀行振込です。</span><span class="nb">単発・チームのセッションは</span><span class="nb">予約のときに、</span><span class="nb">月4回プランは</span><span class="nb">毎月はじめに</span><span class="nb">お支払いいただきます。</span></p></details>
+          <details><summary>月4回を<span class="nb">使い切れなかったら？</span></summary><p>使わなかった回は、<span class="nb">翌月に1回まで</span><span class="nb">持ち越せます。</span></p></details>
+          <details><summary>キャンセルや日程の変更は<span class="nb">できますか？</span></summary><p>前日までにご連絡いただければ、<span class="nb">無料で変更・キャンセルできます。</span><span class="nb">当日のキャンセルは、</span><span class="nb">1回分として数えます。</span></p></details>
+          <details><summary>18歳未満でも<span class="nb">申し込めますか？</span></summary><p>申し込めます。<span class="nb">保護者の方の同意を得てから、</span><span class="nb">ご相談ください。</span></p></details>
         </div>
       </div>
     </section>
 
     <section class="cta" id="contact">
       <div class="wrap reveal">
-        <h2>次の1試合で、何を試すか。<br>まずは30分、話してみませんか。</h2>
-        <p>最初の相談は無料です。今の悩みを一言送るだけで大丈夫です。</p>
+        <h2>まずは30分、<br>今の悩みを<span class="nb">聞かせてください。</span></h2>
+        <p><span class="nb">無料相談（30分）は、</span><span class="nb">XのDMから申し込めます。</span><span class="nb">悩みを一言送るだけで大丈夫です。</span></p>
         <a class="btn" href="#dm-note">XのDMで無料相談する</a>
         <p class="dm-note" id="dm-note"><span class="nb">サンプルのため、XのDMにはつながりません。</span><span class="nb">実際のサイトでは、DMの画面が開きます。</span></p>
       </div>
@@ -359,8 +370,8 @@
   <footer>
     <a class="logo" href="#top">SIGHTLINE</a>
     <div><span class="nb">このページは制作サンプルです。</span><span class="nb">サービス・人物・料金は架空です。</span></div>
-    <div>特定商取引法に基づく表記（サンプルのため省略）</div>
-    <div>Photo: <a href="https://images.unsplash.com/photo-1534423861386-85a16f5d13fd">Unsplash</a></div>
+    <div><a href="#">特定商取引法に基づく表記</a>（サンプルのため省略）</div>
+    <div>Photo: <a href="https://unsplash.com/photos/person-using-computer-playing-fps-game-EHLd2utEf68">Sean Do / Unsplash</a></div>
   </footer>
 
   <nav class="sticky" aria-label="相談">

@@ -19,7 +19,9 @@
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 16px;
-    line-height: 1.85; letter-spacing: .02em; word-break: auto-phrase; -webkit-font-smoothing: antialiased; }
+    line-height: 1.85; letter-spacing: .02em; overflow-wrap: break-word; line-break: strict; -webkit-font-smoothing: antialiased; }
+  h1, h2, h3 { word-break: auto-phrase; }
+  .nw { white-space: nowrap; }
   img { display: block; width: 100%; height: 100%; object-fit: cover; }
   a { color: inherit; }
   h3 { font-family: var(--sans); font-weight: 700; line-height: 1.5; margin: 0; }
@@ -32,7 +34,7 @@
   .heading { margin-bottom: 48px; }
   .heading h2 { font-size: clamp(28px, 7.4vw, 44px); }
   .heading h2 small { font-family: var(--sans); font-weight: 700; font-size: 14px; letter-spacing: .04em; vertical-align: middle;
-    border: 2px solid currentColor; padding: 0 8px; margin-left: 10px; white-space: nowrap; }
+    border: 2px solid currentColor; padding: 0 8px; margin-left: 10px; white-space: nowrap; display: inline-block; line-height: 1.6; }
   .heading p { margin: 14px 0 0; color: var(--sub); }
   .dark { background: var(--ink); color: var(--white); }
   .dark .heading p, .dark p { color: var(--sub-dark); }
@@ -64,7 +66,8 @@
   /* hero */
   .hero { background: var(--ink); color: var(--white); display: grid; overflow: hidden; }
   .hero .photo { aspect-ratio: 16 / 9; clip-path: polygon(0 0, 100% 0, 100% 84%, 0 100%); position: relative; }
-  .hero .photo img { object-position: 60% 30%; }
+  /* mobile: the photo spans full width, so zoom from the right to drop the saw at the left edge */
+  .hero .photo img { object-position: 75% 30%; transform: scale(1.2); transform-origin: 100% 80%; }
   .hero .photo .credit { position: absolute; right: 8px; bottom: 18%; font-size: 13px; background: rgba(29,32,37,.8); padding: 0 8px; }
   .hero .copy { padding: 4px 20px 48px; }
   .hero .tag { display: inline-block; background: var(--yellow); color: var(--ink); font-weight: 700; font-size: 16px; padding: 2px 10px; }
@@ -82,6 +85,7 @@
   /* message */
   .message .grid { display: grid; gap: 36px; align-items: center; }
   .message .photo { aspect-ratio: 4 / 3; border: 3px solid var(--ink); box-shadow: 10px 10px 0 var(--yellow); }
+  .message .photo img { filter: brightness(.9) saturate(.85); }
   .message h2 { font-size: clamp(24px, 6vw, 38px); margin-bottom: 22px; }
   .message h2 mark { background: linear-gradient(transparent 60%, var(--yellow) 60%); color: inherit; }
   .message p { margin: 0 0 16px; color: var(--sub); }
@@ -106,17 +110,10 @@
   /* learn */
   .steps { display: grid; gap: 20px; }
   .step { background: var(--white); border: 3px solid var(--ink); padding: 26px 24px; position: relative; }
-  .step .num { font-family: var(--head); font-size: 56px; line-height: 1; color: var(--ink); }
-  .step .num::after { content: ""; display: block; width: 48px; height: 8px; background: var(--yellow); margin-top: 8px; }
-  .step .when { display: inline-block; margin-top: 14px; font-weight: 700; font-size: 14px; background: var(--ink); color: var(--white); padding: 0 10px; }
-  .step h3 { font-size: 21px; margin: 10px 0 8px; }
+  .step .when { display: inline-block; font-weight: 700; font-size: 16px; background: var(--ink); color: var(--yellow); padding: 2px 12px; }
+  .step h3 { font-size: 21px; margin: 14px 0 8px; }
   .step p { margin: 0; color: var(--sub); }
-  .learn .wide { margin-top: 32px; display: grid; gap: 0; background: var(--ink); color: var(--white); }
-  .learn .wide .photo { aspect-ratio: 4 / 3; }
-  .learn .wide .photo img { object-position: 75% 40%; }
-  .learn .wide div:last-child { padding: 26px 24px; }
-  .learn .wide h3 { color: var(--yellow); font-size: 20px; margin-bottom: 8px; }
-  .learn .wide p { margin: 0; color: var(--sub-dark); }
+  section.learn { padding-bottom: 56px; }
 
   /* requirements table */
   .req table { width: 100%; border-collapse: collapse; background: var(--white); border: 3px solid var(--ink); }
@@ -132,9 +129,6 @@
   .benefits .main-cards div { background: var(--ink-2); border-top: 6px solid var(--yellow); padding: 26px 24px; }
   .benefits h3 { font-family: var(--sans); font-weight: 700; font-size: 22px; color: var(--yellow); }
   .benefits .main-cards p { margin: 6px 0 0; }
-  .benefits ul { list-style: none; margin: 24px 0 0; padding: 0; }
-  .benefits li { font-size: 16px; padding: 14px 0; border-bottom: 1px solid #3a3f47; color: var(--sub-dark); }
-  .benefits li b { color: var(--white); margin-right: 12px; }
 
   /* voices: quotes without boxes */
   .voices .cards { display: grid; gap: 32px; }
@@ -157,15 +151,15 @@
   summary::-webkit-details-marker { display: none; }
   summary::before { content: "Q"; position: absolute; left: 0; top: 0; bottom: 0; width: 44px; display: grid; place-items: center;
     background: var(--ink); color: var(--yellow); font-family: var(--sans); font-weight: 700; font-size: 18px; }
-  summary::after { content: "+"; position: absolute; right: 18px; top: 12px; font-family: var(--head); font-size: 24px; transition: transform .2s; }
-  details[open] summary::after { transform: rotate(45deg); }
+  summary::after { content: "+"; position: absolute; right: 18px; top: 50%; transform: translateY(-50%); font-family: var(--head); font-size: 24px; line-height: 1; transition: transform .2s; }
+  details[open] summary::after { transform: translateY(-50%) rotate(45deg); }
   details p { margin: 0; padding: 0 22px 20px 60px; color: var(--sub); }
 
   /* apply */
   .apply { background: var(--yellow); }
   /* last section: no bottom slant, so no paper-colored triangle above the footer */
   .apply.slant { clip-path: polygon(0 var(--slant), 100% 0, 100% 100%, 0 100%); padding-bottom: 88px; }
-  form label span { font-size: 14px; background: var(--ink); color: var(--yellow); padding: 0 6px; margin-left: 8px; vertical-align: 1px; }
+  form label span { display: inline-block; line-height: 1.6; font-size: 14px; background: var(--ink); color: var(--yellow); padding: 0 6px; margin-left: 8px; vertical-align: 1px; }
   .apply .grid { display: grid; gap: 32px; align-items: center; }
   .apply h2 { font-size: clamp(28px, 7vw, 48px); }
   .apply .lead { margin: 16px 0 0; }
@@ -198,9 +192,10 @@
 
   @media (min-width: 700px) {
     .steps, .voices .cards { grid-template-columns: repeat(3, 1fr); }
-    .benefits .main-cards { grid-template-columns: repeat(2, 1fr); }
+    .benefits .main-cards { grid-template-columns: repeat(3, 1fr); }
   }
   @media (max-width: 599px) {
+    .hero .actions .btn { flex: 1 1 100%; }
     .req th, .req td { display: block; width: 100%; }
     .req th { padding: 8px 16px; }
     .req td { padding: 12px 16px 16px; }
@@ -213,7 +208,7 @@
     .nav { display: flex; }
     .hero { grid-template-columns: 1fr 1fr; min-height: 620px; }
     .hero .photo { order: 2; aspect-ratio: auto; clip-path: polygon(14% 0, 100% 0, 100% 100%, 0 100%); }
-    .hero .photo img { object-position: 72% 50%; }
+    .hero .photo img { object-position: 72% 50%; transform: none; }
     .hero .photo .credit { bottom: 12px; }
     .hero .copy { padding: 64px 0 64px max(20px, calc((100vw - 1120px) / 2 + 20px)); align-self: center; }
     .hero h1 { font-size: clamp(44px, 4.6vw, 62px); }
@@ -222,9 +217,6 @@
     .day .grid { grid-template-columns: 6fr 5fr; gap: 72px; }
     .day .grid > div:last-child { position: sticky; top: 24px; align-self: start; }
     .day .photo { aspect-ratio: 4 / 5; }
-    .learn .wide { grid-template-columns: 1fr 1fr; align-items: center; }
-    .learn .wide div:last-child { padding: 32px 40px; }
-    .benefits ul { display: grid; grid-template-columns: 1fr 1fr; column-gap: 40px; }
     .flow ol { grid-template-columns: repeat(4, 1fr); gap: 28px; }
     .flow li { padding: 64px 0 0; }
     .flow li::before { top: 18px; }
@@ -241,12 +233,12 @@
 <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
-  <div class="notice">これは採用LPの制作サンプルです。会社名・人名・地名・給与などの条件・社員の声は、すべて架空です。</div>
+  <div class="notice">これは採用LPの制作サンプルです。会社名・人名・<span class="nw">地名・</span>給与などの条件・社員の声は、すべて<span class="nw">架空です。</span></div>
 
   <header class="site">
     <div class="wrap">
       <a class="logo" href="#top">クサビ住建<small>RENOVATION</small></a>
-      <nav class="nav" aria-label="ページ内"><a href="#day">仕事の一日</a><a href="#learn">研修</a><a href="#youkou">募集要項</a><a href="#faq">よくある質問</a></nav>
+      <nav class="nav" aria-label="ページ内"><a href="#day">仕事の一日</a><a href="#learn">覚えること</a><a href="#youkou">募集要項</a><a href="#faq">よくある質問</a></nav>
       <a class="btn small" href="#apply">応募する</a>
     </div>
   </header>
@@ -260,7 +252,7 @@
       <div class="copy">
         <span class="tag">大工・内装スタッフ 2名募集</span>
         <h1>道具の持ち方から、<br><em>教えます。</em></h1>
-        <p>ささめ市の、住まいのリフォーム会社です。経験がなくても大丈夫。最初の3か月は、先輩と2人1組で現場に出ます。</p>
+        <p>ささめ市の、住まいのリフォーム会社です。<span class="nw">経験が</span>なくても大丈夫。最初の<span class="nw">3か月は</span>、<span class="nw">先輩と</span>2人1組で現場に出ます。</p>
         <ul class="stats">
           <li><b>22<small>万円〜</small></b><span>スタート月給</span></li>
           <li><b>17<small>時</small></b><span>終業</span></li>
@@ -280,9 +272,9 @@
         <div class="reveal">
           <span class="label">MESSAGE</span>
           <h2>うまい人より、<br><mark>ていねいな人</mark>と働きたい。</h2>
-          <p>クサビ住建は、床の張り替えや手すりの取り付け、キッチンまわりの内装など、住まいの小さなリフォームを中心に請け負っている会社です。</p>
-          <p>技術は、毎日現場に出ていれば少しずつ身につきます。それより大切にしていることが3つあります。養生をきちんとする。使った場所を掃除して帰る。分からないことは、そのままにしない。</p>
-          <p>前の仕事は問いません。一緒に、住む人に喜ばれる仕事をしましょう。</p>
+          <p>クサビ住建は、床の<span class="nw">張り替え</span>や手すりの<span class="nw">取り付け</span>、キッチンまわりの内装など、住まいの<span class="nw">小さな</span>リフォームを中心に請け負っている<span class="nw">会社です。</span></p>
+          <p>技術は、毎日現場に出ていれば少しずつ<span class="nw">身につきます。</span>それより大切に<span class="nw">している</span>ことが<span class="nw">3つあります。</span>養生をきちんとする。使った<span class="nw">場所を</span><span class="nw">掃除して</span><span class="nw">帰る。</span><span class="nw">分からない</span>ことは、<span class="nw">そのままに</span><span class="nw">しない。</span></p>
+          <p>前の仕事は問いません。一緒に、住む人に<span class="nw">喜ばれる</span>仕事をしましょう。</p>
           <p class="sign">株式会社クサビ住建　代表取締役　楔田 健</p>
         </div>
       </div>
@@ -290,22 +282,22 @@
 
     <section class="day dark slant" id="day">
       <div class="wrap">
-        <div class="heading reveal"><h2>ある日の仕事の流れ</h2><p>マンションの洋室で、床を張り替える日の例です。</p></div>
+        <div class="heading reveal"><h2>ある日の仕事の流れ</h2><p>マンションの洋室で、床を張り替える日の<span class="nw">例です。</span></p></div>
         <div class="grid">
           <ol class="timeline reveal">
-            <li><time>8:00</time><h3>出社・朝礼</h3><p>今日の現場と作業を確認して、社用車に道具と材料を積み込みます。</p></li>
-            <li><time>8:40</time><h3>現場に到着・養生</h3><p>お客様にごあいさつ。廊下や家具を傷つけないよう、シートで覆います。</p></li>
+            <li><time>8:00</time><h3>出社・朝礼</h3><p>今日の現場と作業を確認して、<span class="nw">社用車に</span>道具と材料を積み込みます。</p></li>
+            <li><time>8:40</time><h3>現場に到着・養生</h3><p>お客様にごあいさつ。廊下や家具を<span class="nw">傷つけない</span>よう、シートで覆います。</p></li>
             <li class="break"><time>10:00</time>休憩 15分</li>
-            <li><time>10:15</time><h3>古い床をはがす・採寸</h3><p>先輩が測った寸法を、声に出して読み上げて記録します。</p></li>
+            <li><time>10:15</time><h3>古い床をはがす・採寸</h3><p>先輩が測った寸法を、声に出して<span class="nw">読み上げて</span>記録します。</p></li>
             <li class="break"><time>12:00</time>昼休み 60分</li>
-            <li><time>13:00</time><h3>新しい床材を張る</h3><p>はじめは材料を渡す係から。慣れてきたら、切る・はめるも担当します。</p></li>
+            <li><time>13:00</time><h3>新しい床材を張る</h3><p>はじめは材料を渡す係から。<span class="nw">慣れてきたら</span>、切る・はめるも<span class="nw">担当します。</span></p></li>
             <li class="break"><time>15:00</time>休憩 15分</li>
-            <li><time>15:15</time><h3>片付け・掃除・確認</h3><p>お客様と一緒に仕上がりを見て、気になる所がないかお聞きします。</p></li>
-            <li><time>16:30</time><h3>帰社・日報</h3><p>今日覚えたことを日報に3行で書いて、一日が終わります。</p></li>
+            <li><time>15:15</time><h3>片付け・掃除・確認</h3><p>お客様と一緒に仕上がりを見て、<span class="nw">気になる</span>所がないかお聞きします。</p></li>
+            <li><time>16:30</time><h3>帰社・日報</h3><p>今日覚えたことを日報に3行で<span class="nw">書いて</span>、一日が終わります。</p></li>
           </ol>
           <div class="reveal">
             <div class="photo"><img src="https://images.unsplash.com/photo-1779031242456-c2ca2458e8c3?w=900&q=70&auto=format&fit=crop" width="900" height="1350" alt="作業台の上で、両手で木の部材を削る職人の手元" loading="lazy"></div>
-            <p>※写真はイメージです。1日に回る現場は1〜2件です。</p>
+            <p>1日に回る現場は<span class="nw">1〜2件</span>です。</p>
           </div>
         </div>
       </div>
@@ -313,15 +305,11 @@
 
     <section class="learn" id="learn">
       <div class="wrap">
-        <div class="heading reveal"><h2>覚えることと、その順番</h2><p>いきなり一人で現場に出ることはありません。</p></div>
+        <div class="heading reveal"><h2>覚えることと、その順番</h2><p>いきなり一人で現場に出ることは<span class="nw">ありません。</span></p></div>
         <div class="steps reveal">
-          <div class="step"><div class="num">01</div><span class="when">入社〜3か月</span><h3>安全と道具を覚える</h3><p>初日は安全講習。そのあとは道具の名前と使い方、養生、材料の運び方から覚えます。</p></div>
-          <div class="step"><div class="num">02</div><span class="when">4か月〜1年</span><h3>測る・切る・張る</h3><p>採寸、材料のカット、床やクロスの張り替えを、先輩のとなりで実際に手を動かしながら覚えます。</p></div>
-          <div class="step"><div class="num">03</div><span class="when">2年目〜</span><h3>小さな工事を任される</h3><p>手すりの取り付けや建具の交換など、半日で終わる工事から、一人で担当していきます。</p></div>
-        </div>
-        <div class="wide reveal">
-          <div class="photo"><img src="https://images.unsplash.com/photo-1611987345939-a481cc27367e?w=1000&q=70&auto=format&fit=crop" width="1000" height="777" alt="屋外で、枠のついたのこぎりを使って角材を切る年配の職人" loading="lazy"></div>
-          <div><h3>資格の受験費用は、会社が負担</h3><p>仕事に必要な資格（例：内装仕上げ施工技能士、2級建築施工管理技士）の受験料と講習費を会社が出します。受けるかどうか、いつ受けるかは、上長と相談して決めます。</p></div>
+          <div class="step"><span class="when">入社〜3か月</span><h3>安全と道具を覚える</h3><p>初日は安全講習。そのあとは道具の<span class="nw">名前と</span>使い方、養生、材料の<span class="nw">運び方から</span><span class="nw">覚えます。</span></p></div>
+          <div class="step"><span class="when">4か月〜1年</span><h3>測る・切る・張る</h3><p>採寸、材料のカット、床やクロスの<span class="nw">張り替え</span>を、先輩のとなりで実際に<span class="nw">手を</span>動かしながら覚えます。</p></div>
+          <div class="step"><span class="when">2年目〜</span><h3>小さな工事を任される</h3><p>手すりの取り付けや建具の交換など、<span class="nw">半日で</span>終わる工事から、一人で<span class="nw">担当していきます。</span></p></div>
         </div>
       </div>
     </section>
@@ -332,16 +320,16 @@
         <table class="reveal">
           <tr><th scope="row">募集職種</th><td>大工・内装スタッフ（2名）</td></tr>
           <tr><th scope="row">雇用形態</th><td><p>正社員（契約期間の定めなし）</p></td></tr>
-          <tr><th scope="row">仕事内容</th><td><p>住宅のリフォーム工事（床・壁・建具の交換、クロスの張り替え、手すりの取り付けなど）。入社後しばらくは、資材の運搬、現場の養生・清掃、材料の採寸とカットなど、先輩の補助から始めます。</p><p class="note">変更の範囲：会社の定める業務</p></td></tr>
-          <tr><th scope="row">給与</th><td><p>月給 22万円〜30万円（経験・資格により決定。未経験の方は22万円から）</p><p>内訳はすべて基本給です。<strong>固定残業代はありません。</strong>時間外・休日の労働には、1分単位で割増賃金を全額支給します。</p><p>昇給 年1回（評価による）／賞与 年2回（業績による）</p><p>通勤手当 実費支給（月3万円まで）</p></td></tr>
-          <tr><th scope="row">勤務時間</th><td><p>8:00〜17:00（休憩90分：昼60分・午前と午後に15分ずつ）実働7時間30分</p><p class="note">時間外労働は月平均10時間ほど</p></td></tr>
-          <tr><th scope="row">休日・休暇</th><td><p>完全週休2日制（日曜・水曜。祝日は出勤日）、夏季休暇・年末年始休暇 各5日（日曜・水曜を除く）／年間休日114日（会社カレンダーによる）</p><p>有給休暇（入社6か月後に10日。法律どおり）</p></td></tr>
-          <tr><th scope="row">勤務地</th><td><p>本社：ささめ市みなと町1-2-3（架空の住所）。現場へは本社から社用車で移動します（ささめ市内と隣の2市）。転勤はありません。</p><p class="note">変更の範囲：会社の定める場所（転勤なし）</p></td></tr>
-          <tr><th scope="row">試用期間</th><td>3か月。期間中の給与・勤務時間などの条件は、本採用と同じです。</td></tr>
-          <tr><th scope="row">社会保険</th><td>健康保険・厚生年金保険・雇用保険・労災保険</td></tr>
-          <tr><th scope="row">応募資格</th><td><p>普通自動車免許（AT限定可）をお持ちの方。学歴・経験は問いません。</p></td></tr>
+          <tr><th scope="row">仕事内容</th><td><p>住宅のリフォーム工事（床・壁・建具の<span class="nw">交換</span>、クロスの<span class="nw">張り替え</span>、手すりの<span class="nw">取り付け</span>など）。入社後しばらくは、<span class="nw">資材の運搬</span>、現場の養生・清掃、材料の<span class="nw">採寸と</span><span class="nw">カット</span>など、先輩の補助から<span class="nw">始めます。</span></p><p class="note">変更の範囲：リフォーム工事と、それに<span class="nw">付随する業務</span></p></td></tr>
+          <tr><th scope="row">給与</th><td><p>月給 22万円〜30万円（経験・<span class="nw">資格により</span>決定。未経験の方は<span class="nw">22万円から）</span></p><p>内訳はすべて基本給です。<strong><span class="nw">固定残業代は</span>ありません。</strong>時間外・<span class="nw">休日の</span><span class="nw">労働には</span>、<span class="nw">1分単位で</span>割増賃金を全額<span class="nw">支給します。</span></p><p>昇給 年1回（評価による）／賞与 年2回（業績による）</p><p>通勤手当 実費支給（月3万円まで）</p></td></tr>
+          <tr><th scope="row">勤務時間</th><td><p>8:00〜17:00（休憩90分：昼60分・<span class="nw">午前と午後に</span>15分ずつ）<span class="nw">実働7時間30分</span></p><p class="note">時間外労働は月平均10時間ほど</p></td></tr>
+          <tr><th scope="row">休日・休暇</th><td><p>完全週休2日制（日曜・水曜。祝日は<span class="nw">出勤日</span>）、夏季休暇・年末年始休暇 <span class="nw">各5日</span>（日曜・水曜を除く）／<span class="nw">年間休日114日</span><span class="nw">（会社カレンダーによる）</span></p><p>年次有給休暇（入社6か月後に10日。<span class="nw">労働基準法</span>による）</p></td></tr>
+          <tr><th scope="row">勤務地</th><td><p>本社：ささめ市みなと町1-2-3（架空の<span class="nw">住所</span>）。現場へは本社から社用車で<span class="nw">移動します</span>（ささめ市内と隣の2市）。<span class="nw">転勤は</span><span class="nw">ありません。</span></p><p class="note">変更の範囲：本社と、ささめ市・隣の2市の<span class="nw">現場（変更なし）</span></p></td></tr>
+          <tr><th scope="row">試用期間</th><td>3か月。期間中の給与・勤務時間などの<span class="nw">条件</span>は、本採用と同じです。</td></tr>
+          <tr><th scope="row">社会保険</th><td>健康保険・厚生年金保険・雇用保険・<span class="nw">労災保険</span></td></tr>
+          <tr><th scope="row">応募資格</th><td><p>普通自動車免許（AT限定可）を<span class="nw">お持ちの方。</span>学歴・経験は問いません。</p></td></tr>
           <tr><th scope="row">受動喫煙対策</th><td>屋内禁煙（社用車内も禁煙）</td></tr>
-          <tr><th scope="row">募集者</th><td>株式会社クサビ住建</td></tr>
+          <tr><th scope="row">募集者</th><td><p>株式会社クサビ住建（本社：ささめ市<span class="nw">みなと町1-2-3）</span></p><p>連絡先：採用担当（このページの<span class="nw">応募フォーム</span>から受け付けます）</p></td></tr>
         </table>
       </div>
     </section>
@@ -350,23 +338,20 @@
       <div class="wrap">
         <div class="heading reveal"><h2>働くための用意</h2></div>
         <div class="main-cards reveal">
-          <div><h3>道具一式を支給</h3><p>仕事で使う工具は、会社が用意します。自分で買う必要はありません。</p></div>
-          <div><h3>作業着・安全靴を支給</h3><p>入社時に、夏用・冬用の作業着と安全靴をお渡しします。</p></div>
+          <div><h3>道具一式と社用車</h3><p>仕事で使う工具は、会社が<span class="nw">用意します。</span><span class="nw">現場へは</span>社用車で行き、<span class="nw">ガソリン代</span>も<span class="nw">会社が負担します。</span></p></div>
+          <div><h3>作業着・安全靴を支給</h3><p>入社時に、夏用・冬用の作業着と<span class="nw">安全靴を</span>お渡しします。</p></div>
+          <div><h3>資格の受験費用を負担</h3><p>内装仕上げ施工技能士などの受験料と<span class="nw">講習費</span>を、会社が出します。受ける<span class="nw">時期は</span><span class="nw">上長と</span>相談して決めます。</p></div>
         </div>
-        <ul class="reveal">
-          <li><b>現場へは社用車で</b>ガソリン代も会社が負担します。</li>
-          <li><b>夏と年末年始に5日ずつ</b>休みの日は、年の初めに会社カレンダーでお知らせします。</li>
-        </ul>
       </div>
     </section>
 
     <section class="voices">
       <div class="wrap">
-        <div class="heading reveal"><h2>先輩スタッフの話<small>架空の例</small></h2><p>実際のページでは、ご本人の許可を得た声だけを載せます。</p></div>
+        <div class="heading reveal"><h2>先輩スタッフの話<small>架空の例</small></h2><p>実際のページでは、ご本人の許可を得た<span class="nw">声だけを</span>載せます。</p></div>
         <div class="cards reveal">
-          <blockquote class="voice"><p>「最初の1か月は、材料を運んで掃除をする毎日でした。そのあいだに先輩が道具の使い方を一つずつ見せてくれて、4か月目に初めて床材のカットを任されました。」</p><footer>入社1年目・前職 飲食店</footer></blockquote>
-          <blockquote class="voice"><p>「現場ごとに家の形が違うので、毎回考えることがあります。手すりを付けたお客様に、廊下を歩くのが楽になったと言ってもらえた日のことは覚えています。」</p><footer>入社3年目・前職 工場勤務</footer></blockquote>
-          <blockquote class="voice"><p>「前は販売の仕事だったので、お客様へのごあいさつや説明は、今でも役に立っています。分からないことは、その場ですぐ聞ける距離にいつも先輩がいます。」</p><footer>入社2年目・前職 販売</footer></blockquote>
+          <blockquote class="voice"><p>「最初の1か月は、材料を運んで<span class="nw">掃除をする</span>毎日でした。そのあいだに<span class="nw">先輩が</span>道具の使い方を一つずつ見せて<span class="nw">くれて</span>、4か月目に初めて床材の<span class="nw">カットを</span><span class="nw">任されました。」</span></p><footer>入社1年目・前職 飲食店</footer></blockquote>
+          <blockquote class="voice"><p>「現場ごとに家の形が違うので、毎回<span class="nw">考える</span>ことがあります。手すりを付けた<span class="nw">お客様に</span>、廊下を歩くのが楽になったと言って<span class="nw">もらえた</span>日のことは<span class="nw">覚えています。」</span></p><footer>入社3年目・前職 工場勤務</footer></blockquote>
+          <blockquote class="voice"><p>「前は販売の仕事だったので、<span class="nw">お客様への</span>ごあいさつや説明は、<span class="nw">今でも</span>役に<span class="nw">立っています。</span><span class="nw">分からないことは</span>、<span class="nw">その場で</span>すぐ<span class="nw">聞ける</span>距離にいつも先輩が<span class="nw">います。」</span></p><footer>入社2年目・前職 販売</footer></blockquote>
         </div>
       </div>
     </section>
@@ -375,10 +360,10 @@
       <div class="wrap">
         <div class="heading reveal"><h2>応募から入社まで</h2></div>
         <ol class="reveal">
-          <li><h3>応募</h3><p>このページのフォームから。履歴書は面接の日に持ってきてください。</p></li>
+          <li><h3>応募</h3><p>このページのフォームから。<span class="nw">履歴書は</span>面接の日に持ってきて<span class="nw">ください。</span></p></li>
           <li><h3>見学・面接（1回）</h3><p>作業場と道具を見てもらいながら30〜60分。服装は自由です。</p></li>
-          <li><h3>結果のご連絡</h3><p>面接から1週間以内に、お電話かメールでお知らせします。</p></li>
-          <li><h3>入社</h3><p>入社日は、今のお仕事の都合に合わせて相談して決めます。</p></li>
+          <li><h3>結果のご連絡</h3><p>面接から1週間以内に、お電話か<span class="nw">メール</span>でお知らせします。</p></li>
+          <li><h3>入社</h3><p>入社日は、今のお仕事の都合に<span class="nw">合わせて</span>相談して決めます。</p></li>
         </ol>
       </div>
     </section>
@@ -387,11 +372,11 @@
       <div class="wrap">
         <div class="heading reveal"><h2>よくある質問</h2></div>
         <div class="list reveal">
-          <details><summary>体力に自信がありません。</summary><p>重い資材は2人以上で運ぶ決まりです。最初の3か月は、作業の量も先輩と相談しながら決めていきます。</p></details>
-          <details><summary>どんな現場が多いですか？</summary><p>お客様が住んだまま工事をするお部屋がほとんどです。だからこそ、養生と掃除、ごあいさつを大事にしています。</p></details>
-          <details><summary>年齢の制限はありますか？</summary><p>ありません。応募資格は、普通自動車免許（AT限定可）だけです。</p></details>
-          <details><summary>残業はありますか？</summary><p>月平均10時間ほどです。残業代は1分単位で全額支給します。固定残業代はありません。</p></details>
-          <details><summary>応募の前に、見学だけしてもいいですか？</summary><p>はい。下のフォームで「まず見学したい」を選んでください。見学のあとで応募するかを決めていただいて大丈夫です。</p></details>
+          <details><summary>体力に自信がありません。</summary><p>重い資材は2人以上で運ぶ<span class="nw">決まりです。</span>最初の3か月は、<span class="nw">作業の量も</span>先輩と相談しながら<span class="nw">決めて</span><span class="nw">いきます。</span></p></details>
+          <details><summary>どんな現場が多いですか？</summary><p>お客様が住んだまま工事をする<span class="nw">お部屋が</span>ほとんどです。<span class="nw">だからこそ</span>、養生と掃除、<span class="nw">ごあいさつを</span><span class="nw">大事に</span><span class="nw">しています。</span></p></details>
+          <details><summary>年齢の制限はありますか？</summary><p>ありません。応募資格は、<span class="nw">普通自動車免許</span>（AT限定可）<span class="nw">だけです。</span></p></details>
+          <details><summary>残業はありますか？</summary><p>月平均10時間ほどです。<span class="nw">残業代は</span>1分単位で全額<span class="nw">支給します。</span><span class="nw">固定残業代は</span><span class="nw">ありません。</span></p></details>
+          <details><summary>応募の前に、見学だけしてもいいですか？</summary><p>はい。下のフォームで<span class="nw">「まず見学したい」</span>を選んで<span class="nw">ください。</span><span class="nw">見学のあとで</span><span class="nw">応募するかを</span>決めて<span class="nw">いただいて</span><span class="nw">大丈夫です。</span></p></details>
         </div>
       </div>
     </section>
@@ -401,7 +386,7 @@
         <div class="reveal">
           <span class="label">ENTRY</span>
           <h2>まずは、作業場を<br>見に来ませんか。</h2>
-          <p class="lead">応募でも、見学だけでも受け付けています。お名前と電話番号だけで大丈夫です。担当者から、2営業日以内にお電話します。</p>
+          <p class="lead">応募でも、見学だけでも受け付けています。<span class="nw">お名前と</span>電話番号だけで<span class="nw">大丈夫です。</span><span class="nw">担当者から</span>、2営業日以内にお電話します。</p>
         </div>
         <form class="reveal" action="#apply" onsubmit="event.preventDefault(); this.querySelector('.msg').hidden = false;">
           <div><label for="f-name">お名前<span>必須</span></label><input id="f-name" type="text" autocomplete="name" required></div>
@@ -409,9 +394,9 @@
           <fieldset><legend>ご希望</legend>
             <div class="choice"><label><input type="radio" name="want" checked>応募したい</label><label><input type="radio" name="want">まず見学したい</label></div>
           </fieldset>
-          <p class="small-note">お預かりした情報は、採用のご連絡にだけ使います。</p>
+          <p class="small-note">お預かりした情報は、採用のご連絡にだけ<span class="nw">使います。</span></p>
           <button class="btn" type="submit">この内容で申し込む</button>
-          <p class="small-note">※サンプルのため、入力した内容はどこにも送信されません。</p>
+          <p class="small-note">※サンプルのため、入力した内容は<span class="nw">どこにも</span>送信されません。</p>
           <p class="msg" role="status" hidden>サンプルのため送信していません。実際のページでは、ここで受付完了をお知らせします。</p>
         </form>
       </div>
@@ -425,7 +410,7 @@
       FV       https://images.unsplash.com/photo-1779031242528-da09f3af18c7
       MESSAGE  https://images.unsplash.com/photo-1659930087003-2d64e33181f7
       一日     https://images.unsplash.com/photo-1779031242456-c2ca2458e8c3
-      研修     https://images.unsplash.com/photo-1611987345939-a481cc27367e -->
+      （研修の写真は 2026-10-24 に削除） -->
   </footer>
 
   <nav class="sticky" aria-label="応募">

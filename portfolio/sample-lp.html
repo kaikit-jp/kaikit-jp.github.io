@@ -22,6 +22,7 @@
   img { display: block; width: 100%; height: 100%; object-fit: cover; }
   a { color: inherit; }
   h1, h2, h3 { font-family: var(--serif); font-weight: 700; line-height: 1.5; margin: 0; letter-spacing: .04em; word-break: auto-phrase; text-wrap: balance; }
+  p, li, dd { text-wrap: pretty; }
   .nw { white-space: nowrap; }
   .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
   section { padding: 88px 0; }
@@ -74,13 +75,13 @@
   .worries ul { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--line); }
   .worries li { padding: 18px 0 18px 30px; border-bottom: 1px solid var(--line); position: relative; }
   .worries li::before { content: ""; position: absolute; left: 0; top: 50%; width: 14px; height: 1px; background: var(--gold); }
-  .worries .answer { margin: 32px 0 0; font-family: var(--serif); font-size: clamp(19px, 4vw, 24px); line-height: 1.7; }
-  .worries .answer em { font-style: normal; color: var(--green); border-bottom: 2px solid var(--gold); }
 
   /* features */
   .feature { display: grid; gap: 28px; margin-bottom: 72px; align-items: center; }
   .feature:last-child { margin-bottom: 0; }
   .feature .photo { aspect-ratio: 3 / 2; border-radius: 4px; overflow: hidden; }
+  .feature .photo img { filter: saturate(.85) sepia(.12); }
+  .feature .photo img.dim { filter: saturate(.85) sepia(.22) brightness(.93); }
   .feature .num { font-family: var(--serif); font-size: 15px; letter-spacing: .2em; color: var(--gold-text); }
   .feature h3 { font-size: clamp(21px, 4vw, 26px); margin: 8px 0 14px; }
   .feature p { color: var(--sub); margin: 0; }
@@ -97,8 +98,8 @@
   .prices .time { color: var(--sub); font-size: 15px; }
   .prices .price { font-family: var(--serif); font-size: 28px; text-align: right; white-space: nowrap; }
   .prices .price small { font-size: 13px; margin-left: 4px; color: var(--sub); font-family: var(--sans); }
-  .first { margin-top: 24px; background: #fff; color: var(--ink); border: 1px solid var(--gold); border-radius: 4px; padding: 22px 16px; text-align: center; font-family: var(--serif); font-size: 18px; line-height: 1.6; }
-  .first b { color: var(--green-dark); font-size: 22px; margin: 0 2px; }
+  .first { margin-top: 24px; background: #fff; color: var(--ink); border: 1px solid var(--line); border-radius: 4px; padding: 22px 16px; text-align: center; font-family: var(--serif); font-size: 18px; line-height: 1.6; }
+  .first b { font-size: inherit; color: inherit; font-weight: 700; }
   .first small { display: block; font-family: var(--sans); font-size: 14px; color: var(--sub); margin-top: 6px; }
   .menu .more { text-align: center; margin: 32px 0 0; }
 
@@ -147,18 +148,17 @@
   .cta h2 { font-size: clamp(24px, 5vw, 34px); }
   .cta p { margin: 16px 0 32px; opacity: .92; }
   .cta .sub { font-size: 13px; margin: 12px 0 0; }
-  .cta .note { font-size: 13px; margin: 4px 0 0; opacity: .85; }
+  .cta .note { font-size: 13px; margin: 4px 0 0; opacity: .85; scroll-margin-top: 45vh; }
 
   footer { text-align: center; padding: 40px 20px 120px; font-size: 13px; color: var(--sub); }
   footer .logo { color: var(--ink); display: inline-block; margin-bottom: 12px; }
   footer .credit { margin-top: 4px; }
-  footer .src { font-size: 11px; margin-left: 6px; }
-  footer .src a { color: var(--sub); margin: 0 2px; }
 
   /* mobile sticky bar */
   .sticky { position: fixed; z-index: 20; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: 1fr 1.6fr; gap: 8px;
     padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); background: rgba(246,241,233,.95); backdrop-filter: blur(8px);
-    border-top: 1px solid var(--line); }
+    border-top: 1px solid var(--line); transition: transform .3s, visibility .3s; }
+  .js .sticky:not(.show) { transform: translateY(110%); visibility: hidden; }
   .sticky a { text-align: center; text-decoration: none; font-weight: 700; border-radius: 99px; padding: 12px 0; font-size: 14px; }
   .sticky .sub { border: 1px solid var(--green); color: var(--green); }
   .sticky .web { background: var(--green); color: #fff; }
@@ -194,6 +194,7 @@
   @media (prefers-reduced-motion: reduce) {
     .hero > img { animation: none; transform: none; }
     .js .reveal { opacity: 1; transform: none; transition: none; }
+    .sticky { transition: none; }
     html { scroll-behavior: auto; }
     .btn:hover { transform: none; }
   }
@@ -207,7 +208,7 @@
     <div class="wrap">
       <a class="logo" href="#">こもれび<small>RELAXATION SALON</small></a>
       <nav class="nav" aria-label="ページ内"><a href="#features">特徴</a><a href="#menu">メニュー</a><a href="#faq">よくある質問</a><a href="#access">アクセス</a></nav>
-      <a class="btn" href="#reserve">空き状況を見る</a>
+      <a class="btn" href="#reserve-note">空き状況を見る</a>
     </div>
   </header>
 
@@ -218,7 +219,7 @@
         <h1>木もれ日の中で、<br>ほどける六十分。</h1>
         <div class="copy">
           <p>椎の木台駅から歩いて3分。<br>平日は21時まで受付、1日5名まで。<br>毎回同じ担当がお迎えします。</p>
-          <a class="btn" href="#reserve">空き状況を見る</a>
+          <a class="btn" href="#reserve-note">空き状況を見る</a>
         </div>
       </div>
     </div>
@@ -229,15 +230,15 @@
         <div class="reveal">
           <span class="eyebrow">CONCEPT</span>
           <h2>話しかけすぎず、<br>放っておきすぎず。</h2>
-          <p>仕事に、家のことに。気づけば一日じゅう力が入っている。こもれびは、そんな毎日の合間に、ゆっくり力を抜くためのサロンです。</p>
-          <p>昼は窓からの光、夜は葉影を映した灯りで。会話は、あなたが話したいときだけ。</p>
+          <p><span class="nw">仕事に、</span><span class="nw">家のことに。</span><span class="nw">気づけば</span><span class="nw">一日じゅう力が入っている。</span><span class="nw">こもれびは、そんな毎日の合間に、</span><span class="nw">ゆっくり力を抜くためのサロンです。</span></p>
+          <p><span class="nw">昼は窓からの光、</span><span class="nw">夜は葉影を映した灯りで。</span><br><span class="nw">会話は、</span><span class="nw">あなたが話したいときだけ。</span></p>
         </div>
       </div>
     </section>
 
     <section class="worries">
       <div class="wrap grid">
-        <h2 class="reveal">こんな日、<br>ありませんか？</h2>
+        <h2 class="reveal">たとえば、<br>こんな夜に。</h2>
         <div class="reveal">
           <ul>
             <li><span class="nw">仕事のあと、</span><span class="nw">まっすぐ帰る前に</span><span class="nw">ひと息つきたい</span></li>
@@ -245,25 +246,24 @@
             <li><span class="nw">寝る前まで、</span><span class="nw">気持ちが仕事から</span><span class="nw">切り替わらない</span></li>
             <li><span class="nw">毎回ちがう人に、</span><span class="nw">一から説明するのが面倒</span></li>
           </ul>
-          <p class="answer">こもれびは、<em>そんな日のために</em><br>つくったサロンです。</p>
         </div>
       </div>
     </section>
 
     <section id="features">
       <div class="wrap">
-        <div class="heading center reveal"><h2>静かに過ごすための、<span class="nw">決めごと</span></h2></div>
+        <div class="heading center reveal"><h2><span class="nw">静かに過ごすための</span><span class="nw">決めごと</span></h2></div>
         <div class="feature reveal">
-          <div class="photo"><img src="https://images.unsplash.com/photo-1712638932314-e2b185ca0930?w=1000&q=70&auto=format&fit=crop" alt="白いタオルの上でのボディケア" loading="lazy"></div>
-          <div><div class="num">01 —</div><h3>1日5名まで、おひとりずつ</h3><p>ご利用中に、ほかのお客様と顔を合わせることはありません。着替えも個室で。まわりを気にせず、ゆったり過ごせます。</p></div>
+          <div class="photo"><img class="dim" src="https://images.unsplash.com/photo-1787651343620-8d5303006ecb?w=1000&q=70&auto=format&fit=crop&rect=0.28,0.5,0.72,0.32" alt="扉の向こうに見える、窓辺の個室" loading="lazy"></div>
+          <div><div class="num">01 —</div><h3>お迎えは1日5名まで</h3><p><span class="nw">ほかのお客様と</span><span class="nw">顔を合わせないよう、</span><span class="nw">ご予約の間を</span><span class="nw">30分あけています。</span><span class="nw">お部屋はひとつだけです。</span></p></div>
         </div>
         <div class="feature reveal">
-          <div class="photo"><img src="https://images.unsplash.com/photo-1598901986949-f593ff2a31a6?w=1000&q=70&auto=format&fit=crop" alt="あたたかな明かりの中でのボディケア" loading="lazy"></div>
-          <div><div class="num">02 —</div><h3>平日は、夜21時まで受付</h3><p>仕事帰りに、そのまま寄れる時間まで開けています。夜は明かりを落とし、壁に葉の影を映しています。</p></div>
+          <div class="photo"><img src="https://images.unsplash.com/photo-1526235591527-15084c256bad?w=1000&q=70&auto=format&fit=crop" alt="灯りに照らされた壁に映る、葉の影" loading="lazy"></div>
+          <div><div class="num">02 —</div><h3>平日は夜21時まで受付</h3><p><span class="nw">仕事帰りに、</span><span class="nw">そのまま寄れる時間まで</span><span class="nw">開けています。</span><span class="nw">夜は明かりを落とし、</span><span class="nw">壁に葉の影を</span><span class="nw">映しています。</span></p></div>
         </div>
         <div class="feature reveal">
-          <div class="photo"><img src="https://images.unsplash.com/photo-1757689314932-bec6e9c39e51?w=1000&q=70&auto=format&fit=crop" alt="手元のボディケア" loading="lazy"></div>
-          <div><div class="num">03 —</div><h3>担当は、ずっと同じ人</h3><p>前回の強さの好みや、時間をかけた所を記録しておきます。2回目からは、説明なしで「いつもの」から始められます。</p></div>
+          <div class="photo"><img src="https://images.unsplash.com/photo-1483546416237-76fd26bbcdd1?w=1000&q=70&auto=format&fit=crop" alt="木の机の上の、開いたノートと鉛筆" loading="lazy"></div>
+          <div><div class="num">03 —</div><h3>担当はずっと同じ人</h3><p><span class="nw">前回の強さの好みや、</span><span class="nw">時間をかけた所を</span><span class="nw">記録しておきます。</span><span class="nw">2回目からは、</span><span class="nw">説明なしで</span><span class="nw">「いつもの」から</span><span class="nw">始められます。</span></p></div>
         </div>
       </div>
     </section>
@@ -272,12 +272,12 @@
       <div class="wrap">
         <div class="heading reveal"><h2>メニューと料金</h2><p>料金はすべて税込です。</p></div>
         <ul class="prices reveal">
-          <li><div class="name"><h3>ショートコース</h3><p>お昼休みや、買い物の合間に。</p></div><span class="time">30分</span><span class="price">3,850<small>円</small></span></li>
-          <li><div class="name"><h3>じっくりコース</h3><span class="tag">迷ったらこれ</span><p>全身をひと通り。はじめての方に。</p></div><span class="time">60分</span><span class="price">6,600<small>円</small></span></li>
-          <li><div class="name"><h3>しっかりコース</h3><p>気になる所に時間をかけたい方に。</p></div><span class="time">90分</span><span class="price">9,350<small>円</small></span></li>
+          <li><div class="name"><h3>ショートコース</h3><p>買い物や用事の合間に。</p></div><span class="time">30分</span><span class="price">3,850<small>円</small></span></li>
+          <li><div class="name"><h3>定番コース</h3><span class="tag">迷ったらこれ</span><p>はじめての方は、まずこのコースから。</p></div><span class="time">60分</span><span class="price">6,600<small>円</small></span></li>
+          <li><div class="name"><h3>ゆったりコース</h3><p>気になる所に時間をかけたい方に。</p></div><span class="time">90分</span><span class="price">9,350<small>円</small></span></li>
         </ul>
         <div class="first reveal">初回は、どのコースも<span class="nw"><b>1,000円</b>引き</span><small><span class="nw">例）60分 6,600円 → </span><span class="nw">初回 5,600円（税込）</span></small></div>
-        <p class="more reveal"><a class="btn" href="#reserve">空き状況を見る</a></p>
+        <p class="more reveal"><a class="btn" href="#reserve-note">空き状況を見る</a></p>
       </div>
     </section>
 
@@ -285,9 +285,9 @@
       <div class="wrap">
         <div class="heading center reveal"><h2>お客様の声</h2></div>
         <div class="cards reveal">
-          <figure class="voice"><p><span class="nw">「着替えがあるので、</span><span class="nw">会社帰りに</span><span class="nw">手ぶらで行けます。」</span></p><figcaption class="who">30代・会社員</figcaption></figure>
-          <figure class="voice"><p><span class="nw">「お昼休みに</span><span class="nw">30分だけ。</span><span class="nw">午後の前に、</span><span class="nw">気持ちを</span><span class="nw">切り替えています。」</span></p><figcaption class="who">40代・自営業</figcaption></figure>
-          <figure class="voice"><p><span class="nw">「話しかけられすぎないのが、</span><span class="nw">ちょうどいいです。</span><span class="nw">こちらから話したい日は、</span><span class="nw">ゆっくり聞いてくれます。」</span></p><figcaption class="who">50代・パート</figcaption></figure>
+          <figure class="voice"><p><span class="nw">「予約の時間</span><span class="nw">ぴったりに始まるので、</span><span class="nw">帰りの電車が</span><span class="nw">読めます。」</span></p><figcaption class="who">30代・会社員</figcaption></figure>
+          <figure class="voice"><p><span class="nw">「お昼休みに</span><span class="nw">30分だけ。</span><span class="nw">午後の仕事の前に、</span><span class="nw">気持ちを</span><span class="nw">切り替えています。」</span></p><figcaption class="who">40代・自営業</figcaption></figure>
+          <figure class="voice"><p><span class="nw">「黙っていたい日は、</span><span class="nw">そっとしておいてくれます。</span><span class="nw">話したい日は、</span><span class="nw">ゆっくり聞いてくれます。」</span></p><figcaption class="who">50代・パート</figcaption></figure>
         </div>
         <p class="note"><span class="nw">※架空の文章です。</span><span class="nw">実際の制作では、</span><span class="nw">掲載の許可をいただいた</span><span class="nw">本物の声だけを載せます。</span></p>
       </div>
@@ -298,7 +298,7 @@
         <div class="heading reveal"><h2>ご予約からの流れ</h2></div>
         <ol class="reveal">
           <li><h3>Webで予約</h3><p><span class="nw">24時間、</span><span class="nw">空いている時間を</span><span class="nw">その場で選べます。</span></p></li>
-          <li><h3>お好みをお聞きします</h3><p><span class="nw">強さの好みと、</span><span class="nw">時間をかけたい所を</span><span class="nw">5分ほど。</span></p></li>
+          <li><h3>お好みの確認</h3><p><span class="nw">強さの好みと、</span><span class="nw">時間をかけたい所を</span><span class="nw">5分ほど。</span></p></li>
           <li><h3>ボディケア</h3><p><span class="nw">強さを変えたいときは、</span><span class="nw">いつでも</span><span class="nw">声をかけてください。</span></p></li>
           <li><h3>お会計</h3><p><span class="nw">現金・カード・QR決済に</span><span class="nw">対応しています。</span></p></li>
         </ol>
@@ -309,11 +309,11 @@
       <div class="wrap grid">
         <div class="heading reveal"><h2>よくある質問</h2></div>
         <div class="list reveal">
-          <details><summary>着替えは必要ですか？</summary><p>お店でお着替えをご用意しています。お仕事帰りの服装のままお越しください。</p></details>
+          <details><summary>着替えは必要ですか？</summary><p><span class="nw">お店でお着替えを</span><span class="nw">ご用意しています。</span><span class="nw">お仕事帰りの服装のまま</span><span class="nw">お越しください。</span></p></details>
           <details><summary>男性も利用できますか？</summary><p>はい、どなたでもご利用いただけます。</p></details>
-          <details><summary>キャンセルはできますか？</summary><p>前日までのご連絡で、キャンセル料はかかりません。当日のキャンセルは、料金の50%を頂いています。</p></details>
-          <details><summary>治療やケガの相談はできますか？</summary><p>こもれびはリラクゼーションサロンで、治療を目的としたお店ではありません。通院中の方は、医師にご相談のうえお越しください。</p></details>
-          <details><summary>駐車場はありますか？</summary><p>専用の駐車場はありません。近くのコインパーキングをご利用ください。</p></details>
+          <details><summary>キャンセルはできますか？</summary><p><span class="nw">前日までのご連絡で、</span><span class="nw">キャンセル料はかかりません。</span><span class="nw">当日のキャンセルは、</span><span class="nw">料金の50%を</span><span class="nw">頂いています。</span></p></details>
+          <details><summary>治療やケガの相談はできますか？</summary><p><span class="nw">こもれびは</span><span class="nw">リラクゼーションサロンで、</span><span class="nw">治療を目的とした</span><span class="nw">お店ではありません。</span><span class="nw">通院中の方は、</span><span class="nw">医師にご相談のうえ</span><span class="nw">お越しください。</span></p></details>
+          <details><summary>駐車場はありますか？</summary><p><span class="nw">専用の駐車場はありません。</span><span class="nw">近くのコインパーキングを</span><span class="nw">ご利用ください。</span></p></details>
         </div>
       </div>
     </section>
@@ -325,7 +325,7 @@
           <dl>
             <dt>住所</dt><dd>椎の木台2-4-1 <span class="nw">森田ビル2F（架空）</span></dd>
             <dt>最寄り</dt><dd>椎の木台駅 東口から徒歩3分</dd>
-            <dt>営業時間</dt><dd>平日 11:00〜21:00（最終受付）<br>土日祝 10:00〜18:00</dd>
+            <dt>営業時間</dt><dd><span class="nw">平日 11:00〜21:00</span><span class="nw">（最終受付）</span><br><span class="nw">土日祝 10:00〜18:00</span><span class="nw">（最終受付）</span></dd>
             <dt>定休日</dt><dd>毎週水曜日</dd>
           </dl>
           <p class="route"><span class="nw">東口を出て右へ。</span><span class="nw">大通りを2分ほど歩き、</span><span class="nw">花屋の角を左へ。</span><span class="nw">左手のビルの2階です。</span></p>
@@ -343,17 +343,17 @@
             <path d="M0 338H480" stroke="#6f665b" stroke-width="4"/>
             <path d="M0 338H480" stroke="#efe7da" stroke-width="2" stroke-dasharray="10 10"/>
             <rect x="34" y="282" width="150" height="44" rx="4" fill="#fff" stroke="#6f665b" stroke-width="1.5"/>
-            <text x="109" y="311" text-anchor="middle" font-size="19" font-weight="700" fill="#2b2722">椎の木台駅</text>
-            <text x="200" y="276" font-size="16" fill="#6f665b">東口</text>
+            <text x="109" y="312" text-anchor="middle" font-size="22" font-weight="700" fill="#2b2722">椎の木台駅</text>
+            <text x="194" y="278" font-size="20" fill="#6f665b">東口</text>
             <rect x="338" y="174" width="30" height="36" rx="3" fill="#d9c7a7"/>
-            <text x="353" y="166" text-anchor="middle" font-size="15" fill="#6f665b">花屋</text>
+            <text x="353" y="166" text-anchor="middle" font-size="20" fill="#6f665b">花屋</text>
             <rect x="248" y="116" width="40" height="94" rx="3" fill="#3e5b48"/>
             <path d="M184 282V246H310V136H292" stroke="#3e5b48" stroke-width="4" stroke-dasharray="2 8" stroke-linecap="round" fill="none"/>
             <path d="M268 58c-14 0-24 10-24 23 0 17 24 37 24 37s24-20 24-37c0-13-10-23-24-23z" fill="#3e5b48"/>
             <circle cx="268" cy="81" r="8" fill="#fff"/>
             <rect x="140" y="40" width="96" height="34" rx="17" fill="#fff"/>
             <text x="188" y="63" text-anchor="middle" font-size="17" font-weight="700" fill="#2f4637">こもれび</text>
-            <text x="24" y="251" font-size="14" fill="#6f665b">大通り</text>
+            <text x="24" y="253" font-size="20" fill="#6f665b">大通り</text>
           </svg>
           <figcaption>※架空の地図です</figcaption>
         </figure>
@@ -362,8 +362,8 @@
 
     <section class="cta" id="reserve">
       <div class="wrap reveal">
-        <h2>今週の空き状況を、<br>見てみませんか。</h2>
-        <p><span class="nw">平日は21時まで受付。</span><span class="nw">キャンセルは前日まで無料です。</span></p>
+        <h2>仕事帰りの六十分を、<br>ここで。</h2>
+        <p>キャンセルは前日まで無料です。</p>
         <a class="btn light" href="#reserve-note">空き状況を見る</a>
         <p class="sub">24時間受付</p>
         <p class="note" id="reserve-note">※サンプルのため、予約ページにはつながりません</p>
@@ -374,12 +374,19 @@
   <footer>
     <a class="logo" href="#">こもれび<small>RELAXATION SALON</small></a>
     <div>このページは制作サンプルです</div>
-    <div class="credit">写真：<a href="https://unsplash.com/">Unsplash</a><span class="src"><a href="https://unsplash.com/photos/8oW6gov8-7c" aria-label="写真1の出典">1</a><a href="https://unsplash.com/photos/2vKgG0pSKkM" aria-label="写真2の出典">2</a><a href="https://unsplash.com/photos/yBLLzNcA6GU" aria-label="写真3の出典">3</a><a href="https://unsplash.com/photos/WAm_HaI4W2E" aria-label="写真4の出典">4</a><a href="https://unsplash.com/photos/YBfzGCJjLuI" aria-label="写真5の出典">5</a></span></div>
+    <div class="credit">写真：<a href="https://unsplash.com/">Unsplash</a></div>
+    <!-- 写真の出典（Unsplash License・無料写真、確認日 2026-10-24）
+      ヒーロー https://unsplash.com/photos/8oW6gov8-7c
+      コンセプト https://unsplash.com/photos/2vKgG0pSKkM
+      特徴01 https://unsplash.com/photos/JnsuyfJrxQw （洗面台のロゴが入らないよう rect で切り出し）
+      特徴02 https://unsplash.com/photos/57kTxx2-Qjs
+      特徴03 https://unsplash.com/photos/g3O5ZtRk2E4 -->
+
   </footer>
 
   <nav class="sticky" aria-label="予約">
     <a class="sub" href="#menu">料金を見る</a>
-    <a class="web" href="#reserve">空き状況を見る</a>
+    <a class="web" href="#reserve-note">空き状況を見る</a>
   </nav>
 
 <script>
@@ -388,6 +395,9 @@
     if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
   }), { rootMargin: '0px 0px -10% 0px' });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  // sticky bar appears once the hero (with its own button) is off screen
+  const bar = document.querySelector('.sticky');
+  new IntersectionObserver(([e]) => bar.classList.toggle('show', !e.isIntersecting)).observe(document.querySelector('.hero'));
 </script>
 </body>
 </html>

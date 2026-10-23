@@ -57,7 +57,7 @@
   .hero { padding: 4px 0 56px; }
   .hero .wrap { display: grid; gap: 24px; }
   .hero .photo { aspect-ratio: 16 / 10; border-radius: 999px 999px 28px 28px; overflow: hidden; background: var(--cream-2); }
-  .hero .photo img { object-position: 50% 58%; }
+  .hero .photo img { object-position: 45% 60%; }
   .hero h1 { font-size: clamp(29px, 8vw, 46px); letter-spacing: .04em; }
   .hero h1 em { font-style: normal; color: var(--terra-text); }
   .hero p { margin: 12px 0 16px; color: var(--sub); }
@@ -69,7 +69,7 @@
   .concept { background: var(--cream-2); border-radius: 40px 40px 0 0; }
   .concept .grid { display: grid; gap: 36px; align-items: center; }
   .concept .photo { aspect-ratio: 1 / 1; border-radius: 48% 52% 46% 54% / 55% 45% 55% 45%; overflow: hidden; max-width: 460px; width: 100%; margin: 0 auto; }
-  .concept .photo img { object-position: 50% 55%; }
+  .concept .photo img { object-position: 40% 70%; }
   .concept h2 { margin-bottom: 20px; }
   .concept p { margin: 0 0 14px; }
 
@@ -84,7 +84,6 @@
   /* menu: chalkboard */
   .chalk { background: var(--chalk); color: var(--cream); border: 10px solid #8a6446; border-radius: 22px; padding: 32px 22px;
     box-shadow: inset 0 0 60px rgba(0,0,0,.35); }
-  .chalk .eyebrow { color: var(--butter); }
   .chalk-head { margin-bottom: 28px; }
   .chalk-head p { margin: 8px 0 0; color: #ddd0bd; font-size: 15px; }
   .chalk .cols { display: grid; gap: 32px; }
@@ -127,7 +126,7 @@
   .room .grid { display: grid; gap: 32px; align-items: center; }
   .room figure { margin: 0; }
   .room .ph { aspect-ratio: 4 / 3; border-radius: 24px; overflow: hidden; }
-  .room .ph img { object-position: 50% 72%; }
+  .room .ph img { object-position: 50% 60%; }
   .room figcaption { font-size: 15px; color: #e9dccb; margin-top: 8px; padding-left: 4px; }
   .room h2 { margin-bottom: 16px; }
   .room p { margin: 0; color: #e9dccb; }
@@ -230,11 +229,11 @@
     <div class="hero">
       <div class="wrap">
         <div class="photo">
-          <img src="https://images.unsplash.com/photo-1596806032217-146c84269ffc?w=1200&q=70&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1596806032217-146c84269ffc?w=800&q=70&auto=format&fit=crop 800w, https://images.unsplash.com/photo-1596806032217-146c84269ffc?w=1200&q=70&auto=format&fit=crop 1200w, https://images.unsplash.com/photo-1596806032217-146c84269ffc?w=1800&q=70&auto=format&fit=crop 1800w" sizes="(min-width: 900px) 55vw, 100vw" width="1200" height="1800" fetchpriority="high" alt="木のテーブルに置いたスコーンとジャム、ラテのカップ">
+          <img src="https://images.unsplash.com/photo-1678025215973-642b1dda08a0?w=1200&q=70&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1678025215973-642b1dda08a0?w=800&q=70&auto=format&fit=crop 800w, https://images.unsplash.com/photo-1678025215973-642b1dda08a0?w=1200&q=70&auto=format&fit=crop 1200w, https://images.unsplash.com/photo-1678025215973-642b1dda08a0?w=1800&q=70&auto=format&fit=crop 1800w" sizes="(min-width: 900px) 55vw, 100vw" width="1200" height="800" fetchpriority="high" alt="麻のテーブルクロスに置いた皿のスコーン3つと、花柄のマグカップ">
         </div>
         <div class="copy">
           <h1>朝7時半、<br><span class="nowrap"><em>スコーン</em>と一杯を。</span></h1>
-          <p>こむぎ台駅から歩いて2分。毎朝お店で焼くスコーンと食パン、ハンドドリップの珈琲で、ゆっくり朝ごはんを。</p>
+          <p>こむぎ台駅から歩いて2分。毎朝お店で焼くスコーンと食パン、ハンドドリップの珈琲で、朝ごはんが食べられます。</p>
           <ul class="chips"><li>7:30〜18:00</li><li>火曜定休</li><li>テイクアウトあり</li></ul>
           <div class="actions">
             <a class="btn" href="#reserve">今日の空席・予約</a>
@@ -246,12 +245,12 @@
 
     <section class="concept">
       <div class="wrap grid">
-        <div class="photo reveal"><img src="https://images.unsplash.com/photo-1596806033480-12587a7e1f26?w=900&q=70&auto=format&fit=crop" width="900" height="1350" alt="上から見た、木の板にのせたスコーンとジャム" loading="lazy"></div>
+        <div class="photo reveal"><img src="https://images.unsplash.com/photo-1594753286464-628d797fd5f7?w=900&q=70&auto=format&fit=crop" width="900" height="600" alt="天板に並んだ、焼き上がったばかりのスコーン" loading="lazy"></div>
         <div class="reveal">
           <span class="eyebrow">CONCEPT</span>
           <h2>開店の2時間前から、<br>店の奥でスコーンを焼いています。</h2>
           <p>焼くのは、その日にお店に並べる分だけ。窓ぎわの席に座ると、ちょうど焼き上がりの香りが届きます。</p>
-          <p>出勤前の15分でも、休みの日の1時間でも。それぞれのペースで、朝ごはんをどうぞ。</p>
+          <p>モーニングは、ご注文からおよそ5分でお出しします。出勤前でも寄っていただけます。</p>
         </div>
       </div>
     </section>
@@ -259,7 +258,7 @@
     <section class="menu" id="menu">
       <div class="wrap">
         <div class="chalk dark reveal">
-          <div class="chalk-head"><div><span class="eyebrow">MENU</span><h2>メニュー</h2></div><p>価格はすべて、店内でお召し上がりの税込価格です。</p></div>
+          <div class="chalk-head"><h2>メニュー</h2><p>価格はすべて、店内でお召し上がりの税込価格です。</p></div>
           <div class="cols">
             <div>
               <h3>ドリンク</h3>
@@ -295,12 +294,12 @@
           <span class="time">毎朝 7:30〜10:30 L.O.</span>
         </div>
         <div class="sets reveal">
-          <div class="set"><div class="ph"><img src="https://images.unsplash.com/photo-1621947529620-2b9fdbd5beae?rect=0,0.37,0.42,0.33&w=700&q=70&auto=format" width="700" height="525" alt="皿にのったクランベリーのスコーン" loading="lazy"></div><span class="badge">A</span>
-            <div class="body"><h3>スコーンセット</h3><p>クランベリーのスコーンに、クロテッドクリームとジャムを添えて。</p><div class="yen">780<small>円（税込）</small></div></div></div>
-          <div class="set"><div class="ph"><img src="https://images.unsplash.com/photo-1621947529620-2b9fdbd5beae?rect=0.43,0.625,0.385,0.23&w=700&q=70&auto=format" width="700" height="525" alt="パン・オ・ショコラとカフェラテ" loading="lazy"></div><span class="badge">B</span>
+          <div class="set"><div class="ph"><img src="https://images.unsplash.com/photo-1763390896467-1ca4a95c6261?rect=0.04,0.02,0.66,0.743&w=700&q=70&auto=format&fit=crop" width="700" height="525" alt="皿にのったスコーンと、クロテッドクリーム、いちごジャム" loading="lazy"></div><span class="badge">A</span>
+            <div class="body"><h3>スコーンセット</h3><p>スコーン1個に、クロテッドクリームといちごジャムが付きます。</p><div class="yen">780<small>円（税込）</small></div></div></div>
+          <div class="set"><div class="ph"><img src="https://images.unsplash.com/photo-1763647872237-c76e660cf38b?w=700&q=70&auto=format&fit=crop" width="700" height="525" alt="パン・オ・ショコラと、ミルク入りの珈琲" loading="lazy"></div><span class="badge">B</span>
             <div class="body"><h3>パン・オ・ショコラセット</h3><p>バターを折り込んだ生地で、チョコレートを包みました。</p><div class="yen">760<small>円（税込）</small></div></div></div>
-          <div class="set"><div class="ph"><img src="https://images.unsplash.com/photo-1621947529620-2b9fdbd5beae?rect=0.33,0.05,0.58,0.45&w=700&q=70&auto=format" width="700" height="525" alt="りんごのコンポートとグラノーラをのせたオートミール" loading="lazy"></div><span class="badge">C</span>
-            <div class="body"><h3>オートミールセット</h3><p>温かいオートミールに、りんごのコンポートとナッツ入りのグラノーラ。</p><div class="yen">900<small>円（税込）</small></div></div></div>
+          <div class="set"><div class="ph"><img src="https://images.unsplash.com/photo-1559329607-43c470fd9aac?rect=0.04,0.37,0.9,0.45&w=700&q=70&auto=format&fit=crop" width="700" height="525" alt="角切りのりんごとシナモンをのせた、白いボウルのオートミール" loading="lazy"></div><span class="badge">C</span>
+            <div class="body"><h3>オートミールセット</h3><p>温かいオートミールに、角切りのりんごとシナモンをのせています。</p><div class="yen">900<small>円（税込）</small></div></div></div>
         </div>
         <p class="after reveal">カフェラテ・ほうじ茶ラテへの変更は＋80円（税込）です。</p>
       </div>
@@ -310,9 +309,9 @@
       <div class="wrap grid">
         <div class="lead reveal">
           <h2>焼き菓子とパンは、<br>お持ち帰りもできます。</h2>
-          <p>手みやげや、明日の朝ごはんに。食パンは焼く数が決まっているため、前日18時までのご予約で取り置きします。</p>
+          <p>手みやげや、翌朝の朝ごはん用にどうぞ。食パンと焼き菓子は焼く数が決まっているため、前日18時までのご予約で<span class="nowrap">取り置きします。</span></p>
           <ol class="steps">
-            <li>前日18時までに、Webか店頭で予約</li>
+            <li><span><span class="nowrap">前日18時までに予約</span><span class="nowrap">（Web・店頭）</span></span></li>
             <li>受け取りたい時間にご来店</li>
             <li>レジでお名前を伝えて受け取り</li>
           </ol>
@@ -328,7 +327,7 @@
               <li><span class="name">焼き菓子の詰め合わせ</span><span class="yen">1,800円</span><small>6個入り・箱代込み</small></li>
               <li><span class="name">ブレンド珈琲（カップ）</span><span class="yen">450円</span></li>
             </ul>
-            <p class="note" style="margin:12px 0 0">税込（軽減税率8%）。アレルギー表示は店内メニューと同じです。</p>
+            <p class="note" style="margin:12px 0 0">税込（軽減税率8%）。店内とは税率がちがうため、価格も異なります。アレルギー表示は店内メニューと同じです。</p>
           </div>
         </div>
       </div>
@@ -336,12 +335,12 @@
 
     <section class="room dark">
       <div class="wrap grid">
-        <figure class="reveal"><div class="ph"><img src="https://images.unsplash.com/photo-1596806031950-58b50b2affef?w=1000&q=70&auto=format&fit=crop" width="1000" height="1500" alt="壁ぎわの木のテーブル席。ラテとスコーン、壁にコンセント" loading="lazy"></div><figcaption>壁ぎわの席には、電源があります。</figcaption></figure>
+        <figure class="reveal"><div class="ph"><img src="https://images.unsplash.com/photo-1738214344374-bfac4208640b?rect=0,0.3,1,0.7&w=1000&q=70&auto=format&fit=crop" width="1000" height="1050" alt="窓ぎわにクッションを置いたベンチ席と、白い丸テーブル、木のいすが並ぶ店内" loading="lazy"></div><figcaption>窓ぎわのベンチ席。まわりを広くあけています。</figcaption></figure>
         <div class="reveal">
           <h2>24席の、<br>ちいさな店です。</h2>
-          <p>テーブル席とソファ席があります。ソファ席のまわりは、ベビーカーのまま入れるように広くあけています。</p>
+          <p>テーブル席と、窓ぎわのベンチ席があります。ベンチ席のまわりは、ベビーカーのまま入れるように広くあけています。</p>
           <ul class="facts">
-            <li><b>24席</b>テーブル・ソファ</li>
+            <li><b>ベビーカー可</b>ベンチ席のまわり</li>
             <li><b>全席禁煙</b></li>
             <li><b>電源あり</b>壁ぎわの4席</li>
             <li><b>Wi-Fi</b>無料</li>
@@ -360,6 +359,8 @@
             <dt>営業時間</dt><dd>7:30〜18:00（L.O. 17:30）<br>モーニングは 10:30 L.O.</dd>
             <dt>定休日</dt><dd>毎週火曜日</dd>
             <dt>お支払い</dt><dd>現金・カード・QR決済</dd>
+            <dt>駐車場</dt><dd>なし（近くにコインパーキング）</dd>
+            <dt>自転車</dt><dd>店の前に4台まで</dd>
           </dl>
         </div>
         <figure class="map reveal">
@@ -376,15 +377,15 @@
             <line x1="0" y1="222" x2="360" y2="222" stroke="#fbf4ea" stroke-width="4" stroke-dasharray="14 10"/>
             <rect x="196" y="206" width="132" height="32" rx="8" fill="#fff" stroke="#4a3222" stroke-width="2"/>
             <text x="262" y="228" text-anchor="middle" font-size="16" font-weight="700" fill="#3a2a1f">こむぎ台駅</text>
-            <text x="178" y="200" text-anchor="middle" font-size="13" fill="#65503f">西口</text>
-            <text x="300" y="103" text-anchor="middle" font-size="13" fill="#65503f">本町通り</text>
+            <text x="178" y="200" text-anchor="middle" font-size="16" fill="#65503f">西口</text>
+            <text x="290" y="104" text-anchor="middle" font-size="16" fill="#65503f">本町通り</text>
             <text x="122" y="161" text-anchor="end" font-size="14" font-weight="700" fill="#b04a28">徒歩2分</text>
             <polyline points="194,212 146,212 146,98 210,98" fill="none" stroke="#b04a28" stroke-width="4" stroke-dasharray="1 8" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M210 80c-10-13-16-21-16-29a16 16 0 0 1 32 0c0 8-6 16-16 29z" fill="#b04a28"/>
             <circle cx="210" cy="51" r="6" fill="#fff"/>
             <rect x="234" y="34" width="112" height="32" rx="16" fill="#fff"/>
             <text x="290" y="55" text-anchor="middle" font-size="15" font-weight="700" fill="#4a3222">まめとこむぎ</text>
-            <path d="M24 12l7 16h-14z" fill="#65503f"/><text x="24" y="44" text-anchor="middle" font-size="13" font-weight="700" fill="#65503f">N</text>
+            <path d="M24 12l7 16h-14z" fill="#65503f"/><text x="24" y="46" text-anchor="middle" font-size="16" font-weight="700" fill="#65503f">N</text>
           </svg>
           <figcaption>西口を出て北へ。本町通りの角を右に曲がってすぐです。</figcaption>
         </figure>
@@ -395,11 +396,9 @@
       <div class="wrap grid">
         <h2 class="reveal">よくある質問</h2>
         <div class="list reveal">
-          <details><summary>予約なしでも入れますか？</summary><p>はい、空いている席にご案内します。土日の朝は満席になることがあるので、席を取っておきたい方はWebで席をご予約ください。</p></details>
-          <details><summary>子ども連れでも大丈夫ですか？</summary><p>はい。ソファ席はベビーカーのまま入れる広さです。子ども用のいすと取り皿もご用意しています。</p></details>
+          <details><summary>予約なしでも入れますか？</summary><p>はい、空いている席にご案内します。土日の朝は満席になることがあるので、Web予約もご利用ください。</p></details>
+          <details><summary>子ども連れでも大丈夫ですか？</summary><p>はい。ベンチ席のまわりは、ベビーカーのまま入れる広さです。子ども用のいすと取り皿もご用意しています。</p></details>
           <details><summary>アレルギーに対応したメニューはありますか？</summary><p>小麦・卵・乳を使わない焼き菓子・軽食はありません。同じ厨房でナッツ類も扱うため、原材料を取り除いた調理もお受けしていません。</p></details>
-          <details><summary>焼き菓子の取り置きはできますか？</summary><p>はい。前日18時までに、Webか店頭でご予約ください。当日の分は、店頭にある数だけのお渡しになります。</p></details>
-          <details><summary>駐車場はありますか？</summary><p>専用の駐車場はありません。近くのコインパーキングをご利用ください。自転車は店の前に4台まで置けます。</p></details>
         </div>
       </div>
     </section>
@@ -407,7 +406,7 @@
     <section class="cta dark" id="reserve">
       <div class="wrap reveal">
         <h2>土日の朝は、<br>席の予約がおすすめです</h2>
-        <p>席の予約は、当日の朝7時から受け付けています。<br>焼き菓子の取り置きは、前日18時までです。</p>
+        <p>Web予約は、当日の朝7時から受け付けています。<br><span class="nowrap">パン・焼き菓子の取り置きは、</span><span class="nowrap">前日18時までです。</span></p>
         <div class="actions">
           <a class="btn light" href="#reserve-note">今日の空席を見る（Web予約）</a>
           <a class="link" href="#takeout">取り置きの方法を見る</a>
@@ -424,11 +423,13 @@
     <details class="credits">
       <summary>使用した写真の一覧</summary>
       <ul>
-        <li><a href="https://images.unsplash.com/photo-1596806032217-146c84269ffc">スコーンとラテ（トップ）</a></li>
-        <li><a href="https://images.unsplash.com/photo-1596806033480-12587a7e1f26">上から見たスコーン</a></li>
-        <li><a href="https://images.unsplash.com/photo-1621947529620-2b9fdbd5beae">朝ごはんのテーブル（モーニング）</a></li>
-        <li><a href="https://images.unsplash.com/photo-1648142119324-fbab91e76c66">紙カップのラテと焼き菓子</a></li>
-        <li><a href="https://images.unsplash.com/photo-1596806031950-58b50b2affef">壁ぎわの席</a></li>
+        <li><a href="https://unsplash.com/photos/eCp1iJ3tRjc">スコーンとマグカップ（トップ）</a> — 撮影：EVERYDAY PaRIS</li>
+        <li><a href="https://unsplash.com/photos/SOQH9fOWcJY">天板のスコーン</a> — 撮影：David French</li>
+        <li><a href="https://unsplash.com/photos/K2nQUurKss8">スコーンセット</a> — 撮影：Alexander Schimmeck</li>
+        <li><a href="https://unsplash.com/photos/lMSmhRDS0Ik">パン・オ・ショコラセット</a> — 撮影：Christopher Chung</li>
+        <li><a href="https://unsplash.com/photos/4zG050fMarw">オートミールセット</a> — 撮影：K8</li>
+        <li><a href="https://unsplash.com/photos/uTNAyTrS1SQ">紙カップのラテと焼き菓子</a> — 撮影：Anna Wohnoutka</li>
+        <li><a href="https://unsplash.com/photos/X-V9r34NYnI">窓ぎわのベンチ席</a> — 撮影：Finn</li>
       </ul>
     </details>
   </footer>
