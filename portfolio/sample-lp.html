@@ -18,18 +18,21 @@
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans);
-    line-height: 1.9; letter-spacing: .03em; -webkit-font-smoothing: antialiased; word-break: auto-phrase; }
+    line-height: 1.9; letter-spacing: .03em; -webkit-font-smoothing: antialiased; word-break: normal; overflow-wrap: anywhere; }
   img { display: block; width: 100%; height: 100%; object-fit: cover; }
   a { color: inherit; }
   h1, h2, h3 { font-family: var(--serif); font-weight: 700; line-height: 1.5; margin: 0; letter-spacing: .04em; word-break: auto-phrase; text-wrap: balance; }
+  .nw { white-space: nowrap; }
   .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
-  section { padding: 96px 0; }
+  section { padding: 88px 0; }
   .eyebrow { font-family: var(--serif); color: var(--gold-text); font-size: 13px; letter-spacing: .3em; display: block; margin-bottom: 12px; }
-  .heading { text-align: center; margin-bottom: 56px; }
+  .heading { margin-bottom: 48px; }
+  .heading.center { text-align: center; }
   .heading h2 { font-size: clamp(24px, 4.6vw, 34px); }
+  .heading p { margin: 10px 0 0; color: var(--sub); font-size: 15px; }
 
   /* sample notice */
-  .notice { background: var(--ink); color: #f6f1e9; font-size: 12px; text-align: center; padding: 6px 16px; letter-spacing: .05em; }
+  .notice { background: var(--green-dark); color: var(--paper); font-size: 11px; text-align: center; padding: 8px 16px; letter-spacing: .06em; line-height: 1.6; }
 
   /* header */
   header.site { position: absolute; z-index: 10; left: 0; right: 0; padding: 20px 0; color: #fff; }
@@ -40,11 +43,11 @@
   .nav a { text-decoration: none; opacity: .9; }
   .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none;
     background: var(--green); color: #fff; font-weight: 700; letter-spacing: .1em; border-radius: 99px;
-    padding: 16px 40px; transition: background .2s, transform .2s; }
+    padding: 16px 40px; min-height: 48px; transition: background .2s, transform .2s; }
   .btn:hover { background: var(--green-dark); transform: translateY(-2px); }
   :focus-visible { outline: 3px solid var(--green-dark); outline-offset: 3px; }
-  header.site :focus-visible, .hero :focus-visible, .cta :focus-visible { outline-color: #fff; }
-  .btn.small { padding: 10px 22px; font-size: 14px; }
+  header.site :focus-visible, .hero :focus-visible, .cta :focus-visible, .notice :focus-visible { outline-color: #fff; }
+  header.site .btn { display: none; padding: 10px 22px; min-height: 44px; font-size: 14px; }
   .btn.light { background: #fff; color: var(--green-dark); }
   .btn.light:hover { background: var(--paper); }
 
@@ -52,11 +55,10 @@
   .hero { position: relative; min-height: 640px; height: 92svh; max-height: 900px; color: #fff; overflow: hidden; }
   .hero > img { position: absolute; inset: 0; transform: scale(1.06); animation: drift 18s ease-out forwards; }
   .hero::after { content: ""; position: absolute; inset: 0;
-    background: linear-gradient(180deg, rgba(30,24,16,.45) 0%, rgba(30,24,16,.30) 40%, rgba(30,24,16,.80) 100%); }
+    background: linear-gradient(180deg, rgba(30,24,16,.42) 0%, rgba(30,24,16,.25) 40%, rgba(30,24,16,.65) 100%); }
   .hero .inner { position: relative; z-index: 1; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 72px; }
   .hero h1 { font-size: clamp(32px, 8.4vw, 56px); text-shadow: 0 2px 16px rgba(0,0,0,.45); }
-  .hero p { margin: 20px 0 32px; font-size: 16px; opacity: .92; }
-  .hero .actions { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  .hero p { margin: 20px 0 32px; font-size: 16px; text-shadow: 0 1px 10px rgba(0,0,0,.4); }
   @keyframes drift { to { transform: scale(1); } }
 
   /* concept */
@@ -65,56 +67,63 @@
   .concept h2, .access h2 { font-size: clamp(24px, 5vw, 34px); margin-bottom: 24px; }
   .concept p { color: var(--sub); margin: 0 0 16px; }
 
-  /* worries */
+  /* worries: heading left, ruled list right */
   .worries { background: var(--paper-2); }
-  .worries ul { list-style: none; padding: 0; margin: 0 auto; max-width: 760px; display: grid; gap: 14px; }
-  .worries li { background: #fff; border-radius: 4px; padding: 20px 24px 20px 64px; position: relative; }
-  .worries li::before { content: ""; position: absolute; left: 24px; top: 50%; width: 22px; height: 22px; margin-top: -11px;
-    border-radius: 50%; border: 1.5px solid var(--gold);
-    background: radial-gradient(circle, var(--gold) 0 4px, transparent 5px); }
-  .worries .answer { text-align: center; margin-top: 48px; font-family: var(--serif); font-size: clamp(20px, 4vw, 26px); }
+  .worries .grid { display: grid; gap: 32px; }
+  .worries h2 { font-size: clamp(24px, 4.6vw, 34px); }
+  .worries ul { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--line); }
+  .worries li { padding: 18px 0 18px 30px; border-bottom: 1px solid var(--line); position: relative; }
+  .worries li::before { content: ""; position: absolute; left: 0; top: 50%; width: 14px; height: 1px; background: var(--gold); }
+  .worries .answer { margin: 32px 0 0; font-family: var(--serif); font-size: clamp(19px, 4vw, 24px); line-height: 1.7; }
   .worries .answer em { font-style: normal; color: var(--green); border-bottom: 2px solid var(--gold); }
 
   /* features */
   .feature { display: grid; gap: 28px; margin-bottom: 72px; align-items: center; }
   .feature:last-child { margin-bottom: 0; }
   .feature .photo { aspect-ratio: 3 / 2; border-radius: 4px; overflow: hidden; }
-  .feature .num { font-family: var(--serif); font-size: 56px; line-height: 1; color: var(--gold-text); }
+  .feature .num { font-family: var(--serif); font-size: 15px; letter-spacing: .2em; color: var(--gold-text); }
   .feature h3 { font-size: clamp(21px, 4vw, 26px); margin: 8px 0 14px; }
   .feature p { color: var(--sub); margin: 0; }
 
-  /* menu */
+  /* menu: one price list, not cards */
   .menu { background: var(--paper-2); }
-  .menu .cards { display: grid; gap: 20px; }
-  .course { background: #fff; border-radius: 4px; padding: 32px 28px; position: relative; border: 1px solid transparent; }
-  .course.pop { border-color: var(--gold); }
-  .course .tag { position: absolute; top: -13px; left: 28px; background: var(--gold-text); color: #fff; font-size: 12px; font-weight: 700; padding: 3px 14px; border-radius: 99px; letter-spacing: .1em; }
-  .course h3 { font-size: 20px; }
-  .course .time { color: var(--sub); font-size: 14px; }
-  .course .price { font-family: var(--serif); font-size: 32px; margin: 12px 0; }
-  .course .price small { font-size: 14px; margin-left: 4px; color: var(--sub); }
-  .course p { margin: 0; color: var(--sub); font-size: 15px; border-top: 1px solid var(--line); padding-top: 14px; }
-  .first { margin-top: 32px; background: var(--green); color: #fff; border-radius: 4px; padding: 24px; text-align: center; font-family: var(--serif); font-size: 18px; }
-  .first b { color: #f0d9b5; font-size: 24px; margin: 0 4px; }
+  .prices { list-style: none; margin: 0; padding: 8px 24px; background: #fff; border-radius: 4px; }
+  .prices li { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; align-items: baseline; padding: 22px 0; border-bottom: 1px solid var(--line); }
+  .prices li:last-child { border-bottom: 0; }
+  .prices .name { grid-column: 1 / -1; }
+  .prices h3 { font-size: 20px; display: inline; }
+  .prices .tag { display: inline-block; margin-left: 10px; font-size: 12px; font-weight: 700; color: var(--gold-text); border: 1px solid var(--gold); border-radius: 99px; padding: 0 10px; letter-spacing: .1em; vertical-align: 3px; line-height: 1.8; }
+  .prices p { margin: 4px 0 0; color: var(--sub); font-size: 15px; }
+  .prices .time { color: var(--sub); font-size: 15px; }
+  .prices .price { font-family: var(--serif); font-size: 28px; text-align: right; white-space: nowrap; }
+  .prices .price small { font-size: 13px; margin-left: 4px; color: var(--sub); font-family: var(--sans); }
+  .first { margin-top: 24px; background: #fff; color: var(--ink); border: 1px solid var(--gold); border-radius: 4px; padding: 22px 16px; text-align: center; font-family: var(--serif); font-size: 18px; line-height: 1.6; }
+  .first b { color: var(--green-dark); font-size: 22px; margin: 0 2px; }
+  .first small { display: block; font-family: var(--sans); font-size: 14px; color: var(--sub); margin-top: 6px; }
+  .menu .more { text-align: center; margin: 32px 0 0; }
 
-  /* voices */
-  .voices .cards { display: grid; gap: 20px; }
-  .voice { background: #fff; border-radius: 4px; padding: 28px; }
-  .voice p { margin: 0 0 16px; }
+  /* voices: quotes on rules, no cards */
+  .voices .cards { display: grid; gap: 32px; align-items: start; }
+  .voice { border-top: 1px solid var(--gold); padding-top: 20px; margin: 0; }
+  .voice p { margin: 0 0 12px; font-family: var(--serif); font-size: 17px; line-height: 1.9; }
   .voice .who { font-size: 13px; color: var(--sub); }
-  .voices .note { text-align: center; font-size: 12px; color: var(--sub); margin-top: 20px; }
+  .voices .note { font-size: 13px; color: var(--sub); margin: 32px 0 0; text-align: center; }
 
-  /* flow */
+  /* flow: numbers joined by a line */
   .flow { background: var(--paper-2); }
-  .flow ol { list-style: none; counter-reset: s; padding: 0; margin: 0; display: grid; gap: 16px; }
-  .flow li { counter-increment: s; background: #fff; border-radius: 4px; padding: 24px; }
-  .flow li::before { content: "STEP " counter(s); display: block; font-family: var(--serif); color: var(--gold-text); font-size: 13px; letter-spacing: .2em; }
-  .flow h3 { font-size: 18px; margin: 4px 0 6px; }
+  .flow ol { list-style: none; counter-reset: s; padding: 0; margin: 0; display: grid; gap: 28px; }
+  .flow li { counter-increment: s; position: relative; padding-left: 64px; }
+  .flow li::before { content: counter(s); position: absolute; left: 0; top: 0; width: 40px; height: 40px; border: 1px solid var(--gold); border-radius: 50%;
+    display: grid; place-items: center; font-family: var(--serif); color: var(--gold-text); background: var(--paper-2); line-height: 1; }
+  .flow li:not(:last-child)::after { content: ""; position: absolute; left: 20px; top: 48px; bottom: -22px; border-left: 1px solid var(--gold); }
+  .flow h3 { font-size: 18px; margin: 6px 0 6px; }
   .flow p { margin: 0; color: var(--sub); font-size: 15px; }
 
   /* faq */
-  .faq .list { max-width: 760px; margin: 0 auto; }
+  .faq { padding-bottom: 56px; }
+  .faq .grid { display: grid; gap: 8px; }
   details { border-bottom: 1px solid var(--line); }
+  details:first-child { border-top: 1px solid var(--line); }
   summary { cursor: pointer; list-style: none; padding: 22px 40px 22px 36px; position: relative; font-weight: 700; }
   summary::-webkit-details-marker { display: none; }
   summary::before { content: "Q"; position: absolute; left: 0; font-family: var(--serif); color: var(--gold-text); font-size: 20px; top: 18px; }
@@ -123,30 +132,35 @@
   details p { margin: 0 0 22px; padding-left: 36px; color: var(--sub); }
 
   /* access */
+  .access { padding-top: 56px; }
   .access .grid { display: grid; gap: 32px; }
   .access dl { margin: 0; display: grid; grid-template-columns: 5em 1fr; gap: 12px 16px; }
   .access dt { font-weight: 700; }
   .access dd { margin: 0; color: var(--sub); }
-  .map { aspect-ratio: 4 / 3; background: var(--paper-2); border: 1px solid var(--line); border-radius: 4px;
-    display: grid; place-items: center; color: var(--sub); font-size: 14px; }
+  .access .route { margin: 24px 0 0; color: var(--sub); font-size: 15px; border-left: 2px solid var(--gold); padding-left: 16px; }
+  .map { margin: 0; }
+  .map svg { display: block; width: 100%; height: auto; border-radius: 4px; }
+  .map figcaption { font-size: 13px; color: var(--sub); margin-top: 8px; }
 
   /* final cta */
-  .cta { position: relative; color: #fff; text-align: center; overflow: hidden; }
-  .cta > img { position: absolute; inset: 0; }
-  .cta::after { content: ""; position: absolute; inset: 0; background: rgba(28,22,15,.62); }
-  .cta .wrap { position: relative; z-index: 1; }
+  .cta { background: var(--green-dark); color: #fff; text-align: center; }
   .cta h2 { font-size: clamp(24px, 5vw, 34px); }
-  .cta p { margin: 16px 0 32px; opacity: .9; }
+  .cta p { margin: 16px 0 32px; opacity: .92; }
+  .cta .sub { font-size: 13px; margin: 12px 0 0; }
+  .cta .note { font-size: 13px; margin: 4px 0 0; opacity: .85; }
 
-  footer { text-align: center; padding: 40px 20px 120px; font-size: 12px; color: var(--sub); }
+  footer { text-align: center; padding: 40px 20px 120px; font-size: 13px; color: var(--sub); }
   footer .logo { color: var(--ink); display: inline-block; margin-bottom: 12px; }
+  footer .credit { margin-top: 4px; }
+  footer .src { font-size: 11px; margin-left: 6px; }
+  footer .src a { color: var(--sub); margin: 0 2px; }
 
   /* mobile sticky bar */
   .sticky { position: fixed; z-index: 20; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: 1fr 1.6fr; gap: 8px;
     padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); background: rgba(246,241,233,.95); backdrop-filter: blur(8px);
     border-top: 1px solid var(--line); }
   .sticky a { text-align: center; text-decoration: none; font-weight: 700; border-radius: 99px; padding: 12px 0; font-size: 14px; }
-  .sticky .tel { border: 1px solid var(--green); color: var(--green); }
+  .sticky .sub { border: 1px solid var(--green); color: var(--green); }
   .sticky .web { background: var(--green); color: #fff; }
 
   /* reveal on scroll (only when JS runs) */
@@ -156,15 +170,24 @@
   @media (min-width: 900px) {
     section { padding: 112px 0; }
     .nav { display: flex; }
+    header.site .btn { display: inline-flex; }
     .hero .inner { flex-direction: row; justify-content: space-between; align-items: center; padding-bottom: 0; }
     .hero h1 { writing-mode: vertical-rl; white-space: nowrap; font-size: clamp(40px, 4.2vw, 54px); letter-spacing: .2em; order: 2; margin-right: 6%; }
-    .hero .copy { order: 1; align-self: flex-end; padding-bottom: 96px; max-width: 420px; }
+    .hero .copy { order: 1; align-self: flex-end; padding-bottom: 96px; max-width: 440px; }
     .concept .grid { grid-template-columns: 5fr 6fr; gap: 80px; }
+    .worries .grid { grid-template-columns: 4fr 7fr; gap: 64px; align-items: start; }
     .feature { grid-template-columns: 6fr 5fr; gap: 56px; }
+    .feature:nth-child(even) { grid-template-columns: 5fr 6fr; }
     .feature:nth-child(even) .photo { order: 2; }
-    .menu .cards, .voices .cards { grid-template-columns: repeat(3, 1fr); }
-    .flow ol { grid-template-columns: repeat(4, 1fr); }
-    .access .grid { grid-template-columns: 1fr 1fr; align-items: center; }
+    .prices { padding: 8px 40px; }
+    .prices li { grid-template-columns: 1fr 5em 11em; }
+    .prices .name { grid-column: auto; }
+    .voices .cards { grid-template-columns: 5fr 4fr 6fr; gap: 48px; }
+    .flow ol { grid-template-columns: repeat(4, 1fr); gap: 32px; }
+    .flow li { padding-left: 0; padding-top: 60px; }
+    .flow li:not(:last-child)::after { left: 52px; right: -20px; top: 20px; bottom: auto; border-left: 0; border-top: 1px solid var(--gold); }
+    .faq .grid { grid-template-columns: 4fr 8fr; gap: 64px; align-items: start; }
+    .access .grid { grid-template-columns: 5fr 6fr; gap: 64px; align-items: center; }
     .sticky { display: none; }
     footer { padding-bottom: 40px; }
   }
@@ -178,13 +201,13 @@
 <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
-  <div class="notice">これはLP制作のサンプルです。店舗・料金・住所・お客様の声はすべて架空です。</div>
+  <div class="notice">制作サンプル｜店舗・料金・住所・お客様の声は架空です</div>
 
   <header class="site">
     <div class="wrap">
       <a class="logo" href="#">こもれび<small>RELAXATION SALON</small></a>
       <nav class="nav" aria-label="ページ内"><a href="#features">特徴</a><a href="#menu">メニュー</a><a href="#faq">よくある質問</a><a href="#access">アクセス</a></nav>
-      <a class="btn small" href="#reserve">Web予約</a>
+      <a class="btn" href="#reserve">空き状況を見る</a>
     </div>
   </header>
 
@@ -194,10 +217,8 @@
       <div class="wrap inner">
         <h1>木もれ日の中で、<br>ほどける六十分。</h1>
         <div class="copy">
-          <p>〇〇駅3分。平日21時まで受付、1日5名まで。毎回同じ担当がお迎えする、静かなリラクゼーションサロンです。</p>
-          <div class="actions">
-            <a class="btn" href="#reserve">空き状況を見る</a>
-          </div>
+          <p>椎の木台駅から歩いて3分。<br>平日は21時まで受付、1日5名まで。<br>毎回同じ担当がお迎えします。</p>
+          <a class="btn" href="#reserve">空き状況を見る</a>
         </div>
       </div>
     </div>
@@ -208,83 +229,85 @@
         <div class="reveal">
           <span class="eyebrow">CONCEPT</span>
           <h2>話しかけすぎず、<br>放っておきすぎず。</h2>
-          <p>仕事に、家のことに。気づけば一日じゅう力が入っている。こもれびは、そんな体と気持ちを、ゆっくりゆるめるためのサロンです。</p>
-          <p>窓から入るやわらかな光と、静かな音楽。会話は、あなたが話したいときだけ。あなたのペースで過ごしてください。</p>
+          <p>仕事に、家のことに。気づけば一日じゅう力が入っている。こもれびは、そんな毎日の合間に、ゆっくり力を抜くためのサロンです。</p>
+          <p>昼は窓からの光、夜は葉影を映した灯りで。会話は、あなたが話したいときだけ。</p>
         </div>
       </div>
     </section>
 
     <section class="worries">
-      <div class="wrap">
-        <div class="heading reveal"><span class="eyebrow">FOR YOU</span><h2>こんな夕方、ありませんか？</h2></div>
-        <ul class="reveal">
-          <li>仕事のあと、まっすぐ帰る前にひと息つきたい</li>
-          <li>にぎやかなお店だと、かえって疲れてしまう</li>
-          <li>仕事帰りの遅い時間に、通える場所がない</li>
-          <li>毎回ちがう人に、一から説明するのが面倒</li>
-        </ul>
-        <p class="answer reveal">こもれびは、<em>この夕方のために</em>つくったサロンです。</p>
+      <div class="wrap grid">
+        <h2 class="reveal">こんな日、<br>ありませんか？</h2>
+        <div class="reveal">
+          <ul>
+            <li><span class="nw">仕事のあと、</span><span class="nw">まっすぐ帰る前に</span><span class="nw">ひと息つきたい</span></li>
+            <li><span class="nw">にぎやかなお店だと、</span><span class="nw">かえって気をつかってしまう</span></li>
+            <li><span class="nw">寝る前まで、</span><span class="nw">気持ちが仕事から</span><span class="nw">切り替わらない</span></li>
+            <li><span class="nw">毎回ちがう人に、</span><span class="nw">一から説明するのが面倒</span></li>
+          </ul>
+          <p class="answer">こもれびは、<em>そんな日のために</em><br>つくったサロンです。</p>
+        </div>
       </div>
     </section>
 
     <section id="features">
       <div class="wrap">
-        <div class="heading reveal"><span class="eyebrow">FEATURES</span><h2>静かに過ごすための、3つの決めごと</h2></div>
+        <div class="heading center reveal"><h2>静かに過ごすための、<span class="nw">決めごと</span></h2></div>
         <div class="feature reveal">
           <div class="photo"><img src="https://images.unsplash.com/photo-1712638932314-e2b185ca0930?w=1000&q=70&auto=format&fit=crop" alt="白いタオルの上でのボディケア" loading="lazy"></div>
-          <div><div class="num">01</div><h3>1日5名まで、おひとりずつ</h3><p>ご利用中に、ほかのお客様と顔を合わせることはありません。着替えも個室で。まわりを気にせず、ゆったり過ごせます。</p></div>
+          <div><div class="num">01 —</div><h3>1日5名まで、おひとりずつ</h3><p>ご利用中に、ほかのお客様と顔を合わせることはありません。着替えも個室で。まわりを気にせず、ゆったり過ごせます。</p></div>
         </div>
         <div class="feature reveal">
           <div class="photo"><img src="https://images.unsplash.com/photo-1598901986949-f593ff2a31a6?w=1000&q=70&auto=format&fit=crop" alt="あたたかな明かりの中でのボディケア" loading="lazy"></div>
-          <div><div class="num">02</div><h3>平日は、夜21時まで受付</h3><p>仕事帰りに、そのまま寄れる時間まで開けています。照明を落とした夜は、昼よりいっそう静かです。</p></div>
+          <div><div class="num">02 —</div><h3>平日は、夜21時まで受付</h3><p>仕事帰りに、そのまま寄れる時間まで開けています。夜は明かりを落とし、壁に葉の影を映しています。</p></div>
         </div>
         <div class="feature reveal">
-          <div class="photo"><img src="https://images.unsplash.com/photo-1757689314932-bec6e9c39e51?w=1000&q=70&auto=format&fit=crop" alt="腕をほぐす手元" loading="lazy"></div>
-          <div><div class="num">03</div><h3>担当は、ずっと同じ人</h3><p>前回の強さの好みや、時間をかけた所を記録しておきます。2回目からは、説明なしで「いつもの」から始められます。</p></div>
+          <div class="photo"><img src="https://images.unsplash.com/photo-1757689314932-bec6e9c39e51?w=1000&q=70&auto=format&fit=crop" alt="手元のボディケア" loading="lazy"></div>
+          <div><div class="num">03 —</div><h3>担当は、ずっと同じ人</h3><p>前回の強さの好みや、時間をかけた所を記録しておきます。2回目からは、説明なしで「いつもの」から始められます。</p></div>
         </div>
       </div>
     </section>
 
     <section class="menu" id="menu">
       <div class="wrap">
-        <div class="heading reveal"><span class="eyebrow">MENU</span><h2>メニューと料金</h2></div>
-        <div class="cards reveal">
-          <div class="course"><h3>ショートコース</h3><div class="time">30分</div><div class="price">3,850<small>円（税込）</small></div><p>お昼休みや、買い物の合間に。</p></div>
-          <div class="course pop"><span class="tag">迷ったらこれ</span><h3>じっくりコース</h3><div class="time">60分</div><div class="price">6,600<small>円（税込）</small></div><p>全身をひと通り。はじめての方にもおすすめです。</p></div>
-          <div class="course"><h3>しっかりコース</h3><div class="time">90分</div><div class="price">9,350<small>円（税込）</small></div><p>気になる所に時間をかけたい方に。</p></div>
-        </div>
-        <div class="first reveal">初回は、どのコースも<b>1,000円</b>引き（60分なら初回5,600円、2回目から6,600円・税込）</div>
-        <p class="reveal" style="text-align:center;margin-top:32px"><a class="btn" href="#reserve">空き状況を見る</a></p>
+        <div class="heading reveal"><h2>メニューと料金</h2><p>料金はすべて税込です。</p></div>
+        <ul class="prices reveal">
+          <li><div class="name"><h3>ショートコース</h3><p>お昼休みや、買い物の合間に。</p></div><span class="time">30分</span><span class="price">3,850<small>円</small></span></li>
+          <li><div class="name"><h3>じっくりコース</h3><span class="tag">迷ったらこれ</span><p>全身をひと通り。はじめての方に。</p></div><span class="time">60分</span><span class="price">6,600<small>円</small></span></li>
+          <li><div class="name"><h3>しっかりコース</h3><p>気になる所に時間をかけたい方に。</p></div><span class="time">90分</span><span class="price">9,350<small>円</small></span></li>
+        </ul>
+        <div class="first reveal">初回は、どのコースも<span class="nw"><b>1,000円</b>引き</span><small><span class="nw">例）60分 6,600円 → </span><span class="nw">初回 5,600円（税込）</span></small></div>
+        <p class="more reveal"><a class="btn" href="#reserve">空き状況を見る</a></p>
       </div>
     </section>
 
     <section class="voices">
       <div class="wrap">
-        <div class="heading reveal"><span class="eyebrow">VOICE</span><h2>お客様の声</h2></div>
+        <div class="heading center reveal"><h2>お客様の声</h2></div>
         <div class="cards reveal">
-          <div class="voice"><p>「仕事帰りに寄れるのが本当に助かります。帰る前に、一度ひと息つけるのがうれしいです。」</p><div class="who">30代・会社員</div></div>
-          <div class="voice"><p>「静かで、ほかのお客さんに会わないのがいい。気をつかわずに寝てしまいます。」</p><div class="who">40代・自営業</div></div>
-          <div class="voice"><p>「毎回同じ方なので、前回の話の続きから始められます。説明がいらないのが楽です。」</p><div class="who">50代・パート</div></div>
+          <figure class="voice"><p><span class="nw">「着替えがあるので、</span><span class="nw">会社帰りに</span><span class="nw">手ぶらで行けます。」</span></p><figcaption class="who">30代・会社員</figcaption></figure>
+          <figure class="voice"><p><span class="nw">「お昼休みに</span><span class="nw">30分だけ。</span><span class="nw">午後の前に、</span><span class="nw">気持ちを</span><span class="nw">切り替えています。」</span></p><figcaption class="who">40代・自営業</figcaption></figure>
+          <figure class="voice"><p><span class="nw">「話しかけられすぎないのが、</span><span class="nw">ちょうどいいです。</span><span class="nw">こちらから話したい日は、</span><span class="nw">ゆっくり聞いてくれます。」</span></p><figcaption class="who">50代・パート</figcaption></figure>
         </div>
-        <p class="note">※制作サンプルのため架空の文章です。実際の制作では、掲載の許可をいただいた本物の声だけを載せます。</p>
+        <p class="note"><span class="nw">※架空の文章です。</span><span class="nw">実際の制作では、</span><span class="nw">掲載の許可をいただいた</span><span class="nw">本物の声だけを載せます。</span></p>
       </div>
     </section>
 
     <section class="flow">
       <div class="wrap">
-        <div class="heading reveal"><span class="eyebrow">FLOW</span><h2>ご予約からの流れ</h2></div>
+        <div class="heading reveal"><h2>ご予約からの流れ</h2></div>
         <ol class="reveal">
-          <li><h3>Webで予約</h3><p>24時間、空いている時間をその場で選べます。</p></li>
-          <li><h3>お好みをお聞きします</h3><p>強さの好みと、時間をかけたい所を5分ほど。</p></li>
-          <li><h3>ボディケア</h3><p>強さを変えたい時は、いつでもお声がけください。</p></li>
-          <li><h3>お会計</h3><p>現金・カード・QR決済に対応しています。</p></li>
+          <li><h3>Webで予約</h3><p><span class="nw">24時間、</span><span class="nw">空いている時間を</span><span class="nw">その場で選べます。</span></p></li>
+          <li><h3>お好みをお聞きします</h3><p><span class="nw">強さの好みと、</span><span class="nw">時間をかけたい所を</span><span class="nw">5分ほど。</span></p></li>
+          <li><h3>ボディケア</h3><p><span class="nw">強さを変えたいときは、</span><span class="nw">いつでも</span><span class="nw">声をかけてください。</span></p></li>
+          <li><h3>お会計</h3><p><span class="nw">現金・カード・QR決済に</span><span class="nw">対応しています。</span></p></li>
         </ol>
       </div>
     </section>
 
     <section class="faq" id="faq">
-      <div class="wrap">
-        <div class="heading reveal"><span class="eyebrow">FAQ</span><h2>よくある質問</h2></div>
+      <div class="wrap grid">
+        <div class="heading reveal"><h2>よくある質問</h2></div>
         <div class="list reveal">
           <details><summary>着替えは必要ですか？</summary><p>お店でお着替えをご用意しています。お仕事帰りの服装のままお越しください。</p></details>
           <details><summary>男性も利用できますか？</summary><p>はい、どなたでもご利用いただけます。</p></details>
@@ -298,26 +321,52 @@
     <section class="access" id="access">
       <div class="wrap grid">
         <div class="reveal">
-          <span class="eyebrow">ACCESS</span>
           <h2>アクセス</h2>
           <dl>
-            <dt>住所</dt><dd>〇〇市〇〇町1-2-3 こもれびビル2F（架空）</dd>
-            <dt>最寄り</dt><dd>〇〇駅 東口から徒歩3分</dd>
-            <dt>営業</dt><dd>平日 11:00〜21:00（最終受付）<br>土日祝 10:00〜18:00</dd>
+            <dt>住所</dt><dd>椎の木台2-4-1 <span class="nw">森田ビル2F（架空）</span></dd>
+            <dt>最寄り</dt><dd>椎の木台駅 東口から徒歩3分</dd>
+            <dt>営業時間</dt><dd>平日 11:00〜21:00（最終受付）<br>土日祝 10:00〜18:00</dd>
             <dt>定休日</dt><dd>毎週水曜日</dd>
           </dl>
+          <p class="route"><span class="nw">東口を出て右へ。</span><span class="nw">大通りを2分ほど歩き、</span><span class="nw">花屋の角を左へ。</span><span class="nw">左手のビルの2階です。</span></p>
         </div>
-        <div class="map reveal">地図（サンプルのため省略）</div>
+        <figure class="map reveal">
+          <svg viewBox="0 0 480 360" role="img" aria-labelledby="map-t">
+            <title id="map-t">椎の木台駅 東口から、大通りを右へ進み、花屋の角を左に曲がった先の2階に、こもれびがあります</title>
+            <rect width="480" height="360" fill="#efe7da"/>
+            <g fill="#e2d8c8">
+              <rect x="24" y="24" width="110" height="80" rx="3"/><rect x="152" y="24" width="96" height="80" rx="3"/>
+              <rect x="24" y="122" width="224" height="88" rx="3"/><rect x="372" y="24" width="84" height="186" rx="3"/>
+              <rect x="210" y="282" width="110" height="34" rx="3"/><rect x="340" y="282" width="116" height="34" rx="3"/>
+            </g>
+            <path d="M0 246H480M310 246V0" stroke="#fff" stroke-width="28" fill="none"/>
+            <path d="M0 338H480" stroke="#6f665b" stroke-width="4"/>
+            <path d="M0 338H480" stroke="#efe7da" stroke-width="2" stroke-dasharray="10 10"/>
+            <rect x="34" y="282" width="150" height="44" rx="4" fill="#fff" stroke="#6f665b" stroke-width="1.5"/>
+            <text x="109" y="311" text-anchor="middle" font-size="19" font-weight="700" fill="#2b2722">椎の木台駅</text>
+            <text x="200" y="276" font-size="16" fill="#6f665b">東口</text>
+            <rect x="338" y="174" width="30" height="36" rx="3" fill="#d9c7a7"/>
+            <text x="353" y="166" text-anchor="middle" font-size="15" fill="#6f665b">花屋</text>
+            <rect x="248" y="116" width="40" height="94" rx="3" fill="#3e5b48"/>
+            <path d="M184 282V246H310V136H292" stroke="#3e5b48" stroke-width="4" stroke-dasharray="2 8" stroke-linecap="round" fill="none"/>
+            <path d="M268 58c-14 0-24 10-24 23 0 17 24 37 24 37s24-20 24-37c0-13-10-23-24-23z" fill="#3e5b48"/>
+            <circle cx="268" cy="81" r="8" fill="#fff"/>
+            <rect x="140" y="40" width="96" height="34" rx="17" fill="#fff"/>
+            <text x="188" y="63" text-anchor="middle" font-size="17" font-weight="700" fill="#2f4637">こもれび</text>
+            <text x="24" y="251" font-size="14" fill="#6f665b">大通り</text>
+          </svg>
+          <figcaption>※架空の地図です</figcaption>
+        </figure>
       </div>
     </section>
 
     <section class="cta" id="reserve">
-      <img src="https://images.unsplash.com/photo-1773774235180-de511ea41bbe?w=1200&q=70&auto=format&fit=crop" alt="" loading="lazy">
       <div class="wrap reveal">
         <h2>今週の空き状況を、<br>見てみませんか。</h2>
-        <p>平日は21時まで受付。キャンセルは前日まで無料です。</p>
-        <a class="btn light" href="#reserve">今週の空きを見る（24時間受付）</a>
-        <p style="font-size:13px;margin:12px 0 0">※サンプルのため、予約ページにはつながりません</p>
+        <p><span class="nw">平日は21時まで受付。</span><span class="nw">キャンセルは前日まで無料です。</span></p>
+        <a class="btn light" href="#reserve-note">空き状況を見る</a>
+        <p class="sub">24時間受付</p>
+        <p class="note" id="reserve-note">※サンプルのため、予約ページにはつながりません</p>
       </div>
     </section>
   </main>
@@ -325,12 +374,12 @@
   <footer>
     <a class="logo" href="#">こもれび<small>RELAXATION SALON</small></a>
     <div>このページは制作サンプルです</div>
-    <div>写真（Unsplash）：<a href="https://unsplash.com/photos/8oW6gov8-7c">1</a> <a href="https://unsplash.com/photos/2vKgG0pSKkM">2</a> <a href="https://unsplash.com/photos/yBLLzNcA6GU">3</a> <a href="https://unsplash.com/photos/WAm_HaI4W2E">4</a> <a href="https://unsplash.com/photos/YBfzGCJjLuI">5</a>（2026-10-20確認）</div>
+    <div class="credit">写真：<a href="https://unsplash.com/">Unsplash</a><span class="src"><a href="https://unsplash.com/photos/8oW6gov8-7c" aria-label="写真1の出典">1</a><a href="https://unsplash.com/photos/2vKgG0pSKkM" aria-label="写真2の出典">2</a><a href="https://unsplash.com/photos/yBLLzNcA6GU" aria-label="写真3の出典">3</a><a href="https://unsplash.com/photos/WAm_HaI4W2E" aria-label="写真4の出典">4</a><a href="https://unsplash.com/photos/YBfzGCJjLuI" aria-label="写真5の出典">5</a></span></div>
   </footer>
 
   <nav class="sticky" aria-label="予約">
-    <a class="tel" href="#menu">メニュー</a>
-    <a class="web" href="#reserve">空きを見る</a>
+    <a class="sub" href="#menu">料金を見る</a>
+    <a class="web" href="#reserve">空き状況を見る</a>
   </nav>
 
 <script>

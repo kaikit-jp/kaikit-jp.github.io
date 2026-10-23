@@ -17,25 +17,29 @@
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
+  /* break-word only breaks when a line would overflow; unlike "anywhere" it does not split normal words */
   body { margin: 0; background: #fff; color: var(--ink); font-family: var(--sans); font-size: 16px;
-    line-height: 1.9; letter-spacing: .03em; -webkit-font-smoothing: antialiased; word-break: auto-phrase; overflow-wrap: anywhere; }
+    line-height: 1.9; letter-spacing: .03em; -webkit-font-smoothing: antialiased; word-break: auto-phrase; overflow-wrap: break-word; }
   img { display: block; width: 100%; height: 100%; object-fit: cover; }
   a { color: inherit; }
   h1, h2, h3 { font-weight: 700; line-height: 1.5; margin: 0; letter-spacing: .04em; text-wrap: balance; }
   .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
   section { padding: 88px 0; scroll-margin-top: 16px; }
-  .eyebrow { font-family: var(--num); color: var(--blue); font-size: 13px; letter-spacing: .22em; display: block; margin-bottom: 10px; }
-  .heading { margin-bottom: 48px; }
+  .heading { margin-bottom: 40px; }
   .heading h2 { font-size: clamp(24px, 4.4vw, 34px); color: var(--navy); }
+  .heading h2::before { content: ""; display: block; width: 28px; height: 2px; background: var(--navy); margin: 0 0 16px; }
+  .heading.center h2::before { margin: 0 auto 16px; }
   .heading p { color: var(--sub); margin: 14px 0 0; }
   .center { text-align: center; }
+  .nw { white-space: nowrap; }
   .grid > * { min-width: 0; }
   p, li, dd { text-wrap: pretty; }
   .icon { width: 28px; height: 28px; flex: none; }
   .vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
   /* sample notice */
-  .notice { background: var(--navy-dark); color: #fff; font-size: 12px; text-align: center; padding: 6px 16px; letter-spacing: .05em; line-height: 1.6; }
+  .notice { background: var(--mist); color: var(--sub); border-bottom: 1px solid var(--line); font-size: 13px; text-align: center; padding: 6px 16px; line-height: 1.6; }
+  .notice .tag { display: inline-block; border: 1px solid #b7c2d3; border-radius: 4px; padding: 0 6px; margin-right: 8px; font-size: 12px; color: var(--navy); }
 
   /* header */
   header.site { border-bottom: 1px solid var(--line); }
@@ -53,7 +57,6 @@
     padding: 14px 32px; transition: background .2s; }
   .btn:hover { background: var(--accent-dark); }
   .btn.small { min-height: 44px; padding: 8px 18px; font-size: 14px; }
-  .btn svg { width: 18px; height: 18px; }
   .link { color: var(--navy); font-weight: 700; text-underline-offset: 5px; }
   :focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
   .contact :focus-visible { outline-color: #fff; }
@@ -67,28 +70,21 @@
   .hero .sub { margin: 20px 0 28px; color: var(--sub); }
   .hero .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; }
   .hero .note { font-size: 14px; color: var(--sub); margin: 10px 0 0; }
-  .facts { list-style: none; padding: 0; margin: 28px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .facts { list-style: none; padding: 0; margin: 24px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
   .facts li { display: inline-flex; align-items: center; gap: 6px; background: #fff; border: 1px solid var(--line); border-radius: 99px; padding: 4px 14px 4px 10px; font-size: 14px; color: var(--navy); }
   .facts svg { width: 18px; height: 18px; color: var(--blue); }
   .hero .photo { position: relative; }
-  .hero .photo::before { content: ""; position: absolute; inset: 20px -12px -12px 20px; background: var(--navy); border-radius: 12px; }
+  .hero .photo::before { content: ""; position: absolute; inset: auto -12px -12px auto; width: 40%; height: 40%; background: var(--navy); border-radius: 12px; }
   .hero .photo img { position: relative; aspect-ratio: 4 / 3; height: auto; border-radius: 12px; }
 
   /* worries */
-  .worries ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
-  .worries li { display: flex; gap: 14px; align-items: flex-start; border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; }
-  .worries li svg { width: 24px; height: 24px; color: var(--blue); margin-top: 3px; flex: none; }
-  .worries .answer { margin: 40px auto 0; max-width: 720px; text-align: center; font-size: clamp(19px, 3.6vw, 24px); font-weight: 700; color: var(--navy); line-height: 1.7; }
+  .worries ul { list-style: none; padding: 0; margin: 0; display: grid; column-gap: 48px; border-top: 1px solid var(--line); }
+  .worries li { border-bottom: 1px solid var(--line); padding: 16px 0; }
+  .worries .answer { margin: 36px 0 0; font-size: clamp(19px, 3.6vw, 24px); font-weight: 700; color: var(--navy); line-height: 1.7; }
 
   /* services + fees */
   .services { background: var(--mist); }
-  .cards { display: grid; gap: 16px; }
-  .card { background: #fff; border-radius: 12px; padding: 28px 24px; border: 1px solid var(--line); }
-  .card .icon-box { width: 52px; height: 52px; border-radius: 12px; background: var(--navy); color: #fff; display: grid; place-items: center; margin-bottom: 16px; }
-  .card h3 { font-size: 19px; color: var(--navy); }
-  .card p { margin: 8px 0 0; color: var(--sub); font-size: 15.5px; }
-  .fees-wrap { margin-top: 56px; background: #fff; border-radius: 12px; border: 1px solid var(--line); padding: 28px 20px; }
-  .fees-wrap h3 { font-size: 20px; color: var(--navy); margin-bottom: 4px; }
+  .fees-wrap { background: #fff; border-radius: 12px; border: 1px solid var(--line); padding: 12px 20px 28px; }
   table.fees { width: 100%; border-collapse: collapse; }
   .fees th, .fees td { text-align: left; vertical-align: top; padding: 16px 0; }
   .fees thead th { font-size: 14px; color: var(--sub); border-bottom: 2px solid var(--navy); padding: 10px 0; font-weight: 700; }
@@ -102,9 +98,7 @@
 
   /* why */
   .why .grid { display: grid; gap: 48px; align-items: center; }
-  .collage { position: relative; padding: 0 0 56px; }
-  .collage .a { aspect-ratio: 4 / 3; border-radius: 12px; overflow: hidden; width: 88%; }
-  .collage .b { position: absolute; right: 0; bottom: 0; width: 48%; aspect-ratio: 1 / 1; border-radius: 12px; overflow: hidden; border: 6px solid #fff; }
+  .why .photo { aspect-ratio: 4 / 3; border-radius: 12px; overflow: hidden; }
   .points { list-style: none; padding: 0; margin: 0; display: grid; gap: 28px; }
   .points li { display: flex; gap: 18px; }
   .points .icon-box { width: 52px; height: 52px; border-radius: 50%; border: 1.5px solid var(--navy); color: var(--navy); display: grid; place-items: center; flex: none; }
@@ -119,11 +113,13 @@
     background: var(--navy); color: #fff; font-family: var(--num); font-size: 15px; display: grid; place-items: center; }
   .flow h3 { font-size: 18px; color: var(--navy); }
   .flow p { margin: 4px 0 0; color: var(--sub); font-size: 15.5px; }
-  .flow .grid { display: grid; gap: 40px; align-items: start; }
+  .flow .grid { display: grid; gap: 40px; align-items: stretch; }
   .flow .photo { aspect-ratio: 3 / 2; border-radius: 12px; overflow: hidden; }
+  .flow .photo img { object-position: 50% 60%; }
 
   /* faq */
-  .faq .list { max-width: 820px; margin: 0 auto; border-top: 1px solid var(--line); }
+  .faq .grid { display: grid; }
+  .faq .list { border-top: 1px solid var(--line); }
   details { border-bottom: 1px solid var(--line); }
   summary { cursor: pointer; list-style: none; padding: 20px 44px 20px 40px; position: relative; font-weight: 700; color: var(--navy); }
   summary::-webkit-details-marker { display: none; }
@@ -137,20 +133,39 @@
   /* access */
   .access { background: var(--mist); }
   .access .grid { display: grid; gap: 32px; }
-  .access .map { background: #fff; }
   .access dl { margin: 0; display: grid; grid-template-columns: 5.5em 1fr; gap: 14px 16px; }
   .access dt { font-weight: 700; color: var(--navy); }
   .access dd { margin: 0; color: var(--sub); }
-  .map { aspect-ratio: 4 / 3; background: var(--mist); border: 1px solid var(--line); border-radius: 12px; display: grid; place-items: center; color: var(--sub); font-size: 15px; }
+  .access .small { font-size: 14px; }
+  .map { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  .map svg { display: block; width: 100%; height: auto; }
+  .map .block { fill: var(--mist); }
+  .map .road { stroke: var(--line); stroke-width: 18; fill: none; }
+  .map .road.thin { stroke-width: 10; }
+  .map .rail { stroke: #8a95a8; stroke-width: 8; fill: none; }
+  .map .rail-dash { stroke: #fff; stroke-width: 4; stroke-dasharray: 18 18; fill: none; }
+  .map .route { stroke: var(--blue); stroke-width: 2.5; stroke-dasharray: 2 7; stroke-linecap: round; fill: none; }
+  .map .station { fill: #fff; stroke: #8a95a8; stroke-width: 2; }
+  .map .pin { fill: var(--navy); }
+  .map text { font-family: var(--sans); font-size: 19px; fill: var(--sub); letter-spacing: .04em; }
+  .map .label-strong { fill: var(--ink); font-weight: 700; }
+  .map figcaption { font-size: 14px; color: var(--sub); padding: 10px 16px; border-top: 1px solid var(--line); }
 
   /* contact (final cta) */
   .contact { background: var(--navy); color: #fff; }
+  .contact .heading { margin-bottom: 28px; }
   .contact .heading h2 { color: #fff; }
+  .contact .heading h2::before { background: #a9c0e3; }
   .contact .heading p { color: #d5deea; }
-  .contact .eyebrow { color: #a9c0e3; }
-  .contact .grid { display: grid; gap: 20px; }
-  .contact form, .tel-box { background: #fff; color: var(--ink); border-radius: 12px; padding: 28px 22px; }
-  .contact h3 { font-size: 19px; color: var(--navy); margin-bottom: 16px; }
+  .contact .grid { display: grid; gap: 40px; }
+  .tel { border-top: 1px solid rgba(255,255,255,.25); padding-top: 24px; }
+  .tel h3 { font-size: 18px; margin-bottom: 8px; }
+  .tel .hours { margin: 0; font-size: 19px; font-weight: 700; line-height: 1.8; }
+  .tel .num { margin: 14px 0 0; font-family: var(--num); font-size: 18px; letter-spacing: .04em; }
+  .tel .num span { display: block; font-family: var(--sans); font-size: 14px; color: #d5deea; letter-spacing: .03em; }
+  .tel p { margin: 6px 0 0; color: #d5deea; font-size: 15px; }
+  .contact form { background: #fff; color: var(--ink); border-radius: 12px; padding: 28px 22px; }
+  .contact form h3 { font-size: 19px; color: var(--navy); margin-bottom: 16px; }
   .field { margin-bottom: 18px; }
   .field label, .field legend { display: block; font-weight: 700; font-size: 15px; margin-bottom: 6px; padding: 0; }
   .field .req { font-size: 12px; color: #fff; background: var(--navy); border-radius: 4px; padding: 1px 6px; margin-left: 6px; }
@@ -164,18 +179,16 @@
   .contact form .btn { width: 100%; }
   .form-note { font-size: 14px; color: var(--sub); margin: 12px 0 0; }
   .form-done { margin: 12px 0 0; font-weight: 700; color: var(--navy); }
-  .tel-box .num { font-family: var(--num); font-size: 30px; color: var(--navy); letter-spacing: .04em; display: flex; align-items: center; gap: 10px; }
-  .tel-box .num svg { width: 26px; height: 26px; color: var(--blue); }
-  .tel-box p { margin: 6px 0 0; color: var(--sub); font-size: 15px; }
 
   footer { padding: 40px 20px 120px; font-size: 13px; color: var(--sub); text-align: center; line-height: 1.8; }
   footer .logo { margin-bottom: 14px; }
+  footer a:not(.logo) { text-underline-offset: 3px; }
 
   /* mobile sticky bar */
   .sticky { position: fixed; z-index: 20; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: 1fr 1.5fr; gap: 8px;
     padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); background: rgba(255,255,255,.96); border-top: 1px solid var(--line); }
   .sticky a { display: flex; align-items: center; justify-content: center; min-height: 48px; text-decoration: none; font-weight: 700; border-radius: 8px; font-size: 15px; }
-  .sticky .tel { border: 1.5px solid var(--navy); color: var(--navy); }
+  .sticky .tel-link { border: 1.5px solid var(--navy); color: var(--navy); }
   .sticky .web { background: var(--accent); color: #fff; }
 
   /* reveal on scroll (only when JS runs) */
@@ -183,15 +196,13 @@
   .js .reveal.in { opacity: 1; transform: none; }
 
   @media (min-width: 640px) {
-    .cards { grid-template-columns: 1fr 1fr; }
     .worries ul { grid-template-columns: 1fr 1fr; }
-    .fees-wrap { padding: 36px 40px; }
-    .fees th, .fees td { padding: 18px 16px 18px 0; }
-    .fees td.price { text-align: right; padding-right: 0; }
+    .fees-wrap { padding: 20px 40px 36px; }
+    .fees th, .fees td { padding: 18px 24px 18px 0; }
+    .fees th[scope=row] { width: 11em; }
+    .fees thead th:last-child, .fees td.price { text-align: right; padding-right: 0; }
   }
   @media (max-width: 639px) {
-    .card { display: grid; grid-template-columns: 52px 1fr; gap: 0 16px; padding: 22px 20px; }
-    .card .icon-box { grid-row: span 2; margin: 0; }
     /* table → stacked rows on phones */
     .fees thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
     .fees tbody tr { display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; padding: 16px 0; }
@@ -205,13 +216,15 @@
     .nav { display: flex; }
     .hero { padding: 72px 0 104px; }
     .hero .grid { grid-template-columns: 1fr 1.05fr; gap: 64px; }
-    .cards { grid-template-columns: repeat(4, 1fr); }
-    .worries ul { grid-template-columns: 1fr 1fr 1fr; }
     .why .grid { grid-template-columns: 1fr 1fr; gap: 72px; }
     .flow .grid { grid-template-columns: 5fr 6fr; gap: 64px; }
+    /* photo follows the height of the steps, so no empty space beside it */
+    .flow .photo { aspect-ratio: auto; position: relative; }
+    .flow .photo img { position: absolute; inset: 0; }
+    .faq .grid { grid-template-columns: 1fr 2.2fr; gap: 64px; align-items: start; }
     .access .grid { grid-template-columns: 1fr 1fr; align-items: center; gap: 64px; }
-    .contact .grid { grid-template-columns: 1.4fr 1fr; align-items: start; gap: 28px; }
-    .contact form, .tel-box { padding: 36px; }
+    .contact .grid { grid-template-columns: 1fr 1.25fr; align-items: start; gap: 72px; }
+    .contact form { padding: 36px; }
     .sticky { display: none; }
     footer { padding-bottom: 40px; }
   }
@@ -224,7 +237,7 @@
 <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
-  <div class="notice">これはLP制作のサンプルです。事務所名・料金・住所・電話番号はすべて架空です。</div>
+  <div class="notice"><span class="tag">制作サンプル</span>事務所名・料金・住所・電話番号は架空です。</div>
 
   <header class="site">
     <div class="wrap">
@@ -250,66 +263,45 @@
           </div>
           <p class="note">初回相談は60分・無料。来所でもオンラインでも。</p>
           <ul class="facts">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>〇〇駅 徒歩4分</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>土曜も面談可（予約制）</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M2 19h20"/></svg>オンライン相談可</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>しるべ駅 徒歩4分</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>土曜も面談可</li>
           </ul>
         </div>
         <div class="photo">
-          <img src="https://images.unsplash.com/photo-1642522029691-029b5a432954?w=1000&q=70&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1642522029691-029b5a432954?w=640&q=70&auto=format&fit=crop 640w, https://images.unsplash.com/photo-1642522029691-029b5a432954?w=1000&q=70&auto=format&fit=crop 1000w, https://images.unsplash.com/photo-1642522029691-029b5a432954?w=1400&q=70&auto=format&fit=crop 1400w" sizes="(min-width: 900px) 540px, calc(100vw - 52px)" width="1000" height="750" fetchpriority="high" alt="白いテーブルで書類を前に話す二人">
+          <img src="https://images.unsplash.com/photo-1709880945165-d2208c6ad2ec?w=1000&h=750&q=70&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1709880945165-d2208c6ad2ec?w=640&h=480&q=70&auto=format&fit=crop 640w, https://images.unsplash.com/photo-1709880945165-d2208c6ad2ec?w=1000&h=750&q=70&auto=format&fit=crop 1000w, https://images.unsplash.com/photo-1709880945165-d2208c6ad2ec?w=1400&h=1050&q=70&auto=format&fit=crop 1400w" sizes="(min-width: 900px) 540px, calc(100vw - 52px)" width="1000" height="750" fetchpriority="high" alt="電卓と書類、ノートパソコンが置かれた明るい机">
         </div>
       </div>
     </div>
 
     <section class="worries">
       <div class="wrap">
-        <div class="heading center reveal"><span class="eyebrow">WORRIES</span><h2>こんなお悩みはありませんか</h2></div>
+        <div class="heading reveal"><h2><span class="nw">こんなところで、</span><span class="nw">手が止まっていませんか</span></h2></div>
         <ul class="reveal">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg>領収書がたまる一方で、何から手をつければいいかわからない</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg>青色申告にしたいけれど、手続きがよくわからない</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg>副業の収入があり、申告が必要かどうか知りたい</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg>インボイスに登録するかどうか、決めきれない</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg>開業したばかりで、お金のことを相談できる人がいない</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg>本業が忙しく、経理に使える時間がない</li>
+          <li>領収書がたまる一方で、手をつけられない</li>
+          <li>青色申告にしたいが、手続きがわからない</li>
+          <li>副業の収入があり、申告がいるか知りたい</li>
+          <li>インボイスに登録するか、決めきれない</li>
+          <li>開業したばかりで、相談できる人がいない</li>
+          <li>本業が忙しく、経理の時間がとれない</li>
         </ul>
-        <p class="answer reveal">ひとつでも当てはまったら、<br>まずは今の状況をお聞かせください。</p>
+        <p class="answer reveal"><span class="nw">領収書が箱に入ったままでも、</span><span class="nw">そのまま持ってきてください。</span></p>
       </div>
     </section>
 
     <section class="services" id="services">
       <div class="wrap">
-        <div class="heading center reveal"><span class="eyebrow">SERVICES</span><h2>サービスと料金</h2><p>必要なものだけ、組み合わせてご依頼いただけます。</p></div>
-        <div class="cards reveal">
-          <div class="card">
-            <div class="icon-box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></svg></div>
-            <h3>確定申告</h3><p>白色・青色どちらも。副業の方の申告もお受けしています。</p>
-          </div>
-          <div class="card">
-            <div class="icon-box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6M9 15.5h3"/></svg></div>
-            <h3>記帳代行</h3><p>領収書や通帳をお預かりして、毎月の帳簿づけを代わりに行います。</p>
-          </div>
-          <div class="card">
-            <div class="icon-box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10l2-6h14l2 6z"/><path d="M4.5 10v10h15V10M10 20v-5h4v5"/></svg></div>
-            <h3>開業サポート</h3><p>開業届や青色申告の申請など、始めるときの書類をそろえます。</p>
-          </div>
-          <div class="card">
-            <div class="icon-box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="3" width="15" height="18" rx="2"/><path d="M8 8h8M8 11.5h5"/><circle cx="15" cy="16" r="2.3"/></svg></div>
-            <h3>インボイス対応</h3><p>登録するかどうかの整理から、申請と請求書の見直しまで。</p>
-          </div>
-        </div>
-
+        <div class="heading center reveal"><h2>サービスと料金</h2><p>必要なものだけ、組み合わせてご依頼いただけます。</p></div>
         <div class="fees-wrap reveal" id="fees">
-          <h3>料金表</h3>
           <table class="fees">
-            <caption class="vh">料金表（税込）</caption>
+            <caption class="vh">サービスと料金（税込）</caption>
             <thead><tr><th scope="col">サービス</th><th scope="col">内容</th><th scope="col">料金（税込）</th></tr></thead>
             <tbody>
-              <tr><th scope="row">初回相談</th><td class="desc">60分。来所またはオンライン</td><td class="price">無料</td></tr>
-              <tr><th scope="row">確定申告（白色）</th><td class="desc">副業・小規模な事業の方向け</td><td class="price">27,500<small>円〜</small></td></tr>
+              <tr><th scope="row">初回相談</th><td class="desc">60分。今の状況をお聞きして、必要な作業をご説明します。来所またはオンライン</td><td class="price">無料</td></tr>
+              <tr><th scope="row">確定申告（白色）</th><td class="desc">副業・小規模な事業の方の申告書を作成し、提出まで行います</td><td class="price">27,500<small>円〜</small></td></tr>
               <tr><th scope="row">確定申告（青色）</th><td class="desc">青色申告決算書の作成から申告まで</td><td class="price">55,000<small>円〜</small></td></tr>
-              <tr><th scope="row">記帳代行</th><td class="desc">月の取引100件までの目安。会計ソフトへの入力を含みます</td><td class="price"><small>月</small>11,000<small>円〜</small></td></tr>
-              <tr><th scope="row">開業サポート</th><td class="desc">開業届・青色申告承認申請書などの作成と提出</td><td class="price">22,000<small>円</small></td></tr>
-              <tr><th scope="row">インボイス対応</th><td class="desc">登録申請の手続き、請求書の書き方の確認</td><td class="price">16,500<small>円〜</small></td></tr>
+              <tr><th scope="row">記帳代行</th><td class="desc">領収書や通帳をお預かりして、毎月の帳簿づけを代わりに行います。月の取引100件までの目安。会計ソフトへの入力を含みます</td><td class="price"><small>月</small>11,000<small>円〜</small></td></tr>
+              <tr><th scope="row">開業サポート</th><td class="desc">開業届・青色申告承認申請書など、始めるときの書類の作成と提出</td><td class="price">22,000<small>円</small></td></tr>
+              <tr><th scope="row">インボイス対応</th><td class="desc">登録するかどうかの整理から、登録申請、請求書の書き方の確認まで</td><td class="price">16,500<small>円〜</small></td></tr>
               <tr><th scope="row">法人の顧問契約</th><td class="desc">月1回の面談とメール相談。決算・申告は別料金</td><td class="price"><small>月</small>33,000<small>円〜</small></td></tr>
             </tbody>
           </table>
@@ -321,15 +313,12 @@
 
     <section class="why" id="why">
       <div class="wrap grid">
-        <div class="collage reveal">
-          <div class="a"><img src="https://images.unsplash.com/photo-1511376979163-f804dff7ad7b?w=900&q=70&auto=format&fit=crop" width="900" height="675" alt="テーブルをはさんで話し合う様子" loading="lazy"></div>
-          <div class="b"><img src="https://images.unsplash.com/photo-1579389083046-e3df9c2b3325?w=600&q=70&auto=format&fit=crop" width="600" height="600" alt="ノートパソコンの画面を指さして説明する手元" loading="lazy"></div>
-        </div>
+        <div class="photo reveal"><img src="https://images.unsplash.com/photo-1625225233840-695456021cde?rect=2100,0,3500,2625&w=900&h=675&q=70&auto=format&fit=crop" width="900" height="675" alt="白い机の上の紙とペン、小さな観葉植物" loading="lazy"></div>
         <div class="reveal">
-          <div class="heading"><span class="eyebrow">ABOUT US</span><h2>しるべ税理士事務所の進め方</h2></div>
+          <div class="heading"><h2>しるべ税理士事務所の進め方</h2></div>
           <ul class="points">
             <li><span class="icon-box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></span>
-              <div><h3>税理士が直接担当します</h3><p>最初の相談から申告まで、同じ税理士が担当します。担当は原則として途中で変わりません。</p></div></li>
+              <div><h3>税理士が直接担当します</h3><p>最初の相談から申告まで、同じ税理士が担当します。途中で担当が変わることは、原則ありません。</p></div></li>
             <li><span class="icon-box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18H6z"/><path d="M9 7l3 4 3-4M12 11v6M9.5 12.5h5M9.5 15h5"/></svg></span>
               <div><h3>料金は、始める前に書面で</h3><p>お見積もりを書面でお出しします。追加の作業が必要になったときも、先にご相談します。</p></div></li>
             <li><span class="icon-box"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
@@ -343,9 +332,9 @@
 
     <section class="flow">
       <div class="wrap">
-        <div class="heading center reveal"><span class="eyebrow">FLOW</span><h2>ご相談からご契約までの流れ</h2></div>
+        <div class="heading center reveal"><h2>ご相談からご契約までの流れ</h2></div>
         <div class="grid">
-          <div class="photo reveal"><img src="https://images.unsplash.com/photo-1562564055-71e051d33c19?w=900&q=70&auto=format&fit=crop" width="900" height="600" alt="書類に署名する手元" loading="lazy"></div>
+          <div class="photo reveal"><img src="https://images.unsplash.com/photo-1626266061368-46a8f578ddd6?w=900&h=1125&q=70&auto=format&fit=crop" width="900" height="1125" alt="机の上の電卓を打つ手元" loading="lazy"></div>
           <ol class="reveal">
             <li><h3>ご予約</h3><p>フォームかお電話で、ご希望の日時と面談の方法（来所・オンライン）をお知らせください。</p></li>
             <li><h3>初回相談（60分・無料）</h3><p>今の状況とお困りごとをお聞きします。書類が途中でもかまいません。</p></li>
@@ -357,8 +346,8 @@
     </section>
 
     <section class="faq" id="faq">
-      <div class="wrap">
-        <div class="heading center reveal"><span class="eyebrow">FAQ</span><h2>よくある質問</h2></div>
+      <div class="wrap grid">
+        <div class="heading reveal"><h2>よくある質問</h2></div>
         <div class="list reveal">
           <details><summary>領収書の整理が苦手でも大丈夫ですか？</summary><p>大丈夫です。日付順に並べなくても、封筒や箱にまとめてお送りいただければ、こちらで仕分けて帳簿につけます。</p></details>
           <details><summary>会社員の副業でも相談できますか？</summary><p>はい、ご相談いただけます。申告が必要かどうかの確認から、お手伝いします。</p></details>
@@ -373,42 +362,64 @@
     <section class="access" id="access">
       <div class="wrap grid">
         <div class="reveal">
-          <div class="heading"><span class="eyebrow">ACCESS</span><h2>アクセス・受付時間</h2></div>
+          <div class="heading"><h2>アクセス・受付時間</h2></div>
           <dl>
-            <dt>住所</dt><dd>〇〇市〇〇町2-3-4 〇〇ビル3F（架空）</dd>
-            <dt>最寄り</dt><dd>〇〇駅 西口から徒歩4分</dd>
+            <dt>住所</dt><dd>しるべ市本町2-3-4 本町ビル3F（架空）</dd>
+            <dt>最寄り</dt><dd>しるべ駅 西口から徒歩4分</dd>
             <dt>受付時間</dt><dd>平日 9:30〜19:00<br>土曜 10:00〜16:00（面談のみ・予約制）</dd>
             <dt>定休日</dt><dd>日曜・祝日</dd>
-            <dt>電話</dt><dd>00-0000-0000（架空）</dd>
+            <dt>電話</dt><dd class="small">000-1234-5678（架空の番号です）</dd>
           </dl>
         </div>
-        <div class="map reveal">地図（サンプルのため省略）</div>
+        <figure class="map reveal">
+          <svg viewBox="0 0 480 330" role="img" aria-label="簡易地図：しるべ駅の西口を出て南へ進み、本町通りを左に曲がった先に事務所があります">
+            <rect class="block" x="20" y="110" width="104" height="100" rx="4"/>
+            <rect class="block" x="176" y="110" width="140" height="100" rx="4"/>
+            <rect class="block" x="368" y="110" width="92" height="100" rx="4"/>
+            <rect class="block" x="20" y="264" width="104" height="66" rx="4"/>
+            <rect class="block" x="176" y="264" width="140" height="66" rx="4"/>
+            <rect class="block" x="368" y="264" width="92" height="66" rx="4"/>
+            <path class="road" d="M150 84V330M0 237H480"/>
+            <path class="road thin" d="M342 84V330"/>
+            <path class="rail" d="M0 62H480"/><path class="rail-dash" d="M0 62H480"/>
+            <rect class="station" x="96" y="44" width="150" height="36" rx="6"/>
+            <text class="label-strong" x="171" y="68" text-anchor="middle">しるべ駅</text>
+            <text x="102" y="104" text-anchor="middle">西口</text>
+            <path class="route" d="M150 86V237H286"/>
+            <text x="406" y="258" text-anchor="middle">本町通り</text>
+            <path class="pin" d="M296 226c-3-10-15-17-15-30a15 15 0 0 1 30 0c0 13-12 20-15 30z"/>
+            <circle cx="296" cy="196" r="5.5" fill="#fff"/>
+            <text class="label-strong" x="296" y="160" text-anchor="middle">しるべ税理士事務所</text>
+          </svg>
+          <figcaption>西口から徒歩4分。本町ビルの3階です（地図・名称は架空）。</figcaption>
+        </figure>
       </div>
     </section>
 
     <section class="contact" id="contact">
-      <div class="wrap">
-        <div class="heading center reveal"><span class="eyebrow">CONTACT</span><h2>まずは、初回相談から</h2><p>60分・無料。相談したからといって、契約する必要はありません。</p></div>
-        <div class="grid reveal">
-          <form id="form" action="#form" onsubmit="event.preventDefault(); this.querySelector('.form-done').hidden = false;">
-            <h3>フォームで予約する</h3>
-            <div class="field"><label for="f-name">お名前<span class="req">必須</span></label><input id="f-name" type="text" autocomplete="name" required></div>
-            <div class="field"><label for="f-mail">メールアドレス<span class="req">必須</span></label><input id="f-mail" type="email" autocomplete="email" required></div>
-            <div class="field"><label for="f-topic">ご相談の内容</label>
-              <select id="f-topic"><option>確定申告</option><option>記帳代行</option><option>開業サポート</option><option>インボイス対応</option><option>法人の顧問契約</option><option>まだ決まっていない</option></select></div>
-            <fieldset class="field"><legend>面談の方法</legend>
-              <div class="radios"><label><input type="radio" name="how" checked>来所</label><label><input type="radio" name="how">オンライン</label></div></fieldset>
-            <div class="field"><label for="f-msg">ご希望の日時・ご質問など</label><textarea id="f-msg"></textarea></div>
-            <button class="btn" type="submit">この内容で予約を申し込む</button>
-            <p class="form-note">※サンプルのため、送信しても届きません。</p>
-            <p class="form-done" role="status" hidden>サンプルのため、送信はされていません。</p>
-          </form>
-          <div class="tel-box" id="tel">
-            <h3>お電話で予約する</h3>
-            <div class="num"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>00-0000-0000</div>
-            <p>平日 9:30〜19:00（土曜は面談のみ）<br>※架空の番号です。サンプルのため、つながりません。</p>
+      <div class="wrap grid">
+        <div class="reveal">
+          <div class="heading"><h2>まずは、初回相談から</h2><p>60分・無料。相談したからといって、契約する必要はありません。</p></div>
+          <div class="tel" id="tel">
+            <h3>お電話でも予約できます</h3>
+            <p class="hours">平日 9:30〜19:00<br>土曜 10:00〜16:00（面談のみ）</p>
+            <p>面談は、事務所かオンラインで。</p>
+            <p class="num">000-1234-5678 <span>※架空の番号です。つながりません。</span></p>
           </div>
         </div>
+        <form class="reveal" id="form" action="#form" onsubmit="event.preventDefault(); this.querySelector('.form-done').hidden = false;">
+          <h3>フォームで予約する</h3>
+          <div class="field"><label for="f-name">お名前<span class="req">必須</span></label><input id="f-name" type="text" autocomplete="name" required></div>
+          <div class="field"><label for="f-mail">メールアドレス<span class="req">必須</span></label><input id="f-mail" type="email" autocomplete="email" required></div>
+          <div class="field"><label for="f-topic">ご相談の内容</label>
+            <select id="f-topic"><option>確定申告</option><option>記帳代行</option><option>開業サポート</option><option>インボイス対応</option><option>法人の顧問契約</option><option>まだ決まっていない</option></select></div>
+          <fieldset class="field"><legend>面談の方法</legend>
+            <div class="radios"><label><input type="radio" name="how" checked>来所</label><label><input type="radio" name="how">オンライン</label></div></fieldset>
+          <div class="field"><label for="f-msg">ご希望の日時・ご質問など</label><textarea id="f-msg"></textarea></div>
+          <button class="btn" type="submit">この内容で予約を申し込む</button>
+          <p class="form-note">※サンプルのため、送信しても届きません。</p>
+          <p class="form-done" role="status" hidden>サンプルのため、送信はされていません。</p>
+        </form>
       </div>
     </section>
   </main>
@@ -418,12 +429,12 @@
       <svg viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="8" fill="#16284a"/><path d="M17 7v20M17 10h8l2.5 2.5L25 15h-8M17 18H10l-2.5 2.5L10 23h7" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/></svg>
       <span>しるべ税理士事務所<small>SHIRUBE TAX OFFICE（架空）</small></span>
     </a>
-    <div>このページは制作サンプルです。事務所名・料金・住所・電話番号はすべて架空です。</div>
-    <div>写真はイメージです（Unsplash）：<a href="https://images.unsplash.com/photo-1642522029691-029b5a432954">1</a> <a href="https://images.unsplash.com/photo-1511376979163-f804dff7ad7b">2</a> <a href="https://images.unsplash.com/photo-1579389083046-e3df9c2b3325">3</a> <a href="https://images.unsplash.com/photo-1562564055-71e051d33c19">4</a>（Unsplash License・2026-10-20確認）</div>
+    <div>制作サンプル｜<span class="nw">事務所名・料金・住所・</span><span class="nw">電話番号は架空です。</span></div>
+    <div>写真：<a href="https://unsplash.com/">Unsplash</a>（イメージ）</div>
   </footer>
 
   <nav class="sticky" aria-label="初回相談">
-    <a class="tel" href="#tel">電話で予約</a>
+    <a class="tel-link" href="#tel">電話で予約</a>
     <a class="web" href="#form">初回相談を予約</a>
   </nav>
 

@@ -11,26 +11,26 @@
 <style>
   :root {
     --cream: #fbf4ea; --cream-2: #f4e7d4; --ink: #3a2a1f; --sub: #65503f; --line: #e6d5bf;
-    --coffee: #4a3222; --terra: #b04a28; --terra-dark: #8f3a1d; --terra-text: #a3441f; --butter: #f2d49b;
+    --coffee: #4a3222; --chalk: #2f2a26; --terra: #b04a28; --terra-dark: #8f3a1d; --terra-text: #a3441f; --butter: #f2d49b;
     --round: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", sans-serif;
     --sans: "M PLUS 1p", "Hiragino Sans", "Yu Gothic", sans-serif;
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body { margin: 0; background: var(--cream); color: var(--ink); font-family: var(--sans); font-size: 16px;
-    line-height: 1.85; letter-spacing: .02em; word-break: auto-phrase; }
+    line-height: 1.85; letter-spacing: .02em; word-break: auto-phrase; overflow-wrap: anywhere; }
   img { display: block; width: 100%; height: 100%; object-fit: cover; }
   a { color: inherit; }
   h1, h2, h3 { font-family: var(--round); font-weight: 700; line-height: 1.45; margin: 0; word-break: auto-phrase; text-wrap: balance; }
+  h2 { font-size: clamp(24px, 5vw, 32px); }
   .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+  .grid > * { min-width: 0; }
   section { padding: 80px 0; }
   .eyebrow { font-family: var(--round); color: var(--terra-text); font-size: 14px; letter-spacing: .25em; display: block; margin-bottom: 8px; }
-  .heading { text-align: center; margin-bottom: 44px; }
-  .heading h2 { font-size: clamp(25px, 5vw, 34px); }
-  .heading p { color: var(--sub); margin: 12px 0 0; }
   .note { font-size: 14px; color: var(--sub); }
+  .nowrap { white-space: nowrap; }
 
-  .notice { background: var(--coffee); color: var(--cream); font-size: 13px; text-align: center; padding: 6px 16px; }
+  .notice { font-size: 14px; color: var(--sub); text-align: center; padding: 6px 16px; border-bottom: 1px solid var(--line); margin: 0; }
 
   /* header */
   header.site { padding: 14px 0; }
@@ -57,6 +57,7 @@
   .hero { padding: 4px 0 56px; }
   .hero .wrap { display: grid; gap: 24px; }
   .hero .photo { aspect-ratio: 16 / 10; border-radius: 999px 999px 28px 28px; overflow: hidden; background: var(--cream-2); }
+  .hero .photo img { object-position: 50% 58%; }
   .hero h1 { font-size: clamp(29px, 8vw, 46px); letter-spacing: .04em; }
   .hero h1 em { font-style: normal; color: var(--terra-text); }
   .hero p { margin: 12px 0 16px; color: var(--sub); }
@@ -64,81 +65,99 @@
   .chips li { background: var(--cream-2); border-radius: 99px; padding: 2px 11px; font-size: 14px; font-weight: 700; }
   .hero .actions { display: flex; align-items: center; gap: 8px 24px; flex-wrap: wrap; }
 
-  /* concept */
+  /* concept: the only tab-shaped section */
   .concept { background: var(--cream-2); border-radius: 40px 40px 0 0; }
   .concept .grid { display: grid; gap: 36px; align-items: center; }
   .concept .photo { aspect-ratio: 1 / 1; border-radius: 48% 52% 46% 54% / 55% 45% 55% 45%; overflow: hidden; max-width: 460px; width: 100%; margin: 0 auto; }
-  .concept h2 { font-size: clamp(24px, 5vw, 32px); margin-bottom: 20px; }
+  .concept .photo img { object-position: 50% 55%; }
+  .concept h2 { margin-bottom: 20px; }
   .concept p { margin: 0 0 14px; }
 
-  /* menu */
-  .menu .cols { display: grid; gap: 28px; }
-  .board { background: #fff; border-radius: 24px; padding: 28px 24px; border: 2px solid var(--line); }
-  .board h3 { font-size: 20px; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
-  .board h3::before { content: ""; width: 12px; height: 12px; border-radius: 50%; background: var(--terra); }
+  /* price lists (shared) */
   .items { list-style: none; padding: 0; margin: 0; }
-  .items li { display: flex; align-items: baseline; gap: 8px; padding: 10px 0; border-bottom: 1px dashed var(--line); }
-  .items li:last-child { border-bottom: 0; }
-  .items .name { flex: 1; display: flex; align-items: baseline; gap: 8px; }
-  .items .name::after { content: ""; flex: 1; border-bottom: 2px dotted #d6bf9f; transform: translateY(-4px); min-width: 12px; }
-  .items .name small { display: block; font-size: 14px; color: var(--sub); }
-  .items .yen { font-weight: 700; white-space: nowrap; }
+  .items li { display: grid; grid-template-columns: auto minmax(16px, 1fr) auto; column-gap: 8px; align-items: baseline; padding: 6px 0; }
+  .items li::before { content: ""; grid-area: 1 / 2; align-self: center; border-bottom: 2px dotted; opacity: .4; transform: translateY(4px); }
+  .items .name { grid-area: 1 / 1; }
+  .items .yen { grid-area: 1 / 3; font-weight: 700; white-space: nowrap; }
+  .items small { grid-area: 2 / 1 / 3 / -1; font-size: 14px; line-height: 1.6; color: var(--sub); }
+
+  /* menu: chalkboard */
+  .chalk { background: var(--chalk); color: var(--cream); border: 10px solid #8a6446; border-radius: 22px; padding: 32px 22px;
+    box-shadow: inset 0 0 60px rgba(0,0,0,.35); }
+  .chalk .eyebrow { color: var(--butter); }
+  .chalk-head { margin-bottom: 28px; }
+  .chalk-head p { margin: 8px 0 0; color: #ddd0bd; font-size: 15px; }
+  .chalk .cols { display: grid; gap: 32px; }
+  .chalk h3 { font-size: 20px; color: var(--butter); margin-bottom: 8px; padding-bottom: 6px; border-bottom: 2px solid rgba(242,212,155,.35); }
+  .chalk small { color: #d8c8b0; }
   .allergy { margin: 24px 0 0; background: var(--cream-2); border-radius: 16px; padding: 16px 20px; font-size: 15px; }
   .allergy b { color: var(--terra-text); }
 
   /* morning */
-  .morning { background: var(--coffee); color: var(--cream); border-radius: 40px; margin: 0 12px; }
-  .morning .eyebrow { color: var(--butter); }
-  .morning .heading p { color: #e9dccb; }
-  .morning .time { display: inline-block; margin-top: 16px; background: var(--butter); color: var(--coffee); font-weight: 700; border-radius: 99px; padding: 4px 18px; }
+  .morning { background: var(--cream-2); }
+  .morning .head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 24px; margin-bottom: 32px; }
+  .morning .head p { margin: 8px 0 0; color: var(--sub); }
+  .time { display: inline-block; background: var(--coffee); color: var(--cream); font-weight: 700; border-radius: 99px; padding: 6px 20px; }
   .sets { display: grid; gap: 18px; }
-  .set { background: var(--cream); color: var(--ink); border-radius: 24px; padding: 28px 24px 24px; position: relative; }
-  .set .label { font-family: var(--round); font-weight: 700; color: var(--terra-text); letter-spacing: .15em; font-size: 14px; }
-  .set h3 { font-size: 21px; margin: 2px 0 8px; }
+  .set { background: #fff; border-radius: 24px; padding: 8px 8px 22px; position: relative; }
+  .set .ph { aspect-ratio: 4 / 3; border-radius: 18px; overflow: hidden; margin-bottom: 16px; background: var(--cream-2); }
+  .set .badge { position: absolute; top: 18px; left: 18px; width: 40px; height: 40px; border-radius: 50%; background: var(--terra); color: #fff;
+    font-family: var(--round); font-weight: 700; font-size: 18px; line-height: 1; display: grid; place-items: center; }
+  .set .body { padding: 0 16px; }
+  .set h3 { font-size: 21px; margin-bottom: 6px; }
   .set p { margin: 0 0 14px; color: var(--sub); font-size: 15px; }
-  .set .yen { font-family: var(--round); font-weight: 700; font-size: 30px; line-height: 1; border-top: 2px dashed var(--line); padding-top: 14px; }
+  .set .yen { font-family: var(--round); font-weight: 700; font-size: 30px; line-height: 1; border-top: 1px solid var(--line); padding-top: 14px; }
   .set .yen small { font-family: var(--sans); font-size: 14px; color: var(--sub); margin-left: 4px; }
-  .morning .after { text-align: center; margin: 28px 0 0; color: #e9dccb; font-size: 15px; }
+  .morning .after { margin: 24px 0 0; color: var(--sub); font-size: 15px; }
 
   /* takeout */
   .takeout .grid { display: grid; gap: 32px; align-items: start; }
-  .takeout h2 { font-size: clamp(24px, 5vw, 32px); margin-bottom: 16px; }
+  .takeout h2 { margin-bottom: 16px; }
   .takeout .lead p { margin: 0 0 14px; }
   .steps { list-style: none; counter-reset: s; padding: 0; margin: 20px 0 0; display: grid; gap: 10px; }
   .steps li { counter-increment: s; display: flex; gap: 14px; align-items: center; background: var(--cream-2); border-radius: 16px; padding: 12px 16px; }
   .steps li::before { content: counter(s); flex: none; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center;
     background: var(--terra); color: #fff; font-weight: 700; font-family: var(--round); }
+  .takeout .ph { aspect-ratio: 3 / 2; border-radius: 24px; overflow: hidden; margin-bottom: 16px; }
+  .board { background: #fff; border-radius: 24px; padding: 24px; border: 2px solid var(--line); }
+  .board h3 { font-size: 20px; margin-bottom: 8px; }
 
-  /* atmosphere */
-  .room { background: var(--cream-2); border-radius: 40px 40px 0 0; }
-  .gallery { display: grid; gap: 16px; }
-  .gallery figure { margin: 0; }
-  .gallery .ph { aspect-ratio: 4 / 3; border-radius: 24px; overflow: hidden; }
-  .gallery figcaption { font-size: 15px; color: var(--sub); margin-top: 8px; padding-left: 4px; }
-  .facts { list-style: none; padding: 0; margin: 36px 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .facts li { background: var(--cream); border-radius: 16px; padding: 14px 12px; text-align: center; font-size: 15px; line-height: 1.5; }
-  .facts b { display: block; font-family: var(--round); font-size: 22px; color: var(--terra-text); }
+  /* room */
+  .room { background: var(--coffee); color: var(--cream); }
+  .room .grid { display: grid; gap: 32px; align-items: center; }
+  .room figure { margin: 0; }
+  .room .ph { aspect-ratio: 4 / 3; border-radius: 24px; overflow: hidden; }
+  .room .ph img { object-position: 50% 72%; }
+  .room figcaption { font-size: 15px; color: #e9dccb; margin-top: 8px; padding-left: 4px; }
+  .room h2 { margin-bottom: 16px; }
+  .room p { margin: 0; color: #e9dccb; }
+  .facts { list-style: none; padding: 0; margin: 28px 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .facts li { background: rgba(251,244,234,.08); border-radius: 16px; padding: 14px 12px; font-size: 15px; line-height: 1.5; }
+  .facts b { display: block; font-family: var(--round); font-size: 22px; color: var(--butter); }
 
   /* access */
   .access .grid { display: grid; gap: 32px; }
-  .access h2 { font-size: clamp(24px, 5vw, 32px); margin-bottom: 20px; }
+  .access h2 { margin-bottom: 20px; }
   .access dl { margin: 0; display: grid; grid-template-columns: 5.5em 1fr; gap: 10px 14px; }
   .access dt { font-weight: 700; }
   .access dd { margin: 0; }
-  .map { aspect-ratio: 4 / 3; background: var(--cream-2); border: 2px dashed var(--line); border-radius: 24px;
-    display: grid; place-items: center; color: var(--sub); font-size: 15px; }
+  .map { margin: 0; background: var(--cream-2); border-radius: 24px; padding: 12px; }
+  .map svg { display: block; width: 100%; height: auto; border-radius: 16px; }
+  .map figcaption { font-size: 15px; color: var(--sub); margin: 8px 6px 0; }
 
   /* faq */
-  .faq { background: var(--cream-2); border-radius: 40px 40px 0 0; }
-  .faq .list { max-width: 760px; margin: 0 auto; display: grid; gap: 12px; }
-  details { background: #fff; border-radius: 18px; }
-  summary { cursor: pointer; list-style: none; padding: 18px 48px 18px 56px; position: relative; font-weight: 700; border-radius: 18px; }
-  summary::-webkit-details-marker { display: none; }
-  summary::before { content: "Q"; position: absolute; left: 18px; top: 16px; width: 28px; height: 28px; border-radius: 50%;
+  .faq { background: var(--cream-2); }
+  .faq .grid { display: grid; gap: 24px; }
+  .faq .list { display: grid; gap: 12px; }
+  .faq details { background: #fff; border-radius: 18px; }
+  .faq summary { cursor: pointer; list-style: none; padding: 18px 48px 18px 56px; position: relative; font-weight: 700; border-radius: 18px; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::before { content: "Q"; position: absolute; left: 18px; top: 50%; transform: translateY(-50%); width: 28px; height: 28px; border-radius: 50%;
     background: var(--terra); color: #fff; font-family: var(--round); display: grid; place-items: center; line-height: 1; font-size: 15px; }
-  summary::after { content: "+"; position: absolute; right: 20px; top: 14px; font-size: 24px; color: var(--terra-text); transition: transform .2s; }
-  details[open] summary::after { transform: rotate(45deg); }
-  details p { margin: 0; padding: 0 22px 20px 56px; color: var(--sub); }
+  .faq summary::after { content: "+"; position: absolute; right: 20px; top: 50%; transform: translateY(-50%); font-size: 24px; line-height: 1;
+    color: var(--terra-text); transition: transform .2s; }
+  .faq details[open] summary::after { transform: translateY(-50%) rotate(45deg); }
+  .faq details p { margin: 0; padding: 0 22px 20px 56px; color: var(--sub); }
 
   /* final cta */
   .cta { background: var(--coffee); color: var(--cream); text-align: center; }
@@ -151,6 +170,8 @@
   footer { text-align: center; padding: 40px 20px 120px; font-size: 14px; color: var(--sub); }
   footer .logo { display: inline-block; margin-bottom: 10px; color: var(--ink); }
   footer p { margin: 4px 0; }
+  .credits summary { display: inline-flex; align-items: center; min-height: 44px; cursor: pointer; text-decoration: underline; text-underline-offset: 4px; }
+  .credits ul { list-style: none; padding: 0; margin: 0; }
 
   /* mobile sticky bar */
   .sticky { position: fixed; z-index: 20; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: 1fr 1.7fr; gap: 8px;
@@ -171,15 +192,17 @@
     .hero .copy { order: -1; }
     .hero .photo { aspect-ratio: 4 / 5; max-height: 640px; }
     .concept .grid { grid-template-columns: 1fr 1.1fr; gap: 72px; }
-    .menu .cols { grid-template-columns: 1fr 1fr; }
-    .morning { margin: 0 24px; }
+    .chalk { padding: 48px 56px; }
+    .chalk-head { display: flex; align-items: flex-end; gap: 28px; }
+    .chalk-head p { margin: 0 0 4px; }
+    .chalk .cols { grid-template-columns: 1fr 1fr; gap: 56px; }
     .sets { grid-template-columns: repeat(3, 1fr); }
-    .takeout .grid { grid-template-columns: 1fr 1fr; gap: 56px; }
-    .gallery { grid-template-columns: 1.4fr 1fr; grid-template-rows: auto auto; }
-    .gallery figure:first-child { grid-row: span 2; }
-    .gallery figure:first-child .ph { aspect-ratio: auto; height: calc(100% - 36px); }
-    .facts { grid-template-columns: repeat(4, 1fr); }
-    .access .grid { grid-template-columns: 1fr 1fr; align-items: center; }
+    .takeout .grid { grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+    .room .grid { grid-template-columns: 1fr 1fr; gap: 64px; }
+    .room .ph { aspect-ratio: 4 / 5; }
+    .facts { margin-top: 36px; }
+    .access .grid { grid-template-columns: 1fr 1fr; align-items: center; gap: 56px; }
+    .faq .grid { grid-template-columns: 1fr 2fr; gap: 56px; align-items: start; }
     .cta .actions { flex-direction: row; justify-content: center; gap: 28px; }
     .sticky { display: none; }
     footer { padding-bottom: 40px; }
@@ -193,7 +216,7 @@
 <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
-  <div class="notice">LP制作のサンプルです。店名・料金・住所はすべて架空です。</div>
+  <p class="notice">制作サンプル｜店名・料金・住所は架空です</p>
 
   <header class="site">
     <div class="wrap">
@@ -207,11 +230,11 @@
     <div class="hero">
       <div class="wrap">
         <div class="photo">
-          <img src="https://images.unsplash.com/photo-1728761390316-935ffeb3fbcc?w=1200&q=70&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1728761390316-935ffeb3fbcc?w=800&q=70&auto=format&fit=crop 800w, https://images.unsplash.com/photo-1728761390316-935ffeb3fbcc?w=1200&q=70&auto=format&fit=crop 1200w, https://images.unsplash.com/photo-1728761390316-935ffeb3fbcc?w=1800&q=70&auto=format&fit=crop 1800w" sizes="(min-width: 900px) 55vw, 100vw" width="1200" height="960" fetchpriority="high" alt="大きな窓から光が入る、明るい店内">
+          <img src="https://images.unsplash.com/photo-1596806032217-146c84269ffc?w=1200&q=70&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1596806032217-146c84269ffc?w=800&q=70&auto=format&fit=crop 800w, https://images.unsplash.com/photo-1596806032217-146c84269ffc?w=1200&q=70&auto=format&fit=crop 1200w, https://images.unsplash.com/photo-1596806032217-146c84269ffc?w=1800&q=70&auto=format&fit=crop 1800w" sizes="(min-width: 900px) 55vw, 100vw" width="1200" height="1800" fetchpriority="high" alt="木のテーブルに置いたスコーンとジャム、ラテのカップ">
         </div>
         <div class="copy">
-          <h1>朝7時半、<br><span style="white-space:nowrap"><em>焼きたて</em>と一杯を。</span></h1>
-          <p>〇〇駅から歩いて2分。毎朝お店で焼くスコーンと食パン、ハンドドリップの珈琲で、ゆっくり朝ごはんを。</p>
+          <h1>朝7時半、<br><span class="nowrap"><em>スコーン</em>と一杯を。</span></h1>
+          <p>こむぎ台駅から歩いて2分。毎朝お店で焼くスコーンと食パン、ハンドドリップの珈琲で、ゆっくり朝ごはんを。</p>
           <ul class="chips"><li>7:30〜18:00</li><li>火曜定休</li><li>テイクアウトあり</li></ul>
           <div class="actions">
             <a class="btn" href="#reserve">今日の空席・予約</a>
@@ -223,52 +246,61 @@
 
     <section class="concept">
       <div class="wrap grid">
-        <div class="photo reveal"><img src="https://images.unsplash.com/photo-1712577623065-9d759ede8d0e?w=900&q=70&auto=format&fit=crop" width="900" height="900" alt="ソファの横、木のテーブルに置かれたカップ" loading="lazy"></div>
+        <div class="photo reveal"><img src="https://images.unsplash.com/photo-1596806033480-12587a7e1f26?w=900&q=70&auto=format&fit=crop" width="900" height="1350" alt="上から見た、木の板にのせたスコーンとジャム" loading="lazy"></div>
         <div class="reveal">
           <span class="eyebrow">CONCEPT</span>
-          <h2>いそがない朝のための、<br>小さな台所。</h2>
-          <p>開店の2時間前から、店の奥でパンとお菓子を焼いています。窓ぎわの席に座ると、ちょうど焼き上がりの香りが届きます。</p>
-          <p>出勤前の15分でも、休みの日の1時間でも。それぞれのペースで過ごせるよう、席はゆったり並べました。</p>
+          <h2>開店の2時間前から、<br>店の奥でスコーンを焼いています。</h2>
+          <p>焼くのは、その日にお店に並べる分だけ。窓ぎわの席に座ると、ちょうど焼き上がりの香りが届きます。</p>
+          <p>出勤前の15分でも、休みの日の1時間でも。それぞれのペースで、朝ごはんをどうぞ。</p>
         </div>
       </div>
     </section>
 
     <section class="menu" id="menu">
       <div class="wrap">
-        <div class="heading reveal"><span class="eyebrow">MENU</span><h2>メニュー</h2><p>価格はすべて店内でお召し上がりの税込価格です。</p></div>
-        <div class="cols reveal">
-          <div class="board">
-            <h3>ドリンク</h3>
-            <ul class="items">
-              <li><span class="name"><span>ブレンド珈琲<small>ハンドドリップ・中深煎り</small></span></span><span class="yen">500円</span></li>
-              <li><span class="name"><span>カフェオレ</span></span><span class="yen">580円</span></li>
-              <li><span class="name"><span>カフェラテ</span></span><span class="yen">600円</span></li>
-              <li><span class="name"><span>紅茶<small>ダージリン／アールグレイ</small></span></span><span class="yen">550円</span></li>
-              <li><span class="name"><span>ほうじ茶ラテ</span></span><span class="yen">620円</span></li>
-            </ul>
-          </div>
-          <div class="board">
-            <h3>焼き菓子・軽食</h3>
-            <ul class="items">
-              <li><span class="name"><span>スコーン（プレーン）<small>クロテッドクリーム・ジャム付き</small></span></span><span class="yen">380円</span></li>
-              <li><span class="name"><span>レモンケーキ</span></span><span class="yen">350円</span></li>
-              <li><span class="name"><span>季節のマフィン</span></span><span class="yen">400円</span></li>
-              <li><span class="name"><span>厚切りバタートースト</span></span><span class="yen">450円</span></li>
-              <li><span class="name"><span>たまごサンド</span></span><span class="yen">680円</span></li>
-            </ul>
+        <div class="chalk dark reveal">
+          <div class="chalk-head"><div><span class="eyebrow">MENU</span><h2>メニュー</h2></div><p>価格はすべて、店内でお召し上がりの税込価格です。</p></div>
+          <div class="cols">
+            <div>
+              <h3>ドリンク</h3>
+              <ul class="items">
+                <li><span class="name">ブレンド珈琲</span><span class="yen">500円</span><small>ハンドドリップ・中深煎り</small></li>
+                <li><span class="name">カフェオレ</span><span class="yen">580円</span></li>
+                <li><span class="name">カフェラテ</span><span class="yen">600円</span></li>
+                <li><span class="name">紅茶</span><span class="yen">550円</span><small>ダージリン／アールグレイ</small></li>
+                <li><span class="name">ほうじ茶ラテ</span><span class="yen">620円</span></li>
+              </ul>
+            </div>
+            <div>
+              <h3>焼き菓子・軽食</h3>
+              <ul class="items">
+                <li><span class="name">スコーン</span><span class="yen">380円</span><small>プレーン・クランベリー／クロテッドクリームとジャム付き</small></li>
+                <li><span class="name">パン・オ・ショコラ</span><span class="yen">360円</span></li>
+                <li><span class="name">レモンケーキ</span><span class="yen">350円</span></li>
+                <li><span class="name">季節のマフィン</span><span class="yen">400円</span></li>
+                <li><span class="name">厚切りバタートースト</span><span class="yen">450円</span><small>自家製の食パンを使っています</small></li>
+                <li><span class="name">たまごサンド</span><span class="yen">680円</span></li>
+              </ul>
+            </div>
           </div>
         </div>
         <p class="allergy reveal"><b>アレルギーについて：</b>焼き菓子とパンには小麦・卵・乳を使っています。くるみ・アーモンドを使う商品もあり、同じ厨房で作っています。気になる方はご注文の前にスタッフへお声がけください。</p>
       </div>
     </section>
 
-    <section class="morning dark" id="morning">
+    <section class="morning" id="morning">
       <div class="wrap">
-        <div class="heading reveal"><span class="eyebrow">MORNING</span><h2>モーニングセット</h2><p>ドリンクは、ブレンド・紅茶・カフェオレから選べます。</p><span class="time">毎朝 7:30〜10:30 L.O.</span></div>
+        <div class="head reveal">
+          <div><h2>モーニングセット</h2><p>ドリンクは、ブレンド・紅茶・カフェオレから選べます。</p></div>
+          <span class="time">毎朝 7:30〜10:30 L.O.</span>
+        </div>
         <div class="sets reveal">
-          <div class="set"><span class="label">A SET</span><h3>トーストセット</h3><p>自家製食パンの厚切りトースト。バターと季節のジャムで。</p><div class="yen">700<small>円（税込）</small></div></div>
-          <div class="set"><span class="label">B SET</span><h3>スコーンセット</h3><p>その朝焼いたスコーン2個に、クロテッドクリームとジャム。</p><div class="yen">780<small>円（税込）</small></div></div>
-          <div class="set"><span class="label">C SET</span><h3>たまごサンドセット</h3><p>ふんわり卵焼きをはさんだサンドと、小さなサラダ。</p><div class="yen">900<small>円（税込）</small></div></div>
+          <div class="set"><div class="ph"><img src="https://images.unsplash.com/photo-1621947529620-2b9fdbd5beae?rect=0,0.37,0.42,0.33&w=700&q=70&auto=format" width="700" height="525" alt="皿にのったクランベリーのスコーン" loading="lazy"></div><span class="badge">A</span>
+            <div class="body"><h3>スコーンセット</h3><p>クランベリーのスコーンに、クロテッドクリームとジャムを添えて。</p><div class="yen">780<small>円（税込）</small></div></div></div>
+          <div class="set"><div class="ph"><img src="https://images.unsplash.com/photo-1621947529620-2b9fdbd5beae?rect=0.43,0.625,0.385,0.23&w=700&q=70&auto=format" width="700" height="525" alt="パン・オ・ショコラとカフェラテ" loading="lazy"></div><span class="badge">B</span>
+            <div class="body"><h3>パン・オ・ショコラセット</h3><p>バターを折り込んだ生地で、チョコレートを包みました。</p><div class="yen">760<small>円（税込）</small></div></div></div>
+          <div class="set"><div class="ph"><img src="https://images.unsplash.com/photo-1621947529620-2b9fdbd5beae?rect=0.33,0.05,0.58,0.45&w=700&q=70&auto=format" width="700" height="525" alt="りんごのコンポートとグラノーラをのせたオートミール" loading="lazy"></div><span class="badge">C</span>
+            <div class="body"><h3>オートミールセット</h3><p>温かいオートミールに、りんごのコンポートとナッツ入りのグラノーラ。</p><div class="yen">900<small>円（税込）</small></div></div></div>
         </div>
         <p class="after reveal">カフェラテ・ほうじ茶ラテへの変更は＋80円（税込）です。</p>
       </div>
@@ -277,7 +309,6 @@
     <section class="takeout" id="takeout">
       <div class="wrap grid">
         <div class="lead reveal">
-          <span class="eyebrow">TAKEOUT</span>
           <h2>焼き菓子とパンは、<br>お持ち帰りもできます。</h2>
           <p>手みやげや、明日の朝ごはんに。食パンは焼く数が決まっているため、前日18時までのご予約で取り置きします。</p>
           <ol class="steps">
@@ -286,57 +317,83 @@
             <li>レジでお名前を伝えて受け取り</li>
           </ol>
         </div>
-        <div class="board reveal">
-          <h3>お持ち帰りの価格</h3>
-          <ul class="items">
-            <li><span class="name"><span>自家製食パン（1斤）</span></span><span class="yen">540円</span></li>
-            <li><span class="name"><span>スコーン（プレーン）</span></span><span class="yen">300円</span></li>
-            <li><span class="name"><span>レモンケーキ</span></span><span class="yen">340円</span></li>
-            <li><span class="name"><span>焼き菓子の詰め合わせ<small>6個入り・箱代込み</small></span></span><span class="yen">1,800円</span></li>
-            <li><span class="name"><span>ブレンド珈琲（カップ）</span></span><span class="yen">450円</span></li>
-          </ul>
-          <p class="note" style="margin:12px 0 0">税込（軽減税率8%）。アレルギー表示は店内メニューと同じです。</p>
+        <div class="reveal">
+          <div class="ph"><img src="https://images.unsplash.com/photo-1648142119324-fbab91e76c66?rect=0,0,1,0.82&w=900&q=70&auto=format" width="900" height="600" alt="紙カップのラテと、紙袋に入った焼き菓子" loading="lazy"></div>
+          <div class="board">
+            <h3>お持ち帰りの価格</h3>
+            <ul class="items">
+              <li><span class="name">自家製食パン（1斤）</span><span class="yen">540円</span></li>
+              <li><span class="name">スコーン</span><span class="yen">370円</span></li>
+              <li><span class="name">レモンケーキ</span><span class="yen">340円</span></li>
+              <li><span class="name">焼き菓子の詰め合わせ</span><span class="yen">1,800円</span><small>6個入り・箱代込み</small></li>
+              <li><span class="name">ブレンド珈琲（カップ）</span><span class="yen">450円</span></li>
+            </ul>
+            <p class="note" style="margin:12px 0 0">税込（軽減税率8%）。アレルギー表示は店内メニューと同じです。</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="room">
-      <div class="wrap">
-        <div class="heading reveal"><span class="eyebrow">ROOM</span><h2>お店の雰囲気</h2></div>
-        <div class="gallery reveal">
-          <figure><div class="ph"><img src="https://images.unsplash.com/photo-1544031064-9de80864ade5?w=1100&q=70&auto=format&fit=crop" width="1100" height="825" alt="日差しの入る明るい店内" loading="lazy"></div><figcaption>朝は、窓からの光で明るい店内</figcaption></figure>
-          <figure><div class="ph"><img src="https://images.unsplash.com/photo-1702677413541-ffc41d8c08b3?w=800&q=70&auto=format&fit=crop" width="800" height="600" alt="テーブル席が並ぶ店内" loading="lazy"></div><figcaption>ひとりでも、ふたりでも座りやすいテーブル席</figcaption></figure>
-          <figure><div class="ph"><img src="https://images.unsplash.com/photo-1624583338957-4d155ca886dc?w=800&q=70&auto=format&fit=crop" width="800" height="600" alt="明かりのともった夕方の店内" loading="lazy"></div><figcaption>夕方は、明かりを少し落として</figcaption></figure>
+    <section class="room dark">
+      <div class="wrap grid">
+        <figure class="reveal"><div class="ph"><img src="https://images.unsplash.com/photo-1596806031950-58b50b2affef?w=1000&q=70&auto=format&fit=crop" width="1000" height="1500" alt="壁ぎわの木のテーブル席。ラテとスコーン、壁にコンセント" loading="lazy"></div><figcaption>壁ぎわの席には、電源があります。</figcaption></figure>
+        <div class="reveal">
+          <h2>24席の、<br>ちいさな店です。</h2>
+          <p>テーブル席とソファ席があります。ソファ席のまわりは、ベビーカーのまま入れるように広くあけています。</p>
+          <ul class="facts">
+            <li><b>24席</b>テーブル・ソファ</li>
+            <li><b>全席禁煙</b></li>
+            <li><b>電源あり</b>壁ぎわの4席</li>
+            <li><b>Wi-Fi</b>無料</li>
+          </ul>
         </div>
-        <ul class="facts reveal">
-          <li><b>24席</b>テーブル・ソファ</li>
-          <li><b>禁煙</b>全席</li>
-          <li><b>電源</b>窓ぎわの一部の席</li>
-          <li><b>Wi-Fi</b>無料</li>
-        </ul>
       </div>
     </section>
 
     <section class="access" id="access">
       <div class="wrap grid">
         <div class="reveal">
-          <span class="eyebrow">ACCESS</span>
           <h2>アクセス・営業時間</h2>
           <dl>
-            <dt>住所</dt><dd>〇〇市〇〇町4-5-6 1F（架空）</dd>
-            <dt>最寄り</dt><dd>〇〇駅 西口から徒歩2分</dd>
+            <dt>住所</dt><dd>こむぎ台市本町4-5-6 1F</dd>
+            <dt>最寄り</dt><dd>こむぎ台駅 西口から徒歩2分</dd>
             <dt>営業時間</dt><dd>7:30〜18:00（L.O. 17:30）<br>モーニングは 10:30 L.O.</dd>
             <dt>定休日</dt><dd>毎週火曜日</dd>
             <dt>お支払い</dt><dd>現金・カード・QR決済</dd>
           </dl>
         </div>
-        <div class="map reveal">地図（サンプルのため省略）</div>
+        <figure class="map reveal">
+          <svg viewBox="0 0 360 270" role="img" aria-labelledby="map-title">
+            <title id="map-title">地図：こむぎ台駅の西口を出て駅前の通りを北へ進み、本町通りを右に曲がってすぐの場所です</title>
+            <rect width="360" height="270" fill="#f7ecdc"/>
+            <g fill="#ead9c0">
+              <rect x="0" y="0" width="128" height="80" rx="10"/><rect x="164" y="0" width="196" height="80" rx="10"/>
+              <rect x="0" y="116" width="128" height="80" rx="10"/><rect x="164" y="116" width="196" height="80" rx="10"/>
+              <rect x="0" y="248" width="128" height="30" rx="10"/><rect x="164" y="248" width="196" height="30" rx="10"/>
+            </g>
+            <g fill="#fff"><rect x="132" y="0" width="28" height="270"/><rect x="0" y="84" width="360" height="28"/></g>
+            <line x1="0" y1="222" x2="360" y2="222" stroke="#65503f" stroke-width="8"/>
+            <line x1="0" y1="222" x2="360" y2="222" stroke="#fbf4ea" stroke-width="4" stroke-dasharray="14 10"/>
+            <rect x="196" y="206" width="132" height="32" rx="8" fill="#fff" stroke="#4a3222" stroke-width="2"/>
+            <text x="262" y="228" text-anchor="middle" font-size="16" font-weight="700" fill="#3a2a1f">こむぎ台駅</text>
+            <text x="178" y="200" text-anchor="middle" font-size="13" fill="#65503f">西口</text>
+            <text x="300" y="103" text-anchor="middle" font-size="13" fill="#65503f">本町通り</text>
+            <text x="122" y="161" text-anchor="end" font-size="14" font-weight="700" fill="#b04a28">徒歩2分</text>
+            <polyline points="194,212 146,212 146,98 210,98" fill="none" stroke="#b04a28" stroke-width="4" stroke-dasharray="1 8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M210 80c-10-13-16-21-16-29a16 16 0 0 1 32 0c0 8-6 16-16 29z" fill="#b04a28"/>
+            <circle cx="210" cy="51" r="6" fill="#fff"/>
+            <rect x="234" y="34" width="112" height="32" rx="16" fill="#fff"/>
+            <text x="290" y="55" text-anchor="middle" font-size="15" font-weight="700" fill="#4a3222">まめとこむぎ</text>
+            <path d="M24 12l7 16h-14z" fill="#65503f"/><text x="24" y="44" text-anchor="middle" font-size="13" font-weight="700" fill="#65503f">N</text>
+          </svg>
+          <figcaption>西口を出て北へ。本町通りの角を右に曲がってすぐです。</figcaption>
+        </figure>
       </div>
     </section>
 
     <section class="faq" id="faq">
-      <div class="wrap">
-        <div class="heading reveal"><span class="eyebrow">FAQ</span><h2>よくある質問</h2></div>
+      <div class="wrap grid">
+        <h2 class="reveal">よくある質問</h2>
         <div class="list reveal">
           <details><summary>予約なしでも入れますか？</summary><p>はい、空いている席にご案内します。土日の朝は満席になることがあるので、席を取っておきたい方はWebで席をご予約ください。</p></details>
           <details><summary>子ども連れでも大丈夫ですか？</summary><p>はい。ソファ席はベビーカーのまま入れる広さです。子ども用のいすと取り皿もご用意しています。</p></details>
@@ -349,8 +406,7 @@
 
     <section class="cta dark" id="reserve">
       <div class="wrap reveal">
-        <span class="eyebrow" style="color:var(--butter)">RESERVE</span>
-        <h2>今日の空席を見て、<br>席を予約する</h2>
+        <h2>土日の朝は、<br>席の予約がおすすめです</h2>
         <p>席の予約は、当日の朝7時から受け付けています。<br>焼き菓子の取り置きは、前日18時までです。</p>
         <div class="actions">
           <a class="btn light" href="#reserve-note">今日の空席を見る（Web予約）</a>
@@ -364,7 +420,17 @@
   <footer>
     <a class="logo" href="#">まめとこむぎ<small>BAKE &amp; COFFEE</small></a>
     <p>このページは制作サンプルです（店舗は架空）</p>
-    <p>写真（Unsplash）：<a href="https://images.unsplash.com/photo-1728761390316-935ffeb3fbcc">1</a> <a href="https://images.unsplash.com/photo-1712577623065-9d759ede8d0e">2</a> <a href="https://images.unsplash.com/photo-1544031064-9de80864ade5">3</a> <a href="https://images.unsplash.com/photo-1702677413541-ffc41d8c08b3">4</a> <a href="https://images.unsplash.com/photo-1624583338957-4d155ca886dc">5</a>（<a href="https://unsplash.com/license">Unsplash License</a>）</p>
+    <p>Photos: <a href="https://unsplash.com/">Unsplash</a>（<a href="https://unsplash.com/license">Unsplash License</a>）</p>
+    <details class="credits">
+      <summary>使用した写真の一覧</summary>
+      <ul>
+        <li><a href="https://images.unsplash.com/photo-1596806032217-146c84269ffc">スコーンとラテ（トップ）</a></li>
+        <li><a href="https://images.unsplash.com/photo-1596806033480-12587a7e1f26">上から見たスコーン</a></li>
+        <li><a href="https://images.unsplash.com/photo-1621947529620-2b9fdbd5beae">朝ごはんのテーブル（モーニング）</a></li>
+        <li><a href="https://images.unsplash.com/photo-1648142119324-fbab91e76c66">紙カップのラテと焼き菓子</a></li>
+        <li><a href="https://images.unsplash.com/photo-1596806031950-58b50b2affef">壁ぎわの席</a></li>
+      </ul>
+    </details>
   </footer>
 
   <nav class="sticky" aria-label="予約">
