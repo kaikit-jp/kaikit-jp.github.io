@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>まめとこむぎ｜朝ごはんと焼き菓子のカフェ（制作サンプル）</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@700&family=M+PLUS+1p:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #fbf4ea; --cream-2: #f4e7d4; --ink: #3a2a1f; --sub: #65503f; --line: #e6d5bf;
+    --coffee: #4a3222; --terra: #b04a28; --terra-dark: #8f3a1d; --terra-text: #a3441f; --butter: #f2d49b;
+    --round: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", sans-serif;
+    --sans: "M PLUS 1p", "Hiragino Sans", "Yu Gothic", sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--cream); color: var(--ink); font-family: var(--sans); font-size: 16px;
+    line-height: 1.85; letter-spacing: .02em; word-break: auto-phrase; }
+  img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  a { color: inherit; }
+  h1, h2, h3 { font-family: var(--round); font-weight: 700; line-height: 1.45; margin: 0; word-break: auto-phrase; text-wrap: balance; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+  section { padding: 80px 0; }
+  .eyebrow { font-family: var(--round); color: var(--terra-text); font-size: 14px; letter-spacing: .25em; display: block; margin-bottom: 8px; }
+  .heading { text-align: center; margin-bottom: 44px; }
+  .heading h2 { font-size: clamp(25px, 5vw, 34px); }
+  .heading p { color: var(--sub); margin: 12px 0 0; }
+  .note { font-size: 14px; color: var(--sub); }
+
+  .notice { background: var(--coffee); color: var(--cream); font-size: 13px; text-align: center; padding: 6px 16px; }
+
+  /* header */
+  header.site { padding: 14px 0; }
+  header.site .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .logo { font-family: var(--round); font-size: 22px; font-weight: 700; text-decoration: none; letter-spacing: .08em; line-height: 1.3; }
+  .logo small { display: block; font-family: var(--sans); font-size: 11px; letter-spacing: .3em; color: var(--sub); }
+  .nav { display: none; gap: 28px; font-size: 15px; }
+  .nav a { text-decoration: none; }
+  .nav a:hover { color: var(--terra-text); }
+
+  .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; text-decoration: none;
+    background: var(--terra); color: #fff; font-weight: 700; letter-spacing: .06em; border-radius: 16px;
+    padding: 12px 32px; box-shadow: 0 4px 0 var(--terra-dark); transition: background .2s, transform .15s, box-shadow .15s; }
+  .btn:hover { background: var(--terra-dark); }
+  .btn:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--terra-dark); }
+  .btn.small { min-height: 44px; padding: 8px 18px; font-size: 14px; box-shadow: none; }
+  .btn.light { background: var(--cream); color: var(--coffee); box-shadow: 0 4px 0 #c9a77f; }
+  .btn.light:hover { background: #fff; }
+  .link { font-weight: 700; color: var(--terra-text); text-underline-offset: 5px; display: inline-flex; align-items: center; min-height: 44px; }
+  :focus-visible { outline: 3px solid var(--terra-dark); outline-offset: 3px; border-radius: 6px; }
+  .dark :focus-visible { outline-color: var(--butter); }
+
+  /* hero */
+  .hero { padding: 4px 0 56px; }
+  .hero .wrap { display: grid; gap: 24px; }
+  .hero .photo { aspect-ratio: 16 / 10; border-radius: 999px 999px 28px 28px; overflow: hidden; background: var(--cream-2); }
+  .hero h1 { font-size: clamp(29px, 8vw, 46px); letter-spacing: .04em; }
+  .hero h1 em { font-style: normal; color: var(--terra-text); }
+  .hero p { margin: 12px 0 16px; color: var(--sub); }
+  .chips { list-style: none; padding: 0; margin: 0 0 20px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .chips li { background: var(--cream-2); border-radius: 99px; padding: 2px 11px; font-size: 14px; font-weight: 700; }
+  .hero .actions { display: flex; align-items: center; gap: 8px 24px; flex-wrap: wrap; }
+
+  /* concept */
+  .concept { background: var(--cream-2); border-radius: 40px 40px 0 0; }
+  .concept .grid { display: grid; gap: 36px; align-items: center; }
+  .concept .photo { aspect-ratio: 1 / 1; border-radius: 48% 52% 46% 54% / 55% 45% 55% 45%; overflow: hidden; max-width: 460px; width: 100%; margin: 0 auto; }
+  .concept h2 { font-size: clamp(24px, 5vw, 32px); margin-bottom: 20px; }
+  .concept p { margin: 0 0 14px; }
+
+  /* menu */
+  .menu .cols { display: grid; gap: 28px; }
+  .board { background: #fff; border-radius: 24px; padding: 28px 24px; border: 2px solid var(--line); }
+  .board h3 { font-size: 20px; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+  .board h3::before { content: ""; width: 12px; height: 12px; border-radius: 50%; background: var(--terra); }
+  .items { list-style: none; padding: 0; margin: 0; }
+  .items li { display: flex; align-items: baseline; gap: 8px; padding: 10px 0; border-bottom: 1px dashed var(--line); }
+  .items li:last-child { border-bottom: 0; }
+  .items .name { flex: 1; display: flex; align-items: baseline; gap: 8px; }
+  .items .name::after { content: ""; flex: 1; border-bottom: 2px dotted #d6bf9f; transform: translateY(-4px); min-width: 12px; }
+  .items .name small { display: block; font-size: 14px; color: var(--sub); }
+  .items .yen { font-weight: 700; white-space: nowrap; }
+  .allergy { margin: 24px 0 0; background: var(--cream-2); border-radius: 16px; padding: 16px 20px; font-size: 15px; }
+  .allergy b { color: var(--terra-text); }
+
+  /* morning */
+  .morning { background: var(--coffee); color: var(--cream); border-radius: 40px; margin: 0 12px; }
+  .morning .eyebrow { color: var(--butter); }
+  .morning .heading p { color: #e9dccb; }
+  .morning .time { display: inline-block; margin-top: 16px; background: var(--butter); color: var(--coffee); font-weight: 700; border-radius: 99px; padding: 4px 18px; }
+  .sets { display: grid; gap: 18px; }
+  .set { background: var(--cream); color: var(--ink); border-radius: 24px; padding: 28px 24px 24px; position: relative; }
+  .set .label { font-family: var(--round); font-weight: 700; color: var(--terra-text); letter-spacing: .15em; font-size: 14px; }
+  .set h3 { font-size: 21px; margin: 2px 0 8px; }
+  .set p { margin: 0 0 14px; color: var(--sub); font-size: 15px; }
+  .set .yen { font-family: var(--round); font-weight: 700; font-size: 30px; line-height: 1; border-top: 2px dashed var(--line); padding-top: 14px; }
+  .set .yen small { font-family: var(--sans); font-size: 14px; color: var(--sub); margin-left: 4px; }
+  .morning .after { text-align: center; margin: 28px 0 0; color: #e9dccb; font-size: 15px; }
+
+  /* takeout */
+  .takeout .grid { display: grid; gap: 32px; align-items: start; }
+  .takeout h2 { font-size: clamp(24px, 5vw, 32px); margin-bottom: 16px; }
+  .takeout .lead p { margin: 0 0 14px; }
+  .steps { list-style: none; counter-reset: s; padding: 0; margin: 20px 0 0; display: grid; gap: 10px; }
+  .steps li { counter-increment: s; display: flex; gap: 14px; align-items: center; background: var(--cream-2); border-radius: 16px; padding: 12px 16px; }
+  .steps li::before { content: counter(s); flex: none; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center;
+    background: var(--terra); color: #fff; font-weight: 700; font-family: var(--round); }
+
+  /* atmosphere */
+  .room { background: var(--cream-2); border-radius: 40px 40px 0 0; }
+  .gallery { display: grid; gap: 16px; }
+  .gallery figure { margin: 0; }
+  .gallery .ph { aspect-ratio: 4 / 3; border-radius: 24px; overflow: hidden; }
+  .gallery figcaption { font-size: 15px; color: var(--sub); margin-top: 8px; padding-left: 4px; }
+  .facts { list-style: none; padding: 0; margin: 36px 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .facts li { background: var(--cream); border-radius: 16px; padding: 14px 12px; text-align: center; font-size: 15px; line-height: 1.5; }
+  .facts b { display: block; font-family: var(--round); font-size: 22px; color: var(--terra-text); }
+
+  /* access */
+  .access .grid { display: grid; gap: 32px; }
+  .access h2 { font-size: clamp(24px, 5vw, 32px); margin-bottom: 20px; }
+  .access dl { margin: 0; display: grid; grid-template-columns: 5.5em 1fr; gap: 10px 14px; }
+  .access dt { font-weight: 700; }
+  .access dd { margin: 0; }
+  .map { aspect-ratio: 4 / 3; background: var(--cream-2); border: 2px dashed var(--line); border-radius: 24px;
+    display: grid; place-items: center; color: var(--sub); font-size: 15px; }
+
+  /* faq */
+  .faq { background: var(--cream-2); border-radius: 40px 40px 0 0; }
+  .faq .list { max-width: 760px; margin: 0 auto; display: grid; gap: 12px; }
+  details { background: #fff; border-radius: 18px; }
+  summary { cursor: pointer; list-style: none; padding: 18px 48px 18px 56px; position: relative; font-weight: 700; border-radius: 18px; }
+  summary::-webkit-details-marker { display: none; }
+  summary::before { content: "Q"; position: absolute; left: 18px; top: 16px; width: 28px; height: 28px; border-radius: 50%;
+    background: var(--terra); color: #fff; font-family: var(--round); display: grid; place-items: center; line-height: 1; font-size: 15px; }
+  summary::after { content: "+"; position: absolute; right: 20px; top: 14px; font-size: 24px; color: var(--terra-text); transition: transform .2s; }
+  details[open] summary::after { transform: rotate(45deg); }
+  details p { margin: 0; padding: 0 22px 20px 56px; color: var(--sub); }
+
+  /* final cta */
+  .cta { background: var(--coffee); color: var(--cream); text-align: center; }
+  .cta h2 { font-size: clamp(25px, 5.4vw, 36px); }
+  .cta p { margin: 16px 0 28px; color: #e9dccb; }
+  .cta .actions { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .cta .link { color: var(--butter); }
+  .cta .note { color: #e9dccb; margin: 18px 0 0; }
+
+  footer { text-align: center; padding: 40px 20px 120px; font-size: 14px; color: var(--sub); }
+  footer .logo { display: inline-block; margin-bottom: 10px; color: var(--ink); }
+  footer p { margin: 4px 0; }
+
+  /* mobile sticky bar */
+  .sticky { position: fixed; z-index: 20; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: 1fr 1.7fr; gap: 8px;
+    padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); background: rgba(251,244,234,.96); border-top: 1px solid var(--line); }
+  .sticky a { display: flex; align-items: center; justify-content: center; min-height: 46px; text-decoration: none; font-weight: 700; border-radius: 14px; font-size: 15px; }
+  .sticky .sub { border: 2px solid var(--terra); color: var(--terra-text); }
+  .sticky .main { background: var(--terra); color: #fff; }
+
+  /* reveal on scroll (only when JS runs) */
+  .js .reveal { opacity: 0; transform: translateY(20px); transition: opacity .8s ease, transform .8s ease; }
+  .js .reveal.in { opacity: 1; transform: none; }
+
+  @media (min-width: 900px) {
+    section { padding: 104px 0; }
+    .nav { display: flex; }
+    .hero { padding: 16px 0 88px; }
+    .hero .wrap { grid-template-columns: 1fr 1.1fr; gap: 56px; align-items: center; }
+    .hero .copy { order: -1; }
+    .hero .photo { aspect-ratio: 4 / 5; max-height: 640px; }
+    .concept .grid { grid-template-columns: 1fr 1.1fr; gap: 72px; }
+    .menu .cols { grid-template-columns: 1fr 1fr; }
+    .morning { margin: 0 24px; }
+    .sets { grid-template-columns: repeat(3, 1fr); }
+    .takeout .grid { grid-template-columns: 1fr 1fr; gap: 56px; }
+    .gallery { grid-template-columns: 1.4fr 1fr; grid-template-rows: auto auto; }
+    .gallery figure:first-child { grid-row: span 2; }
+    .gallery figure:first-child .ph { aspect-ratio: auto; height: calc(100% - 36px); }
+    .facts { grid-template-columns: repeat(4, 1fr); }
+    .access .grid { grid-template-columns: 1fr 1fr; align-items: center; }
+    .cta .actions { flex-direction: row; justify-content: center; gap: 28px; }
+    .sticky { display: none; }
+    footer { padding-bottom: 40px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .js .reveal { opacity: 1; transform: none; transition: none; }
+    html { scroll-behavior: auto; }
+    .btn, .btn:active { transition: none; transform: none; }
+  }
+</style>
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+  <div class="notice">LP制作のサンプルです。店名・料金・住所はすべて架空です。</div>
+
+  <header class="site">
+    <div class="wrap">
+      <a class="logo" href="#">まめとこむぎ<small>BAKE &amp; COFFEE</small></a>
+      <nav class="nav" aria-label="ページ内"><a href="#menu">メニュー</a><a href="#morning">モーニング</a><a href="#takeout">テイクアウト</a><a href="#access">アクセス</a></nav>
+      <a class="btn small" href="#reserve">空席・予約</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div class="wrap">
+        <div class="photo">
+          <img src="https://images.unsplash.com/photo-1728761390316-935ffeb3fbcc?w=1200&q=70&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1728761390316-935ffeb3fbcc?w=800&q=70&auto=format&fit=crop 800w, https://images.unsplash.com/photo-1728761390316-935ffeb3fbcc?w=1200&q=70&auto=format&fit=crop 1200w, https://images.unsplash.com/photo-1728761390316-935ffeb3fbcc?w=1800&q=70&auto=format&fit=crop 1800w" sizes="(min-width: 900px) 55vw, 100vw" width="1200" height="960" fetchpriority="high" alt="大きな窓から光が入る、明るい店内">
+        </div>
+        <div class="copy">
+          <h1>朝7時半、<br><span style="white-space:nowrap"><em>焼きたて</em>と一杯を。</span></h1>
+          <p>〇〇駅から歩いて2分。毎朝お店で焼くスコーンと食パン、ハンドドリップの珈琲で、ゆっくり朝ごはんを。</p>
+          <ul class="chips"><li>7:30〜18:00</li><li>火曜定休</li><li>テイクアウトあり</li></ul>
+          <div class="actions">
+            <a class="btn" href="#reserve">今日の空席・予約</a>
+            <a class="link" href="#menu">メニューを見る</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="concept">
+      <div class="wrap grid">
+        <div class="photo reveal"><img src="https://images.unsplash.com/photo-1712577623065-9d759ede8d0e?w=900&q=70&auto=format&fit=crop" width="900" height="900" alt="ソファの横、木のテーブルに置かれたカップ" loading="lazy"></div>
+        <div class="reveal">
+          <span class="eyebrow">CONCEPT</span>
+          <h2>いそがない朝のための、<br>小さな台所。</h2>
+          <p>開店の2時間前から、店の奥でパンとお菓子を焼いています。窓ぎわの席に座ると、ちょうど焼き上がりの香りが届きます。</p>
+          <p>出勤前の15分でも、休みの日の1時間でも。それぞれのペースで過ごせるよう、席はゆったり並べました。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="menu" id="menu">
+      <div class="wrap">
+        <div class="heading reveal"><span class="eyebrow">MENU</span><h2>メニュー</h2><p>価格はすべて店内でお召し上がりの税込価格です。</p></div>
+        <div class="cols reveal">
+          <div class="board">
+            <h3>ドリンク</h3>
+            <ul class="items">
+              <li><span class="name"><span>ブレンド珈琲<small>ハンドドリップ・中深煎り</small></span></span><span class="yen">500円</span></li>
+              <li><span class="name"><span>カフェオレ</span></span><span class="yen">580円</span></li>
+              <li><span class="name"><span>カフェラテ</span></span><span class="yen">600円</span></li>
+              <li><span class="name"><span>紅茶<small>ダージリン／アールグレイ</small></span></span><span class="yen">550円</span></li>
+              <li><span class="name"><span>ほうじ茶ラテ</span></span><span class="yen">620円</span></li>
+            </ul>
+          </div>
+          <div class="board">
+            <h3>焼き菓子・軽食</h3>
+            <ul class="items">
+              <li><span class="name"><span>スコーン（プレーン）<small>クロテッドクリーム・ジャム付き</small></span></span><span class="yen">380円</span></li>
+              <li><span class="name"><span>レモンケーキ</span></span><span class="yen">350円</span></li>
+              <li><span class="name"><span>季節のマフィン</span></span><span class="yen">400円</span></li>
+              <li><span class="name"><span>厚切りバタートースト</span></span><span class="yen">450円</span></li>
+              <li><span class="name"><span>たまごサンド</span></span><span class="yen">680円</span></li>
+            </ul>
+          </div>
+        </div>
+        <p class="allergy reveal"><b>アレルギーについて：</b>焼き菓子とパンには小麦・卵・乳を使っています。くるみ・アーモンドを使う商品もあり、同じ厨房で作っています。気になる方はご注文の前にスタッフへお声がけください。</p>
+      </div>
+    </section>
+
+    <section class="morning dark" id="morning">
+      <div class="wrap">
+        <div class="heading reveal"><span class="eyebrow">MORNING</span><h2>モーニングセット</h2><p>ドリンクは、ブレンド・紅茶・カフェオレから選べます。</p><span class="time">毎朝 7:30〜10:30 L.O.</span></div>
+        <div class="sets reveal">
+          <div class="set"><span class="label">A SET</span><h3>トーストセット</h3><p>自家製食パンの厚切りトースト。バターと季節のジャムで。</p><div class="yen">700<small>円（税込）</small></div></div>
+          <div class="set"><span class="label">B SET</span><h3>スコーンセット</h3><p>その朝焼いたスコーン2個に、クロテッドクリームとジャム。</p><div class="yen">780<small>円（税込）</small></div></div>
+          <div class="set"><span class="label">C SET</span><h3>たまごサンドセット</h3><p>ふんわり卵焼きをはさんだサンドと、小さなサラダ。</p><div class="yen">900<small>円（税込）</small></div></div>
+        </div>
+        <p class="after reveal">カフェラテ・ほうじ茶ラテへの変更は＋80円（税込）です。</p>
+      </div>
+    </section>
+
+    <section class="takeout" id="takeout">
+      <div class="wrap grid">
+        <div class="lead reveal">
+          <span class="eyebrow">TAKEOUT</span>
+          <h2>焼き菓子とパンは、<br>お持ち帰りもできます。</h2>
+          <p>手みやげや、明日の朝ごはんに。食パンは焼く数が決まっているため、前日18時までのご予約で取り置きします。</p>
+          <ol class="steps">
+            <li>前日18時までに、Webか店頭で予約</li>
+            <li>受け取りたい時間にご来店</li>
+            <li>レジでお名前を伝えて受け取り</li>
+          </ol>
+        </div>
+        <div class="board reveal">
+          <h3>お持ち帰りの価格</h3>
+          <ul class="items">
+            <li><span class="name"><span>自家製食パン（1斤）</span></span><span class="yen">540円</span></li>
+            <li><span class="name"><span>スコーン（プレーン）</span></span><span class="yen">300円</span></li>
+            <li><span class="name"><span>レモンケーキ</span></span><span class="yen">340円</span></li>
+            <li><span class="name"><span>焼き菓子の詰め合わせ<small>6個入り・箱代込み</small></span></span><span class="yen">1,800円</span></li>
+            <li><span class="name"><span>ブレンド珈琲（カップ）</span></span><span class="yen">450円</span></li>
+          </ul>
+          <p class="note" style="margin:12px 0 0">税込（軽減税率8%）。アレルギー表示は店内メニューと同じです。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="room">
+      <div class="wrap">
+        <div class="heading reveal"><span class="eyebrow">ROOM</span><h2>お店の雰囲気</h2></div>
+        <div class="gallery reveal">
+          <figure><div class="ph"><img src="https://images.unsplash.com/photo-1544031064-9de80864ade5?w=1100&q=70&auto=format&fit=crop" width="1100" height="825" alt="日差しの入る明るい店内" loading="lazy"></div><figcaption>朝は、窓からの光で明るい店内</figcaption></figure>
+          <figure><div class="ph"><img src="https://images.unsplash.com/photo-1702677413541-ffc41d8c08b3?w=800&q=70&auto=format&fit=crop" width="800" height="600" alt="テーブル席が並ぶ店内" loading="lazy"></div><figcaption>ひとりでも、ふたりでも座りやすいテーブル席</figcaption></figure>
+          <figure><div class="ph"><img src="https://images.unsplash.com/photo-1624583338957-4d155ca886dc?w=800&q=70&auto=format&fit=crop" width="800" height="600" alt="明かりのともった夕方の店内" loading="lazy"></div><figcaption>夕方は、明かりを少し落として</figcaption></figure>
+        </div>
+        <ul class="facts reveal">
+          <li><b>24席</b>テーブル・ソファ</li>
+          <li><b>禁煙</b>全席</li>
+          <li><b>電源</b>窓ぎわの一部の席</li>
+          <li><b>Wi-Fi</b>無料</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="access" id="access">
+      <div class="wrap grid">
+        <div class="reveal">
+          <span class="eyebrow">ACCESS</span>
+          <h2>アクセス・営業時間</h2>
+          <dl>
+            <dt>住所</dt><dd>〇〇市〇〇町4-5-6 1F（架空）</dd>
+            <dt>最寄り</dt><dd>〇〇駅 西口から徒歩2分</dd>
+            <dt>営業時間</dt><dd>7:30〜18:00（L.O. 17:30）<br>モーニングは 10:30 L.O.</dd>
+            <dt>定休日</dt><dd>毎週火曜日</dd>
+            <dt>お支払い</dt><dd>現金・カード・QR決済</dd>
+          </dl>
+        </div>
+        <div class="map reveal">地図（サンプルのため省略）</div>
+      </div>
+    </section>
+
+    <section class="faq" id="faq">
+      <div class="wrap">
+        <div class="heading reveal"><span class="eyebrow">FAQ</span><h2>よくある質問</h2></div>
+        <div class="list reveal">
+          <details><summary>予約なしでも入れますか？</summary><p>はい、空いている席にご案内します。土日の朝は満席になることがあるので、席を取っておきたい方はWebで席をご予約ください。</p></details>
+          <details><summary>子ども連れでも大丈夫ですか？</summary><p>はい。ソファ席はベビーカーのまま入れる広さです。子ども用のいすと取り皿もご用意しています。</p></details>
+          <details><summary>アレルギーに対応したメニューはありますか？</summary><p>小麦・卵・乳を使わない焼き菓子・軽食はありません。同じ厨房でナッツ類も扱うため、原材料を取り除いた調理もお受けしていません。</p></details>
+          <details><summary>焼き菓子の取り置きはできますか？</summary><p>はい。前日18時までに、Webか店頭でご予約ください。当日の分は、店頭にある数だけのお渡しになります。</p></details>
+          <details><summary>駐車場はありますか？</summary><p>専用の駐車場はありません。近くのコインパーキングをご利用ください。自転車は店の前に4台まで置けます。</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta dark" id="reserve">
+      <div class="wrap reveal">
+        <span class="eyebrow" style="color:var(--butter)">RESERVE</span>
+        <h2>今日の空席を見て、<br>席を予約する</h2>
+        <p>席の予約は、当日の朝7時から受け付けています。<br>焼き菓子の取り置きは、前日18時までです。</p>
+        <div class="actions">
+          <a class="btn light" href="#reserve-note">今日の空席を見る（Web予約）</a>
+          <a class="link" href="#takeout">取り置きの方法を見る</a>
+        </div>
+        <p class="note" id="reserve-note">※サンプルのため、予約ページにはつながりません</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <a class="logo" href="#">まめとこむぎ<small>BAKE &amp; COFFEE</small></a>
+    <p>このページは制作サンプルです（店舗は架空）</p>
+    <p>写真（Unsplash）：<a href="https://images.unsplash.com/photo-1728761390316-935ffeb3fbcc">1</a> <a href="https://images.unsplash.com/photo-1712577623065-9d759ede8d0e">2</a> <a href="https://images.unsplash.com/photo-1544031064-9de80864ade5">3</a> <a href="https://images.unsplash.com/photo-1702677413541-ffc41d8c08b3">4</a> <a href="https://images.unsplash.com/photo-1624583338957-4d155ca886dc">5</a>（<a href="https://unsplash.com/license">Unsplash License</a>）</p>
+  </footer>
+
+  <nav class="sticky" aria-label="予約">
+    <a class="sub" href="#menu">メニュー</a>
+    <a class="main" href="#reserve">今日の空席・予約</a>
+  </nav>
+
+<script>
+  // ponytail: one observer for all fade-ins; no library
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  }), { rootMargin: '0px 0px -10% 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

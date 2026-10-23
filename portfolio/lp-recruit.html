@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>クサビ住建｜大工・内装スタッフ募集（制作サンプル）</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=BIZ+UDPGothic:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1d2025; --ink-2: #2b2f36; --yellow: #ffcf1a; --yellow-dark: #f2b800;
+    --paper: #f5f3ee; --white: #fff; --sub: #4b5058; --sub-dark: #c9ccd1; --line: #dedad0;
+    --head: "Dela Gothic One", "Yu Gothic", sans-serif;
+    --sans: "BIZ UDPGothic", "Yu Gothic", sans-serif;
+    --slant: 5vw;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 16px;
+    line-height: 1.85; letter-spacing: .02em; word-break: auto-phrase; -webkit-font-smoothing: antialiased; }
+  img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  a { color: inherit; }
+  h3 { font-family: var(--sans); font-weight: 700; line-height: 1.5; margin: 0; }
+  h1, h2 { font-family: var(--head); font-weight: 400; line-height: 1.35; margin: 0; letter-spacing: .03em; text-wrap: balance; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+  section { padding: 88px 0; }
+  .label { display: inline-block; font-family: var(--head); font-size: 14px; letter-spacing: .15em; background: var(--ink); color: var(--yellow);
+    padding: 2px 12px; margin-bottom: 14px; }
+  .dark .label, .label.on-dark { background: var(--yellow); color: var(--ink); }
+  .heading { margin-bottom: 48px; }
+  .heading h2 { font-size: clamp(28px, 7.4vw, 44px); }
+  .heading p { margin: 14px 0 0; color: var(--sub); }
+  .dark { background: var(--ink); color: var(--white); }
+  .dark .heading p, .dark p { color: var(--sub-dark); }
+  .slant { clip-path: polygon(0 var(--slant), 100% 0, 100% calc(100% - var(--slant)), 0 100%);
+    padding: calc(88px + var(--slant)) 0; }
+  .stripe { height: 12px; background: repeating-linear-gradient(-45deg, var(--yellow) 0 14px, var(--ink) 14px 28px); }
+
+  /* buttons: one color across the page (yellow) */
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 56px; padding: 14px 36px;
+    background: var(--yellow); color: var(--ink); font-weight: 700; font-size: 18px; letter-spacing: .06em; text-decoration: none;
+    border: 3px solid var(--ink); box-shadow: 5px 5px 0 var(--ink); transition: transform .15s, box-shadow .15s; }
+  .btn:hover { transform: translate(2px, 2px); box-shadow: 3px 3px 0 var(--ink); }
+  .btn.small { min-height: 44px; padding: 6px 18px; font-size: 16px; box-shadow: none; border-width: 2px; }
+  .btn.ghost { background: transparent; color: var(--white); border-color: var(--white); box-shadow: none; font-size: 16px; }
+  .dark .btn:not(.ghost), .hero .btn:not(.ghost) { box-shadow: 5px 5px 0 var(--yellow-dark); border-color: var(--yellow); }
+  :focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+  .dark :focus-visible, header.site :focus-visible, .hero :focus-visible, .sticky :focus-visible { outline-color: var(--yellow); }
+
+  /* sample notice + header */
+  .notice { background: var(--yellow); color: var(--ink); font-size: 14px; font-weight: 700; text-align: center; padding: 6px 16px; }
+  header.site { background: var(--ink); color: var(--white); }
+  header.site .wrap { display: flex; align-items: center; justify-content: space-between; min-height: 64px; gap: 16px; }
+  .logo { font-family: var(--head); font-size: 22px; letter-spacing: .08em; text-decoration: none; color: var(--yellow); line-height: 1.2; }
+  .logo small { display: block; font-family: var(--sans); font-size: 10px; font-weight: 700; letter-spacing: .3em; color: var(--sub-dark); }
+  .nav { display: none; gap: 28px; font-size: 16px; font-weight: 700; }
+  .nav a { text-decoration: none; }
+  .nav a:hover { color: var(--yellow); }
+
+  /* hero */
+  .hero { background: var(--ink); color: var(--white); display: grid; overflow: hidden; }
+  .hero .photo { aspect-ratio: 16 / 9; clip-path: polygon(0 0, 100% 0, 100% 84%, 0 100%); position: relative; }
+  .hero .photo img { object-position: 45% 40%; }
+  .hero .photo .credit { position: absolute; right: 8px; bottom: 18%; font-size: 13px; background: rgba(29,32,37,.8); padding: 0 8px; }
+  .hero .copy { padding: 4px 20px 48px; }
+  .hero .tag { display: inline-block; background: var(--yellow); color: var(--ink); font-weight: 700; font-size: 16px; padding: 2px 10px; }
+  .hero h1 { font-size: clamp(32px, 9vw, 64px); margin: 12px 0 14px; }
+  .hero h1 em { font-style: normal; color: var(--yellow); }
+  .hero p { margin: 0 0 22px; color: var(--sub-dark); }
+  .stats { list-style: none; margin: 0 0 28px; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 2px solid var(--yellow); }
+  .stats li { padding: 10px 0 0; line-height: 1.3; }
+  .stats li + li { padding-left: 12px; border-left: 1px solid #4a4f57; }
+  .stats b { font-family: var(--head); font-weight: 400; font-size: clamp(30px, 8.5vw, 48px); color: var(--yellow); line-height: 1.1; }
+  .stats b small { font-family: var(--sans); font-weight: 700; font-size: .4em; margin-left: 2px; color: var(--white); }
+  .stats span { display: block; font-size: 14px; color: var(--sub-dark); margin-top: 4px; }
+  .hero .actions { display: flex; flex-wrap: wrap; gap: 16px; }
+
+  /* message */
+  .message .grid { display: grid; gap: 36px; align-items: center; }
+  .message .photo { aspect-ratio: 4 / 3; border: 3px solid var(--ink); box-shadow: 10px 10px 0 var(--yellow); }
+  .message h2 { font-size: clamp(24px, 6vw, 38px); margin-bottom: 22px; }
+  .message h2 mark { background: linear-gradient(transparent 60%, var(--yellow) 60%); color: inherit; }
+  .message p { margin: 0 0 16px; color: var(--sub); }
+  .message .sign { font-weight: 700; color: var(--ink); }
+
+  /* a day */
+  .day .grid { display: grid; gap: 40px; }
+  .timeline { list-style: none; margin: 0; padding: 0 0 0 22px; border-left: 3px solid var(--yellow); }
+  .timeline li { position: relative; padding: 0 0 26px 18px; }
+  .timeline li:last-child { padding-bottom: 0; }
+  .timeline li::before { content: ""; position: absolute; left: -32px; top: 6px; width: 17px; height: 17px; background: var(--yellow); border: 3px solid var(--ink); }
+  .timeline time { font-family: var(--head); color: var(--yellow); font-size: 22px; line-height: 1.3; }
+  .timeline h3 { font-family: var(--sans); font-weight: 700; font-size: 18px; color: var(--white); margin: 2px 0 2px; }
+  .timeline p { margin: 0; font-size: 16px; }
+  .day .photo { aspect-ratio: 4 / 3; align-self: start; }
+  .day .photo + p { font-size: 14px; margin: 10px 0 0; }
+
+  /* learn */
+  .steps { display: grid; gap: 20px; }
+  .step { background: var(--white); border: 3px solid var(--ink); padding: 26px 24px; position: relative; }
+  .step .num { font-family: var(--head); font-size: 56px; line-height: 1; color: var(--ink); }
+  .step .num::after { content: ""; display: block; width: 48px; height: 8px; background: var(--yellow); margin-top: 8px; }
+  .step .when { display: inline-block; margin-top: 14px; font-weight: 700; font-size: 14px; background: var(--ink); color: var(--white); padding: 0 10px; }
+  .step h3 { font-size: 21px; margin: 10px 0 8px; }
+  .step p { margin: 0; color: var(--sub); }
+  .learn .wide { margin-top: 32px; display: grid; gap: 0; background: var(--ink); color: var(--white); }
+  .learn .wide .photo { aspect-ratio: 16 / 9; }
+  .learn .wide div:last-child { padding: 26px 24px; }
+  .learn .wide h3 { color: var(--yellow); font-size: 20px; margin-bottom: 8px; }
+  .learn .wide p { margin: 0; color: var(--sub-dark); }
+
+  /* requirements table */
+  .req table { width: 100%; border-collapse: collapse; background: var(--white); border: 3px solid var(--ink); }
+  .req th, .req td { text-align: left; vertical-align: top; padding: 16px 20px; border-bottom: 1px solid var(--line); }
+  .req th { background: var(--ink); color: var(--yellow); font-weight: 700; white-space: nowrap; border-bottom-color: #3a3f47; }
+  .req td p { margin: 0 0 6px; }
+  .req td p:last-child { margin-bottom: 0; }
+  .req .note { font-size: 14px; color: var(--sub); }
+  .req strong { background: linear-gradient(transparent 60%, var(--yellow) 60%); }
+
+  /* benefits */
+  .benefits ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+  .benefits li { background: var(--ink-2); border-top: 6px solid var(--yellow); padding: 20px 22px; }
+  .benefits h3 { font-family: var(--sans); font-weight: 700; font-size: 18px; color: var(--white); }
+  .benefits li p { margin: 4px 0 0; font-size: 16px; }
+
+  /* voices */
+  .voices .cards { display: grid; gap: 20px; }
+  .voice { background: var(--white); border: 3px solid var(--ink); padding: 26px 24px; position: relative; }
+  .voice .fake { position: absolute; top: -14px; right: 16px; background: var(--yellow); border: 2px solid var(--ink); font-size: 14px; font-weight: 700; padding: 0 10px; }
+  .voice .who { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; font-weight: 700; line-height: 1.5; }
+  .voice .who div span { font-size: 14px; color: var(--sub); font-weight: 400; display: block; }
+  .voice .icon { flex: none; width: 48px; height: 48px; display: grid; place-items: center; background: var(--ink); color: var(--yellow); font-family: var(--head); font-size: 20px; }
+  .voice p { margin: 0; }
+  .voices .note { font-size: 14px; color: var(--sub); margin-top: 24px; }
+
+  /* selection flow */
+  .flow ol { list-style: none; counter-reset: s; padding: 0; margin: 0; display: grid; gap: 12px; }
+  .flow li { counter-increment: s; background: var(--white); border: 3px solid var(--ink); padding: 20px 22px 20px 84px; position: relative; }
+  .flow li::before { content: counter(s, decimal-leading-zero); position: absolute; left: 0; top: 0; bottom: 0; width: 64px;
+    display: grid; place-items: center; background: var(--yellow); border-right: 3px solid var(--ink); font-family: var(--head); font-size: 24px; }
+  .flow h3 { font-size: 19px; }
+  .flow p { margin: 4px 0 0; color: var(--sub); font-size: 16px; }
+
+  /* faq */
+  .faq .list { max-width: 820px; }
+  details { background: var(--white); border: 3px solid var(--ink); margin-bottom: 12px; }
+  summary { cursor: pointer; list-style: none; padding: 18px 52px 18px 60px; position: relative; font-weight: 700; min-height: 44px; }
+  summary::-webkit-details-marker { display: none; }
+  summary::before { content: "Q"; position: absolute; left: 0; top: 0; bottom: 0; width: 44px; display: grid; place-items: center;
+    background: var(--ink); color: var(--yellow); font-family: var(--head); font-size: 20px; }
+  summary::after { content: "+"; position: absolute; right: 18px; top: 12px; font-family: var(--head); font-size: 24px; transition: transform .2s; }
+  details[open] summary::after { transform: rotate(45deg); }
+  details p { margin: 0; padding: 0 22px 20px 60px; color: var(--sub); }
+
+  /* apply */
+  .apply { background: var(--yellow); }
+  .apply .grid { display: grid; gap: 32px; align-items: center; }
+  .apply h2 { font-size: clamp(28px, 7vw, 48px); }
+  .apply .lead { margin: 16px 0 0; }
+  form { background: var(--white); border: 3px solid var(--ink); box-shadow: 10px 10px 0 var(--ink); padding: 26px 22px; display: grid; gap: 18px; }
+  form label, legend { font-weight: 700; display: block; margin-bottom: 6px; }
+  form input[type=text], form input[type=tel] { width: 100%; font: inherit; padding: 12px 14px; min-height: 48px; border: 2px solid var(--ink); background: var(--paper); }
+  fieldset { border: 0; margin: 0; padding: 0; }
+  .choice { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+  .choice label { font-weight: 400; display: flex; align-items: center; gap: 8px; min-height: 44px; margin: 0; cursor: pointer; }
+  .choice input { width: 22px; height: 22px; accent-color: var(--ink); }
+  form .btn { width: 100%; border-color: var(--ink); box-shadow: 5px 5px 0 var(--ink); }
+  form .small-note { margin: 0; font-size: 14px; color: var(--sub); }
+  form .msg { margin: 0; font-weight: 700; background: var(--paper); padding: 10px 14px; border-left: 6px solid var(--ink); }
+
+  footer { background: var(--ink); color: var(--sub-dark); text-align: center; padding: 40px 20px 120px; font-size: 14px; }
+  footer .logo { display: inline-block; margin-bottom: 12px; }
+  footer a { color: var(--white); }
+  footer div a { display: inline-block; min-width: 32px; padding: 6px 4px; }
+
+  /* mobile sticky bar */
+  .sticky { position: fixed; z-index: 20; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: 1fr 1.5fr; gap: 10px;
+    padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); background: var(--ink); border-top: 3px solid var(--yellow); }
+  .sticky a { display: grid; place-items: center; min-height: 48px; text-decoration: none; font-weight: 700; font-size: 16px; }
+  .sticky .sub { border: 2px solid var(--white); color: var(--white); }
+  .sticky .main { background: var(--yellow); color: var(--ink); }
+
+  /* reveal on scroll (only when JS runs) */
+  .js .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+  .js .reveal.in { opacity: 1; transform: none; }
+
+  @media (min-width: 700px) {
+    .steps, .voices .cards { grid-template-columns: repeat(3, 1fr); }
+    .benefits ul { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 599px) {
+    .req th, .req td { display: block; width: 100%; }
+    .req th { padding: 8px 16px; }
+    .req td { padding: 12px 16px 16px; }
+  }
+  @media (min-width: 900px) {
+    section { padding: 112px 0; }
+    .slant { padding: calc(112px + var(--slant)) 0; --slant: 60px; }
+    .nav { display: flex; }
+    .hero { grid-template-columns: 1fr 1fr; min-height: 620px; }
+    .hero .photo { order: 2; aspect-ratio: auto; clip-path: polygon(14% 0, 100% 0, 100% 100%, 0 100%); }
+    .hero .photo .credit { bottom: 12px; }
+    .hero .copy { padding: 64px 0 64px max(20px, calc((100vw - 1120px) / 2 + 20px)); align-self: center; }
+    .hero h1 { font-size: clamp(44px, 4.6vw, 62px); }
+    .stats b { font-size: 44px; }
+    .message .grid { grid-template-columns: 5fr 6fr; gap: 72px; }
+    .day .grid { grid-template-columns: 6fr 5fr; gap: 72px; }
+    .learn .wide { grid-template-columns: 1fr 1fr; align-items: center; }
+    .learn .wide div:last-child { padding: 32px 40px; }
+    .benefits ul { grid-template-columns: repeat(3, 1fr); }
+    .flow ol { grid-template-columns: repeat(4, 1fr); }
+    .flow li { padding: 76px 20px 22px; }
+    .flow li::before { bottom: auto; right: 0; width: auto; height: 52px; border-right: 0; border-bottom: 3px solid var(--ink); }
+    .apply .grid { grid-template-columns: 1fr 1fr; gap: 72px; }
+    .sticky { display: none; }
+    footer { padding-bottom: 40px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .js .reveal { opacity: 1; transform: none; transition: none; }
+    .btn, .btn:hover { transition: none; transform: none; }
+  }
+</style>
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+  <div class="notice">これは採用LPの制作サンプルです。会社名・給与などの条件・社員の声はすべて架空です。</div>
+
+  <header class="site">
+    <div class="wrap">
+      <a class="logo" href="#top">クサビ住建<small>RENOVATION</small></a>
+      <nav class="nav" aria-label="ページ内"><a href="#day">仕事の一日</a><a href="#learn">研修</a><a href="#youkou">募集要項</a><a href="#faq">よくある質問</a></nav>
+      <a class="btn small" href="#apply">応募する</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="hero">
+      <div class="photo">
+        <img src="https://images.unsplash.com/photo-1505798577917-a65157d3320a?w=1200&q=70&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1505798577917-a65157d3320a?w=800&q=70&auto=format&fit=crop 800w, https://images.unsplash.com/photo-1505798577917-a65157d3320a?w=1200&q=70&auto=format&fit=crop 1200w, https://images.unsplash.com/photo-1505798577917-a65157d3320a?w=1800&q=70&auto=format&fit=crop 1800w" sizes="(min-width: 900px) 50vw, 100vw" width="1200" height="800" fetchpriority="high" alt="明るい部屋で、卓上丸ノコを使って木材を切る職人">
+        <span class="credit">写真はイメージです</span>
+      </div>
+      <div class="copy">
+        <span class="tag">大工・内装スタッフ 2名募集</span>
+        <h1>道具の持ち方から、<br><em>教えます。</em></h1>
+        <p>〇〇市の住まいのリフォーム会社です。経験がなくても、最初の3か月は先輩と2人1組。道具の使い方から一つずつ覚えます。</p>
+        <ul class="stats">
+          <li><b>22<small>万円〜</small></b><span>スタート月給</span></li>
+          <li><b>3<small>か月</small></b><span>先輩と2人1組</span></li>
+          <li><b>114<small>日</small></b><span>年間休日</span></li>
+        </ul>
+        <div class="actions">
+          <a class="btn" href="#apply">応募する</a>
+          <a class="btn ghost" href="#youkou">募集要項を見る</a>
+        </div>
+      </div>
+    </div>
+    <div class="stripe" aria-hidden="true"></div>
+
+    <section class="message">
+      <div class="wrap grid">
+        <div class="photo reveal"><img src="https://images.unsplash.com/photo-1645651964715-d200ce0939cc?w=900&q=70&auto=format&fit=crop" width="900" height="600" alt="木の板の上に並んだ電動ドリル・金づち・ビス・刷毛" loading="lazy"></div>
+        <div class="reveal">
+          <span class="label">MESSAGE</span>
+          <h2>うまい人より、<br><mark>ていねいな人</mark>と働きたい。</h2>
+          <p>クサビ住建は、床の張り替えや手すりの取り付け、キッチンまわりの内装など、住まいの小さなリフォームを中心に請け負っている会社です。</p>
+          <p>技術は、毎日現場に出ていれば少しずつ身につきます。私たちが大切にしているのは、養生をきちんとする、使った場所を掃除して帰る、分からないことをそのままにしない、ということです。</p>
+          <p>前の仕事は問いません。一緒に、住む人に喜ばれる仕事をしましょう。</p>
+          <p class="sign">株式会社クサビ住建（架空） 代表</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="day dark slant" id="day">
+      <div class="wrap">
+        <div class="heading reveal"><span class="label">A DAY</span><h2>ある日の仕事の流れ</h2><p>マンションの洋室で、床を張り替える日の例です。</p></div>
+        <div class="grid">
+          <ol class="timeline reveal">
+            <li><time>8:00</time><h3>出社・朝礼</h3><p>今日の現場と作業を確認して、社用車に道具と材料を積み込みます。</p></li>
+            <li><time>8:40</time><h3>現場に到着・養生</h3><p>お客様にごあいさつ。廊下や家具を傷つけないよう、シートで覆います。</p></li>
+            <li><time>10:00</time><h3>休憩（15分）</h3></li>
+            <li><time>10:15</time><h3>古い床をはがす・採寸</h3><p>先輩が測った寸法を、声に出して読み上げて記録します。</p></li>
+            <li><time>12:00</time><h3>昼休み（60分）</h3></li>
+            <li><time>13:00</time><h3>新しい床材を張る</h3><p>はじめは材料を渡す係から。慣れてきたら、切る・はめるも担当します。</p></li>
+            <li><time>15:00</time><h3>休憩（15分）</h3></li>
+            <li><time>15:15</time><h3>片付け・掃除・確認</h3><p>お客様と一緒に仕上がりを見て、気になる所がないかお聞きします。</p></li>
+            <li><time>16:30</time><h3>帰社・日報</h3><p>今日覚えたことを3行で書いて、17:00に終業です。</p></li>
+          </ol>
+          <div class="reveal">
+            <div class="photo"><img src="https://images.unsplash.com/photo-1513467535987-fd81bc7d62f8?w=900&q=70&auto=format&fit=crop" width="900" height="600" alt="丸ノコで木材を切る手元" loading="lazy"></div>
+            <p>※写真はイメージです。1日に回る現場は1〜2件です。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="learn" id="learn">
+      <div class="wrap">
+        <div class="heading reveal"><span class="label">TRAINING</span><h2>覚えることと、その順番</h2><p>いきなり一人で現場に出ることはありません。</p></div>
+        <div class="steps reveal">
+          <div class="step"><div class="num">01</div><span class="when">入社〜3か月</span><h3>安全と道具を覚える</h3><p>初日は安全講習。そのあとは先輩と2人1組で、道具の名前と使い方、養生、材料の運び方を覚えます。</p></div>
+          <div class="step"><div class="num">02</div><span class="when">4か月〜1年</span><h3>測る・切る・張る</h3><p>採寸、材料のカット、床やクロスの張り替えを、先輩のとなりで実際に手を動かしながら覚えます。</p></div>
+          <div class="step"><div class="num">03</div><span class="when">2年目〜</span><h3>小さな工事を任される</h3><p>手すりの取り付けや建具の交換など、半日で終わる工事から、一人で担当していきます。</p></div>
+        </div>
+        <div class="wide reveal">
+          <div class="photo"><img src="https://images.unsplash.com/photo-1674649207083-281c2517ab49?w=1000&q=70&auto=format&fit=crop" width="1000" height="667" alt="内装工事中の廊下。床に養生シートと木材が置かれている" loading="lazy"></div>
+          <div><h3>資格の受験費用は、会社が負担</h3><p>仕事に必要な資格（例：内装仕上げ施工技能士、2級建築施工管理技士）の受験料と講習費を会社が出します。受けるかどうか、いつ受けるかは、上長と相談して決めます。</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="req" id="youkou">
+      <div class="wrap">
+        <div class="heading reveal"><span class="label">REQUIREMENTS</span><h2>募集要項</h2></div>
+        <table class="reveal">
+          <tr><th scope="row">募集職種</th><td>大工・内装スタッフ（2名）</td></tr>
+          <tr><th scope="row">雇用形態</th><td><p>正社員（契約期間の定めなし）</p></td></tr>
+          <tr><th scope="row">仕事内容</th><td><p>住宅のリフォーム工事（床・壁・建具の交換、クロスの張り替え、手すりの取り付けなど）。入社後しばらくは、資材の運搬、現場の養生・清掃、材料の採寸とカットなど、先輩の補助から始めます。</p><p class="note">変更の範囲：会社の定める業務</p></td></tr>
+          <tr><th scope="row">給与</th><td><p>月給 22万円〜30万円（経験・資格により決定。未経験の方は22万円から）</p><p>内訳はすべて基本給です。<strong>固定残業代はありません。</strong>時間外・休日の労働には、1分単位で割増賃金を全額支給します。</p><p>昇給 年1回（評価による）／賞与 年2回（業績による）</p><p>通勤手当 実費支給（月3万円まで）</p></td></tr>
+          <tr><th scope="row">勤務時間</th><td><p>8:00〜17:00（休憩90分：昼60分・午前と午後に15分ずつ）実働7時間30分</p><p class="note">時間外労働は月平均10時間ほど</p></td></tr>
+          <tr><th scope="row">休日・休暇</th><td><p>完全週休2日制（日曜・水曜。祝日は出勤日）、夏季休暇・年末年始休暇 各5日（日曜・水曜を除く）／年間休日114日（会社カレンダーによる）</p><p>有給休暇（入社6か月後に10日。法律どおり）</p></td></tr>
+          <tr><th scope="row">勤務地</th><td><p>本社：〇〇県〇〇市〇〇町1-2-3（架空）。現場へは本社から社用車で移動します（〇〇市内と近隣の市）。転勤はありません。</p><p class="note">変更の範囲：会社の定める場所（転勤なし）</p></td></tr>
+          <tr><th scope="row">試用期間</th><td>3か月。期間中の給与・勤務時間などの条件は、本採用と同じです。</td></tr>
+          <tr><th scope="row">社会保険</th><td>健康保険・厚生年金保険・雇用保険・労災保険</td></tr>
+          <tr><th scope="row">応募資格</th><td><p>普通自動車免許（AT限定可）をお持ちの方。学歴・経験は問いません。</p></td></tr>
+          <tr><th scope="row">受動喫煙対策</th><td>屋内禁煙（社用車内も禁煙）</td></tr>
+          <tr><th scope="row">募集者</th><td>株式会社クサビ住建（架空の会社です）</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <section class="benefits dark slant">
+      <div class="wrap">
+        <div class="heading reveal"><span class="label">SUPPORT</span><h2>働くための用意</h2></div>
+        <ul class="reveal">
+          <li><h3>道具一式を支給</h3><p>仕事で使う工具は、会社が用意します。自分で買う必要はありません。</p></li>
+          <li><h3>作業着・安全靴を支給</h3><p>入社時に夏用・冬用の作業着と安全靴をお渡しします。</p></li>
+          <li><h3>資格の受験費用を負担</h3><p>仕事に必要な資格の受験料と講習費を、会社が出します。</p></li>
+          <li><h3>現場へは社用車で</h3><p>本社から社用車で移動します。ガソリン代も会社が負担します。</p></li>
+          <li><h3>重い物は2人で運ぶ</h3><p>重い資材は2人以上で運ぶ決まりです。現場は原則2人以上で入ります。</p></li>
+          <li><h3>夏と年末年始に5日ずつ</h3><p>まとまった休みは、会社カレンダーで年の初めにお知らせします。</p></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="voices">
+      <div class="wrap">
+        <div class="heading reveal"><span class="label">VOICE</span><h2>先輩スタッフの話</h2></div>
+        <div class="cards reveal">
+          <div class="voice"><span class="fake">架空のサンプル</span><div class="who"><span class="icon" aria-hidden="true">A</span><div>入社1年目<span>前職：飲食店</span></div></div><p>「最初の1か月は、材料を運んで掃除をする毎日でした。そのあいだに先輩が道具の使い方を一つずつ見せてくれて、4か月目に初めて床材のカットを任されました。」</p></div>
+          <div class="voice"><span class="fake">架空のサンプル</span><div class="who"><span class="icon" aria-hidden="true">B</span><div>入社3年目<span>前職：工場勤務</span></div></div><p>「現場ごとに家の形が違うので、毎回考えることがあります。手すりを付けたお客様に、廊下を歩くのが楽になったと言ってもらえた日のことは覚えています。」</p></div>
+          <div class="voice"><span class="fake">架空のサンプル</span><div class="who"><span class="icon" aria-hidden="true">C</span><div>入社2年目<span>前職：販売</span></div></div><p>「体力が心配でしたが、重い物は2人で運ぶ決まりです。分からないことは、その場ですぐ聞ける距離にいつも先輩がいます。」</p></div>
+        </div>
+        <p class="note">※制作サンプルのため、すべて架空の文章です。実際の制作では、ご本人の許可を得た本当の声だけを載せます。</p>
+      </div>
+    </section>
+
+    <section class="flow">
+      <div class="wrap">
+        <div class="heading reveal"><span class="label">FLOW</span><h2>応募から入社まで</h2></div>
+        <ol class="reveal">
+          <li><h3>応募</h3><p>このページのフォームから。履歴書は面接の日に持ってきてください。</p></li>
+          <li><h3>見学・面接（1回）</h3><p>作業場と道具を見てもらいながら30〜60分。服装は自由です。</p></li>
+          <li><h3>結果のご連絡</h3><p>面接から1週間以内に、お電話かメールでお知らせします。</p></li>
+          <li><h3>入社</h3><p>入社日はご相談のうえ決めます。初日は安全講習からです。</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="faq" id="faq">
+      <div class="wrap">
+        <div class="heading reveal"><span class="label">FAQ</span><h2>よくある質問</h2></div>
+        <div class="list reveal">
+          <details><summary>体力に自信がありません。</summary><p>重い資材は2人以上で運ぶ決まりです。最初の3か月は、作業の量も先輩と相談しながら決めていきます。</p></details>
+          <details><summary>道具は自分で買う必要がありますか？</summary><p>いいえ。仕事で使う道具・作業着・安全靴は、会社が用意します。</p></details>
+          <details><summary>年齢の制限はありますか？</summary><p>ありません。応募資格は、普通自動車免許（AT限定可）だけです。</p></details>
+          <details><summary>残業はありますか？</summary><p>月平均10時間ほどです。残業代は1分単位で全額支給します。固定残業代はありません。</p></details>
+          <details><summary>応募の前に、見学だけしてもいいですか？</summary><p>はい。下のフォームで「まず見学したい」を選んでください。見学のあとで応募するかを決めていただいて大丈夫です。</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="apply slant" id="apply">
+      <div class="wrap grid">
+        <div class="reveal">
+          <span class="label">ENTRY</span>
+          <h2>まずは、作業場を<br>見に来ませんか。</h2>
+          <p class="lead">応募でも、見学だけでも受け付けています。お名前と電話番号だけで大丈夫です。担当者から、2営業日以内にお電話します。</p>
+        </div>
+        <form class="reveal" action="#apply" onsubmit="event.preventDefault(); this.querySelector('.msg').hidden = false;">
+          <div><label for="f-name">お名前</label><input id="f-name" type="text" autocomplete="name" required></div>
+          <div><label for="f-tel">電話番号</label><input id="f-tel" type="tel" autocomplete="tel" inputmode="tel" required></div>
+          <fieldset><legend>ご希望</legend>
+            <div class="choice"><label><input type="radio" name="want" checked>応募したい</label><label><input type="radio" name="want">まず見学したい</label></div>
+          </fieldset>
+          <button class="btn" type="submit">この内容で申し込む</button>
+          <p class="small-note">※サンプルのため、入力した内容はどこにも送信されません。</p>
+          <p class="msg" role="status" hidden>サンプルのため送信していません。実際のページでは、ここで受付完了をお知らせします。</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <a class="logo" href="#top">クサビ住建<small>RENOVATION</small></a>
+    <div>このページは制作サンプルです</div>
+    <div>写真（Unsplash）：<a href="https://images.unsplash.com/photo-1505798577917-a65157d3320a">1</a> <a href="https://images.unsplash.com/photo-1645651964715-d200ce0939cc">2</a> <a href="https://images.unsplash.com/photo-1513467535987-fd81bc7d62f8">3</a> <a href="https://images.unsplash.com/photo-1674649207083-281c2517ab49">4</a>（2026-10-23確認）</div>
+  </footer>
+
+  <nav class="sticky" aria-label="応募">
+    <a class="sub" href="#youkou">募集要項</a>
+    <a class="main" href="#apply">応募する</a>
+  </nav>
+
+<script>
+  // ponytail: one observer for all fade-ins; no library
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  }), { rootMargin: '0px 0px -10% 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

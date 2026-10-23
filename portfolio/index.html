@@ -46,6 +46,10 @@
   .work p { margin: 6px 0 0; color: var(--sub); font-size: 15px; }
   .work .tech { font-size: 13px; color: var(--sub); margin-top: 8px; }
 
+  .samples { list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 8px; }
+  .samples li { border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px; }
+  .samples a { font-weight: bold; display: inline-block; margin-right: 8px; }
+  .samples span { color: var(--sub); font-size: 14px; }
   pre { background: var(--code); color: #dbe4f3; border-radius: 10px; padding: 16px; overflow-x: auto;
     font-size: 13px; line-height: 1.6; margin: 16px 0 0; }
   .note { font-size: 13px; color: var(--sub); margin-top: 8px; }
@@ -106,9 +110,16 @@
       <div class="works">
 
         <article class="work">
-          <div class="meta"><span class="kind">LP</span><span class="status">制作サンプル（架空の店舗）</span></div>
-          <h3><a href="sample-lp.html">リラクゼーションサロンのLP</a></h3>
-          <p>「悩み → 特徴 → 料金 → 流れ → 予約」の順で、予約ボタンまで迷わず進める構成。医療的な効果をうたわない表現にしています。</p>
+          <div class="meta"><span class="kind">LP</span><span class="status">制作サンプル（5業種・すべて架空）</span></div>
+          <h3>業種別のLPサンプル</h3>
+          <p>業種とお客様に合わせて、配色・文字・ページの組み立てを変えています。どれも広告や求人のルールに触れない表現で書いています。</p>
+          <ul class="samples">
+            <li><a href="sample-lp.html">リラクゼーションサロン</a><span>落ち着いた明朝体と写真。医療的な効果をうたわない表現</span></li>
+            <li><a href="lp-cafe.html">カフェ</a><span>暖かい色と丸い文字。メニューと料金（税込）、テイクアウト</span></li>
+            <li><a href="lp-tax.html">税理士事務所</a><span>紺色で信頼感。料金表と、保証をしないよくある質問</span></li>
+            <li><a href="lp-recruit.html">リフォーム会社の採用</a><span>力強い黄色と黒。法律で必要な条件をそろえた募集要項</span></li>
+            <li><a href="lp-coaching.html">ゲームのオンライン指導</a><span>黒地に青い光。料金プランと、結果を約束しない書き方</span></li>
+          </ul>
           <div class="tech">HTML / CSS ・ スマホ対応 ・ 外部ライブラリなし</div>
         </article>
 
