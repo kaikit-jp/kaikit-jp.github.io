@@ -16,19 +16,20 @@
     --sans: "M PLUS 1p", "Hiragino Sans", "Yu Gothic", sans-serif;
   }
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; scroll-padding-bottom: 80px; }
   body { margin: 0; background: var(--cream); color: var(--ink); font-family: var(--sans); font-size: 16px;
-    line-height: 1.85; letter-spacing: .02em; word-break: auto-phrase; overflow-wrap: anywhere; }
+    line-height: 1.85; letter-spacing: .02em; word-break: normal; line-break: strict; overflow-wrap: break-word; }
   img { display: block; width: 100%; height: 100%; object-fit: cover; }
   a { color: inherit; }
   h1, h2, h3 { font-family: var(--round); font-weight: 700; line-height: 1.45; margin: 0; word-break: auto-phrase; text-wrap: balance; }
   h2 { font-size: clamp(24px, 5vw, 32px); }
   .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
   .grid > * { min-width: 0; }
-  section { padding: 80px 0; }
+  section { padding: 64px 0; }
   .eyebrow { font-family: var(--round); color: var(--terra-text); font-size: 14px; letter-spacing: .25em; display: block; margin-bottom: 8px; }
   .note { font-size: 14px; color: var(--sub); }
-  .nowrap { white-space: nowrap; }
+  .nw { white-space: nowrap; }
+  .photo-note { margin: 8px 0 0; font-size: 13px; line-height: 1.65; color: var(--sub); }
 
   .notice { font-size: 14px; color: var(--sub); text-align: center; padding: 6px 16px; border-bottom: 1px solid var(--line); margin: 0; }
 
@@ -41,14 +42,12 @@
   .nav a { text-decoration: none; }
   .nav a:hover { color: var(--terra-text); }
 
-  .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; text-decoration: none;
+  .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; text-decoration: none; border: 0; font: inherit; cursor: pointer;
     background: var(--terra); color: #fff; font-weight: 700; letter-spacing: .06em; border-radius: 16px;
     padding: 12px 32px; box-shadow: 0 4px 0 var(--terra-dark); transition: background .2s, transform .15s, box-shadow .15s; }
   .btn:hover { background: var(--terra-dark); }
   .btn:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--terra-dark); }
   .btn.small { min-height: 44px; padding: 8px 18px; font-size: 14px; box-shadow: none; }
-  .btn.light { background: var(--cream); color: var(--coffee); box-shadow: 0 4px 0 #c9a77f; }
-  .btn.light:hover { background: #fff; }
   .link { font-weight: 700; color: var(--terra-text); text-underline-offset: 5px; display: inline-flex; align-items: center; min-height: 44px; }
   :focus-visible { outline: 3px solid var(--terra-dark); outline-offset: 3px; border-radius: 6px; }
   .dark :focus-visible { outline-color: var(--butter); }
@@ -56,7 +55,9 @@
   /* hero */
   .hero { padding: 4px 0 56px; }
   .hero .wrap { display: grid; gap: 24px; }
+  .hero-visual { margin: 0; min-width: 0; }
   .hero .photo { aspect-ratio: 16 / 10; border-radius: 999px 999px 28px 28px; overflow: hidden; background: var(--cream-2); }
+  .hero picture { display: block; height: 100%; }
   .hero .photo img { object-position: 45% 60%; }
   .hero h1 { font-size: clamp(29px, 8vw, 46px); letter-spacing: .04em; }
   .hero h1 em { font-style: normal; color: var(--terra-text); }
@@ -89,8 +90,12 @@
   .chalk .cols { display: grid; gap: 32px; }
   .chalk h3 { font-size: 20px; color: var(--butter); margin-bottom: 8px; padding-bottom: 6px; border-bottom: 2px solid rgba(242,212,155,.35); }
   .chalk small { color: #d8c8b0; }
-  .allergy { margin: 24px 0 0; background: var(--cream-2); border-radius: 16px; padding: 16px 20px; font-size: 15px; }
+  .allergy { margin: 24px 0 0; background: var(--cream-2); border-radius: 16px; padding: 18px 20px; font-size: 15px; }
+  .allergy p { margin: 0; }
   .allergy b { color: var(--terra-text); }
+  .allergy ul { list-style: none; padding: 0; margin: 12px 0; display: grid; gap: 2px 32px; }
+  .allergy li { display: flex; flex-wrap: wrap; column-gap: 12px; padding: 5px 0; border-bottom: 1px solid var(--line); line-height: 1.6; }
+  .allergy li span:first-child { font-weight: 700; }
 
   /* morning */
   .morning { background: var(--cream-2); }
@@ -98,13 +103,17 @@
   .morning .head p { margin: 8px 0 0; color: var(--sub); }
   .time { display: inline-block; background: var(--coffee); color: var(--cream); font-weight: 700; border-radius: 99px; padding: 6px 20px; }
   .sets { display: grid; gap: 18px; }
-  .set { background: #fff; border-radius: 24px; padding: 8px 8px 22px; position: relative; }
+  .set { background: #fff; border-radius: 24px; padding: 8px 8px 22px; position: relative; display: flex; flex-direction: column; }
+  .set .body { flex: 1; display: flex; flex-direction: column; }
+  .set .what { font-weight: 700; color: var(--ink); font-size: 15px; margin: 0 0 14px; }
+  .set .yen { margin-top: auto; }
   .set .ph { aspect-ratio: 4 / 3; border-radius: 18px; overflow: hidden; margin-bottom: 16px; background: var(--cream-2); }
   .set .badge { position: absolute; top: 18px; left: 18px; width: 40px; height: 40px; border-radius: 50%; background: var(--terra); color: #fff;
     font-family: var(--round); font-weight: 700; font-size: 18px; line-height: 1; display: grid; place-items: center; }
   .set .body { padding: 0 16px; }
   .set h3 { font-size: 21px; margin-bottom: 6px; }
   .set p { margin: 0 0 14px; color: var(--sub); font-size: 15px; }
+  .set .photo-note { font-size: 13px; }
   .set .yen { font-family: var(--round); font-weight: 700; font-size: 30px; line-height: 1; border-top: 1px solid var(--line); padding-top: 14px; }
   .set .yen small { font-family: var(--sans); font-size: 14px; color: var(--sub); margin-left: 4px; }
   .morning .after { margin: 24px 0 0; color: var(--sub); font-size: 15px; }
@@ -118,6 +127,8 @@
   .steps li::before { content: counter(s); flex: none; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center;
     background: var(--terra); color: #fff; font-weight: 700; font-family: var(--round); }
   .takeout .ph { aspect-ratio: 3 / 2; border-radius: 24px; overflow: hidden; margin-bottom: 16px; }
+  .takeout-photo { margin: 0 0 16px; }
+  .takeout-photo .ph { margin-bottom: 8px; }
   .board { background: #fff; border-radius: 24px; padding: 24px; border: 2px solid var(--line); }
   .board h3 { font-size: 20px; margin-bottom: 8px; }
 
@@ -161,10 +172,33 @@
   /* final cta */
   .cta { background: var(--coffee); color: var(--cream); text-align: center; }
   .cta h2 { font-size: clamp(25px, 5.4vw, 36px); }
-  .cta p { margin: 16px 0 28px; color: #e9dccb; }
-  .cta .actions { display: flex; flex-direction: column; align-items: center; gap: 12px; }
-  .cta .link { color: var(--butter); }
-  .cta .note { color: #e9dccb; margin: 18px 0 0; }
+  .cta > .wrap > p { margin: 16px 0 0; color: #e9dccb; }
+
+  /* reservation demo form (nothing is sent) */
+  .rsv { background: var(--cream); color: var(--ink); border-radius: 24px; padding: 24px 20px; text-align: left;
+    max-width: 640px; margin: 28px auto 0; display: grid; gap: 20px; }
+  .rsv .demo { margin: 0; justify-self: start; font-size: 14px; font-weight: 700; color: var(--terra-text); background: var(--cream-2); border-radius: 99px; padding: 4px 14px; }
+  .rsv fieldset { border: 0; padding: 0; margin: 0; min-width: 0; display: grid; gap: 14px; }
+  .rsv fieldset[hidden] { display: none; }
+  .rsv legend { font-weight: 700; padding: 0; margin-bottom: 8px; }
+  .rsv label { display: grid; gap: 6px; font-weight: 700; }
+  .rsv input:not([type=radio]), .rsv select { font: inherit; font-weight: 400; width: 100%; min-width: 0; min-height: 48px; padding: 8px 12px;
+    border: 2px solid #8a6446; border-radius: 12px; background: #fff; color: var(--ink); }
+  .rsv .kind { gap: 8px; }
+  .rsv .kind label { display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 8px 14px; border: 2px solid #8a6446; border-radius: 12px; background: #fff; cursor: pointer; }
+  .rsv .kind label:has(:checked) { border-color: var(--terra); background: #fdeee6; }
+  .rsv input[type=radio] { width: 20px; height: 20px; margin: 0; accent-color: var(--terra); flex: none; }
+  .rsv .qty label { grid-template-columns: minmax(0, 1fr) 80px; align-items: center; font-weight: 400; }
+  .rsv .qty .full { grid-template-columns: 1fr; }
+  .rsv label small { font-size: 14px; color: var(--sub); }
+  .rsv .hint { margin: 0; font-size: 14px; color: var(--sub); line-height: 1.6; }
+  .rsv .btn { width: 100%; }
+  .rsv .btn:disabled { cursor: default; opacity: .6; box-shadow: none; }
+  .rsv output { display: block; }
+  .rsv output:not(:empty) { border: 2px solid var(--terra); border-radius: 16px; padding: 16px 18px; background: #fff; }
+  .rsv output p { margin: 0; }
+  .rsv output ul { margin: 8px 0; padding-left: 1.2em; }
+  .rsv output .stop { font-weight: 700; color: var(--terra-text); }
 
   footer { text-align: center; padding: 40px 20px 120px; font-size: 14px; color: var(--sub); }
   footer .logo { display: inline-block; margin-bottom: 10px; color: var(--ink); }
@@ -183,7 +217,26 @@
   .js .reveal { opacity: 0; transform: translateY(20px); transition: opacity .8s ease, transform .8s ease; }
   .js .reveal.in { opacity: 1; transform: none; }
 
+  @media (max-width: 899px) {
+    .concept { padding-bottom: 32px; }
+    .concept p:last-child { margin-bottom: 0; }
+    .morning { padding-top: 32px; }
+    body:has(.rsv:focus-within) .sticky { display: none; }
+  }
+  @media (min-width: 600px) and (max-width: 899px) {
+    .set { display: grid; grid-template-columns: 240px 1fr; align-items: stretch; padding: 8px; }
+    .set .ph { margin: 0; aspect-ratio: auto; height: 100%; min-height: 180px; }
+    .set .body { padding: 14px 16px 10px; }
+  }
+  @media (min-width: 600px) {
+    .allergy ul { grid-template-columns: 1fr 1fr; }
+    .rsv { padding: 32px; }
+    .rsv .kind { grid-template-columns: 1fr 1fr; }
+    .rsv .two { grid-template-columns: 1fr 1fr; }
+    .rsv .two .hint { grid-column: 1 / -1; }
+  }
   @media (min-width: 900px) {
+    html { scroll-padding-bottom: 0; }
     section { padding: 104px 0; }
     .nav { display: flex; }
     .hero { padding: 16px 0 88px; }
@@ -202,7 +255,6 @@
     .facts { margin-top: 36px; }
     .access .grid { grid-template-columns: 1fr 1fr; align-items: center; gap: 56px; }
     .faq .grid { grid-template-columns: 1fr 2fr; gap: 56px; align-items: start; }
-    .cta .actions { flex-direction: row; justify-content: center; gap: 28px; }
     .sticky { display: none; }
     footer { padding-bottom: 40px; }
   }
@@ -212,32 +264,38 @@
     .btn, .btn:active { transition: none; transform: none; }
   }
 </style>
-<script>document.documentElement.classList.add('js');</script>
+<script>if ('IntersectionObserver' in window) document.documentElement.classList.add('js');</script>
 </head>
 <body>
-  <p class="notice">制作サンプル｜店名・料金・住所は架空です</p>
+  <p class="notice">制作サンプル｜店は架空・予約はデモです</p>
 
   <header class="site">
     <div class="wrap">
       <a class="logo" href="#">まめとこむぎ<small>BAKE &amp; COFFEE</small></a>
-      <nav class="nav" aria-label="ページ内"><a href="#menu">メニュー</a><a href="#morning">モーニング</a><a href="#takeout">テイクアウト</a><a href="#access">アクセス</a></nav>
-      <a class="btn small" href="#reserve">空席・予約</a>
+      <nav class="nav" aria-label="ページ内"><a href="#morning">モーニング</a><a href="#menu">メニュー</a><a href="#takeout">テイクアウト</a><a href="#access">アクセス</a></nav>
+      <a class="btn small" href="#reserve">予約（デモ）</a>
     </div>
   </header>
 
   <main>
     <div class="hero">
       <div class="wrap">
-        <div class="photo">
-          <img src="https://images.unsplash.com/photo-1678025215973-642b1dda08a0?w=1200&q=70&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1678025215973-642b1dda08a0?w=800&q=70&auto=format&fit=crop 800w, https://images.unsplash.com/photo-1678025215973-642b1dda08a0?w=1200&q=70&auto=format&fit=crop 1200w, https://images.unsplash.com/photo-1678025215973-642b1dda08a0?w=1800&q=70&auto=format&fit=crop 1800w" sizes="(min-width: 900px) 55vw, 100vw" width="1200" height="800" fetchpriority="high" alt="麻のテーブルクロスに置いた皿のスコーン3つと、花柄のマグカップ">
-        </div>
+        <figure class="hero-visual">
+          <div class="photo">
+            <picture>
+            <source media="(min-width: 900px)" sizes="(min-width: 1080px) 520px, 48vw" srcset="https://images.unsplash.com/photo-1678025215973-642b1dda08a0?w=560&h=700&fit=crop&crop=focalpoint&fp-x=.45&fp-y=.6&q=70&auto=format 560w, https://images.unsplash.com/photo-1678025215973-642b1dda08a0?w=1040&h=1300&fit=crop&crop=focalpoint&fp-x=.45&fp-y=.6&q=70&auto=format 1040w">
+            <img src="https://images.unsplash.com/photo-1678025215973-642b1dda08a0?w=800&h=500&fit=crop&q=70&auto=format" srcset="https://images.unsplash.com/photo-1678025215973-642b1dda08a0?w=800&h=500&fit=crop&q=70&auto=format 800w, https://images.unsplash.com/photo-1678025215973-642b1dda08a0?w=1200&h=750&fit=crop&q=70&auto=format 1200w" sizes="100vw" width="1200" height="750" fetchpriority="high" alt="麻のテーブルクロスに置いた皿のスコーン3つと、花柄のマグカップ">
+            </picture>
+          </div>
+          <figcaption class="photo-note">写真はすべて素材写真です。架空メニューの実物ではありません。</figcaption>
+        </figure>
         <div class="copy">
-          <h1>朝7時半、<br><span class="nowrap"><em>スコーン</em>と一杯を。</span></h1>
-          <p>こむぎ台駅から歩いて2分。毎朝お店で焼くスコーンと食パン、ハンドドリップの珈琲で、朝ごはんが食べられます。</p>
-          <ul class="chips"><li>7:30〜18:00</li><li>火曜定休</li><li>テイクアウトあり</li></ul>
+          <h1>朝7時半、<br><span class="nw"><em>スコーン</em>と一杯を。</span></h1>
+          <p>こむぎ台駅の西口から<span class="nw">徒歩2分。</span>毎朝焼くスコーンと食パン、ハンドドリップの珈琲で朝ごはんを出しているカフェです。</p>
+          <ul class="chips"><li><span class="nw">7:30〜18:00</span>・火曜定休</li><li>モーニング <span class="nw">715円〜</span>（<span class="nw">10:30 L.O.</span>）</li></ul>
           <div class="actions">
-            <a class="btn" href="#reserve">今日の空席・予約</a>
-            <a class="link" href="#menu">メニューを見る</a>
+            <a class="btn" href="#reserve">席の予約・取り置き（デモ）</a>
+            <a class="link" href="#morning">モーニングを見る</a>
           </div>
         </div>
       </div>
@@ -245,63 +303,77 @@
 
     <section class="concept">
       <div class="wrap grid">
-        <div class="photo reveal"><img src="https://images.unsplash.com/photo-1594753286464-628d797fd5f7?w=900&q=70&auto=format&fit=crop" width="900" height="600" alt="天板に並んだ、焼き上がったばかりのスコーン" loading="lazy"></div>
+        <div class="photo reveal"><img src="https://images.unsplash.com/photo-1594753286464-628d797fd5f7?w=900&q=70&auto=format&fit=crop" width="900" height="600" alt="天板に並んだスコーンの素材写真" loading="lazy"></div>
         <div class="reveal">
           <span class="eyebrow">CONCEPT</span>
           <h2>開店の2時間前から、<br>店の奥でスコーンを焼いています。</h2>
-          <p>焼くのは、その日にお店に並べる分だけ。窓ぎわの席に座ると、ちょうど焼き上がりの香りが届きます。</p>
-          <p>モーニングは、ご注文からおよそ5分でお出しします。出勤前でも寄っていただけます。</p>
+          <p>スコーンは、外がさくっと、中はしっとり。店内でお出しするときは、ご注文を受けてからオーブンで温め直します。</p>
+          <p>モーニングは、ご注文から<span class="nw">およそ5分</span>でお出しします。出勤前でも寄っていただけます。</p>
+          <p class="photo-note">写真はスコーンづくりのイメージです。形・焼き色は写真ごとに異なります。</p>
         </div>
-      </div>
-    </section>
-
-    <section class="menu" id="menu">
-      <div class="wrap">
-        <div class="chalk dark reveal">
-          <div class="chalk-head"><h2>メニュー</h2><p>価格はすべて、店内でお召し上がりの税込価格です。</p></div>
-          <div class="cols">
-            <div>
-              <h3>ドリンク</h3>
-              <ul class="items">
-                <li><span class="name">ブレンド珈琲</span><span class="yen">500円</span><small>ハンドドリップ・中深煎り</small></li>
-                <li><span class="name">カフェオレ</span><span class="yen">580円</span></li>
-                <li><span class="name">カフェラテ</span><span class="yen">600円</span></li>
-                <li><span class="name">紅茶</span><span class="yen">550円</span><small>ダージリン／アールグレイ</small></li>
-                <li><span class="name">ほうじ茶ラテ</span><span class="yen">620円</span></li>
-              </ul>
-            </div>
-            <div>
-              <h3>焼き菓子・軽食</h3>
-              <ul class="items">
-                <li><span class="name">スコーン</span><span class="yen">380円</span><small>プレーン・クランベリー／クロテッドクリームとジャム付き</small></li>
-                <li><span class="name">パン・オ・ショコラ</span><span class="yen">360円</span></li>
-                <li><span class="name">レモンケーキ</span><span class="yen">350円</span></li>
-                <li><span class="name">季節のマフィン</span><span class="yen">400円</span></li>
-                <li><span class="name">厚切りバタートースト</span><span class="yen">450円</span><small>自家製の食パンを使っています</small></li>
-                <li><span class="name">たまごサンド</span><span class="yen">680円</span></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <p class="allergy reveal"><b>アレルギーについて：</b>焼き菓子とパンには小麦・卵・乳を使っています。くるみ・アーモンドを使う商品もあり、同じ厨房で作っています。気になる方はご注文の前にスタッフへお声がけください。</p>
       </div>
     </section>
 
     <section class="morning" id="morning">
       <div class="wrap">
         <div class="head reveal">
-          <div><h2>モーニングセット</h2><p>ドリンクは、ブレンド・紅茶・カフェオレから選べます。</p></div>
+          <div><h2>モーニングセット</h2><p>どのセットも、ドリンクをブレンド・紅茶・カフェオレから<span class="nw">1杯</span>選べます。</p></div>
           <span class="time">毎朝 7:30〜10:30 L.O.</span>
         </div>
         <div class="sets reveal">
           <div class="set"><div class="ph"><img src="https://images.unsplash.com/photo-1763390896467-1ca4a95c6261?rect=0.04,0.02,0.66,0.743&w=700&q=70&auto=format&fit=crop" width="700" height="525" alt="皿にのったスコーンと、クロテッドクリーム、いちごジャム" loading="lazy"></div><span class="badge">A</span>
-            <div class="body"><h3>スコーンセット</h3><p>スコーン1個に、クロテッドクリームといちごジャムが付きます。</p><div class="yen">780<small>円（税込）</small></div></div></div>
-          <div class="set"><div class="ph"><img src="https://images.unsplash.com/photo-1763647872237-c76e660cf38b?w=700&q=70&auto=format&fit=crop" width="700" height="525" alt="パン・オ・ショコラと、ミルク入りの珈琲" loading="lazy"></div><span class="badge">B</span>
-            <div class="body"><h3>パン・オ・ショコラセット</h3><p>バターを折り込んだ生地で、チョコレートを包みました。</p><div class="yen">760<small>円（税込）</small></div></div></div>
+            <div class="body"><h3>スコーンセット</h3><p>温め直したスコーンに、クロテッドクリームといちごジャムが付きます。</p><p class="what">スコーン<span class="nw">1個</span>＋ドリンク<span class="nw">1杯</span></p><p class="photo-note">素材写真：形・焼き色・食器はイメージです。</p><div class="yen">770<small>円（税込）</small></div></div></div>
+          <div class="set"><div class="ph"><img src="https://images.unsplash.com/photo-1763647872237-c76e660cf38b?w=700&q=70&auto=format&fit=crop" width="700" height="525" alt="複数のパンと、ラテアートのあるミルク入り珈琲の素材写真" loading="lazy"></div><span class="badge">B</span>
+            <div class="body"><h3>パン・オ・ショコラセット</h3><p>バターを折り込んだ生地で、チョコレートを包んでいます。</p><p class="what">パン・オ・ショコラ<span class="nw">1個</span>＋ドリンク<span class="nw">1杯</span></p><p class="photo-note">素材写真のパンの数量はセットと異なります。カフェラテに変更すると<span class="nw">825円（税込）</span>（<span class="nw">＋110円</span>）です。</p><div class="yen">715<small>円（税込）</small></div></div></div>
           <div class="set"><div class="ph"><img src="https://images.unsplash.com/photo-1559329607-43c470fd9aac?rect=0.04,0.37,0.9,0.45&w=700&q=70&auto=format&fit=crop" width="700" height="525" alt="角切りのりんごとシナモンをのせた、白いボウルのオートミール" loading="lazy"></div><span class="badge">C</span>
-            <div class="body"><h3>オートミールセット</h3><p>温かいオートミールに、角切りのりんごとシナモンをのせています。</p><div class="yen">900<small>円（税込）</small></div></div></div>
+            <div class="body"><h3>オートミールセット</h3><p>温かいオートミールに、角切りのりんごとシナモンをのせています。</p><p class="what">オートミール<span class="nw">1皿</span>＋ドリンク<span class="nw">1杯</span></p><p class="photo-note">素材写真：盛り付け・食器はイメージです。</p><div class="yen">880<small>円（税込）</small></div></div></div>
         </div>
-        <p class="after reveal">カフェラテ・ほうじ茶ラテへの変更は＋80円（税込）です。</p>
+        <p class="after reveal">カフェラテ・ほうじ茶ラテへの変更は＋110円（税込）です。</p>
+      </div>
+    </section>
+
+    <section class="menu" id="menu">
+      <div class="wrap">
+        <div class="chalk dark reveal">
+          <div class="chalk-head"><h2>メニュー</h2><p>店内でお召し上がりの税込価格（消費税10%）です。</p></div>
+          <div class="cols">
+            <div>
+              <h3>ドリンク</h3>
+              <ul class="items">
+                <li><span class="name">ブレンド珈琲</span><span class="yen">495円</span><small>ハンドドリップ・中深煎り</small></li>
+                <li><span class="name">カフェオレ</span><span class="yen">550円</span></li>
+                <li><span class="name">カフェラテ</span><span class="yen">605円</span></li>
+                <li><span class="name">紅茶</span><span class="yen">550円</span><small>ダージリン／アールグレイ</small></li>
+                <li><span class="name">ほうじ茶ラテ</span><span class="yen">605円</span></li>
+              </ul>
+            </div>
+            <div>
+              <h3>焼き菓子・軽食</h3>
+              <ul class="items">
+                <li><span class="name">スコーン</span><span class="yen">385円</span><small>プレーン・クランベリー／クロテッドクリームとジャム付き</small></li>
+                <li><span class="name">パン・オ・ショコラ</span><span class="yen">330円</span></li>
+                <li><span class="name">レモンケーキ</span><span class="yen">330円</span></li>
+                <li><span class="name">季節のマフィン（くるみ）</span><span class="yen">385円</span></li>
+                <li><span class="name">厚切りバタートースト</span><span class="yen">440円</span><small>自家製の食パンを使っています</small></li>
+                <li><span class="name">たまごサンド</span><span class="yen">660円</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="allergy reveal">
+          <p><b>アレルギーについて：</b>食物アレルギーのある方は、ご注文の前にスタッフへご相談ください。掲載メニューで使用している主なアレルゲンは次のとおりです。</p>
+          <ul>
+            <li><span>スコーン、パン・オ・ショコラ</span><span>小麦・卵・乳</span></li>
+            <li><span>レモンケーキ</span><span>小麦・卵・乳・アーモンド</span></li>
+            <li><span>季節のマフィン（くるみ）</span><span>小麦・卵・乳・くるみ</span></li>
+            <li><span>焼き菓子の詰め合わせ</span><span>小麦・卵・乳・アーモンド・くるみ</span></li>
+            <li><span>食パン・バタートースト</span><span>小麦・乳</span></li>
+            <li><span>たまごサンド</span><span>小麦・卵・乳</span></li>
+            <li><span>オートミール</span><span>乳・りんご</span></li>
+            <li><span>カフェオレ・ラテ類</span><span>乳</span></li>
+          </ul>
+          <p>同じ厨房で小麦・卵・乳・くるみ・アーモンドを扱うため、ほかの商品に混ざる可能性があります。原材料を取り除いた調理はお受けしていません。</p>
+        </div>
       </div>
     </section>
 
@@ -309,25 +381,26 @@
       <div class="wrap grid">
         <div class="lead reveal">
           <h2>焼き菓子とパンは、<br>お持ち帰りもできます。</h2>
-          <p>手みやげや、翌朝の朝ごはん用にどうぞ。食パンと焼き菓子は焼く数が決まっているため、前日18時までのご予約で<span class="nowrap">取り置きします。</span></p>
+          <p>食パンと焼き菓子は焼く数が決まっているため、ご希望の商品は取り置きがおすすめです。下のフォームで入力から内容確認までをお試しいただけます。</p>
           <ol class="steps">
-            <li><span><span class="nowrap">前日18時までに予約</span><span class="nowrap">（Web・店頭）</span></span></li>
+            <li><a class="link" href="#reserve" data-kind="pickup">取り置き内容を入力（デモ）</a></li>
             <li>受け取りたい時間にご来店</li>
             <li>レジでお名前を伝えて受け取り</li>
           </ol>
         </div>
         <div class="reveal">
-          <div class="ph"><img src="https://images.unsplash.com/photo-1648142119324-fbab91e76c66?rect=0,0,1,0.82&w=900&q=70&auto=format" width="900" height="600" alt="紙カップのラテと、紙袋に入った焼き菓子" loading="lazy"></div>
+          <figure class="takeout-photo"><div class="ph"><img src="https://images.unsplash.com/photo-1620921568790-c1cf8984624c?rect=0,0.06,1,0.889&w=900&q=70&auto=format" width="900" height="600" alt="木の皿にのせた、山型の食パン一斤" loading="lazy"></div><figcaption class="photo-note">素材写真：食パンのイメージです。詰め合わせの箱・包装の写真は掲載していません。</figcaption></figure>
           <div class="board">
             <h3>お持ち帰りの価格</h3>
             <ul class="items">
               <li><span class="name">自家製食パン（1斤）</span><span class="yen">540円</span></li>
-              <li><span class="name">スコーン</span><span class="yen">370円</span></li>
-              <li><span class="name">レモンケーキ</span><span class="yen">340円</span></li>
-              <li><span class="name">焼き菓子の詰め合わせ</span><span class="yen">1,800円</span><small>6個入り・箱代込み</small></li>
-              <li><span class="name">ブレンド珈琲（カップ）</span><span class="yen">450円</span></li>
+              <li><span class="name">スコーン</span><span class="yen">378円</span><small>クロテッドクリームとジャムは付きません</small></li>
+              <li><span class="name">レモンケーキ</span><span class="yen">324円</span></li>
+              <li><span class="name">焼き菓子の詰め合わせ</span><span class="yen">2,160円</span><small>スコーン・レモンケーキ・くるみのマフィンを各2個、計6個。箱代込み。中身の変更はできません</small></li>
+              <li><span class="name">ブレンド珈琲（カップ）</span><span class="yen">486円</span></li>
             </ul>
-            <p class="note" style="margin:12px 0 0">税込（軽減税率8%）。店内とは税率がちがうため、価格も異なります。アレルギー表示は店内メニューと同じです。</p>
+            <p class="note" style="margin:12px 0 0">税込価格（消費税<span class="nw">8%</span>）です。本体価格は店内と同じです（<span class="nw">1円未満</span>切り捨て）。スコーンは店内と付属品が異なります。</p>
+            <p class="note" style="margin:8px 0 0">保存方法・期限は袋と箱のシールでご確認ください。翌日召し上がる場合も、表示された保存方法・期限に従ってください。原材料・アレルゲンは上のメニュー欄をご確認ください。</p>
           </div>
         </div>
       </div>
@@ -335,7 +408,7 @@
 
     <section class="room dark">
       <div class="wrap grid">
-        <figure class="reveal"><div class="ph"><img src="https://images.unsplash.com/photo-1738214344374-bfac4208640b?rect=0,0.3,1,0.7&w=1000&q=70&auto=format&fit=crop" width="1000" height="1050" alt="窓ぎわにクッションを置いたベンチ席と、白い丸テーブル、木のいすが並ぶ店内" loading="lazy"></div><figcaption>窓ぎわのベンチ席。まわりを広くあけています。</figcaption></figure>
+        <figure class="reveal"><div class="ph"><img src="https://images.unsplash.com/photo-1738214344374-bfac4208640b?rect=0,0.3,1,0.7&w=1000&q=70&auto=format&fit=crop" width="1000" height="1050" alt="窓ぎわにクッションを置いたベンチ席と、白い丸テーブル、木のいすが並ぶ店内" loading="lazy"></div><figcaption>素材写真：窓ぎわのベンチ席のイメージです。</figcaption></figure>
         <div class="reveal">
           <h2>24席の、<br>ちいさな店です。</h2>
           <p>テーブル席と、窓ぎわのベンチ席があります。ベンチ席のまわりは、ベビーカーのまま入れるように広くあけています。</p>
@@ -396,22 +469,60 @@
       <div class="wrap grid">
         <h2 class="reveal">よくある質問</h2>
         <div class="list reveal">
-          <details><summary>予約なしでも入れますか？</summary><p>はい、空いている席にご案内します。土日の朝は満席になることがあるので、Web予約もご利用ください。</p></details>
+          <details><summary>予約なしでも入れますか？</summary><p>空いている席へのご案内となります。このページの予約フォームは、入力内容の確認を試すデモです。実際の予約はできません。</p></details>
           <details><summary>子ども連れでも大丈夫ですか？</summary><p>はい。ベンチ席のまわりは、ベビーカーのまま入れる広さです。子ども用のいすと取り皿もご用意しています。</p></details>
-          <details><summary>アレルギーに対応したメニューはありますか？</summary><p>小麦・卵・乳を使わない焼き菓子・軽食はありません。同じ厨房でナッツ類も扱うため、原材料を取り除いた調理もお受けしていません。</p></details>
+          <details><summary>予約の時間に遅れそうなときは？</summary><p>予約の時間から15分は、席を空けてお待ちします。それを過ぎたときは、空いている席へのご案内になります。</p></details>
         </div>
       </div>
     </section>
 
     <section class="cta dark" id="reserve">
       <div class="wrap reveal">
-        <h2>土日の朝は、<br>席の予約がおすすめです</h2>
-        <p>Web予約は、当日の朝7時から受け付けています。<br><span class="nowrap">パン・焼き菓子の取り置きは、</span><span class="nowrap">前日18時までです。</span></p>
-        <div class="actions">
-          <a class="btn light" href="#reserve-note">今日の空席を見る（Web予約）</a>
-          <a class="link" href="#takeout">取り置きの方法を見る</a>
-        </div>
-        <p class="note" id="reserve-note">※サンプルのため、予約ページにはつながりません</p>
+        <h2>席の予約・取り置きを、<br>デモでお試しください</h2>
+        <p>日程・空き状況は<span class="nw">2026年10月</span>の固定した架空の候補です。現在の日時や実際の受付状況とは連動しません。</p>
+        <form class="rsv" id="rsv" method="dialog" aria-label="予約フォーム（デモ）">
+          <p class="demo">入力内容の確認のみ・予約は成立しません</p>
+          <p class="hint">お名前には架空の名前をお使いください。入力内容は送信・保存されません。</p>
+          <fieldset class="kind">
+            <legend>ご予約の種類</legend>
+            <label><input type="radio" name="kind" value="seat" checked>席の予約</label>
+            <label><input type="radio" name="kind" value="pickup">パン・焼き菓子の取り置き</label>
+          </fieldset>
+          <fieldset class="two" id="f-seat">
+            <legend>席の予約</legend>
+            <label>ご来店枠（架空の空き状況）
+              <select name="seat_slot" required aria-describedby="seat-hint">
+                <option value="2026-10-28T07:30" data-capacity="2">10/28（水）7:30｜空き2名</option>
+                <option value="2026-10-28T10:00" data-capacity="6">10/28（水）10:00｜空き6名</option>
+                <option value="full" disabled>10/29（木）8:00｜満席</option>
+                <option value="closed" disabled>10/27（火）｜定休日</option>
+              </select></label>
+            <label>人数
+              <select name="people" required>
+                <option value="1">1名</option><option value="2" selected>2名</option><option value="3" disabled>3名</option>
+                <option value="4" disabled>4名</option><option value="5" disabled>5名</option><option value="6" disabled>6名</option>
+              </select></label>
+            <p class="hint" id="seat-hint">人数は各枠の空席数まで選べます。満席・火曜定休の枠は選べません。</p>
+          </fieldset>
+          <fieldset class="qty" id="f-pickup" disabled hidden>
+            <legend>取り置き</legend>
+            <label class="full">受け取り枠（架空の日程）
+              <select name="pickup_slot" required>
+                <option value="2026-10-28T10:00">10/28（水）10:00</option>
+                <option value="2026-10-29T16:00">10/29（木）16:00</option>
+                <option value="closed" disabled>10/27（火）｜定休日</option>
+              </select></label>
+            <label><span>自家製食パン<br><small>1斤 <span class="nw">540円（税込）</span></small></span><input type="number" name="bread" min="0" max="5" step="1" value="0" inputmode="numeric" data-product="自家製食パン" data-unit="斤" data-price="540"></label>
+            <label><span>スコーン<br><small>1個 <span class="nw">378円（税込）</span>・付属品なし</small></span><input type="number" name="scone" min="0" max="12" step="1" value="0" inputmode="numeric" data-product="スコーン" data-unit="個" data-price="378"></label>
+            <label><span>レモンケーキ<br><small>1個 <span class="nw">324円（税込）</span></small></span><input type="number" name="lemon" min="0" max="12" step="1" value="0" inputmode="numeric" data-product="レモンケーキ" data-unit="個" data-price="324"></label>
+            <label><span>焼き菓子の詰め合わせ<br><small>1箱 <span class="nw">2,160円（税込）</span>・6個入り</small></span><input type="number" name="box" min="0" max="5" step="1" value="0" inputmode="numeric" data-product="焼き菓子の詰め合わせ" data-unit="箱" data-price="2160"></label>
+            <p class="hint">数量は整数で入力してください。食パンは<span class="nw">5斤</span>、詰め合わせは<span class="nw">5箱</span>、スコーン・レモンケーキは各<span class="nw">12個</span>まで選べます。珈琲は取り置きの対象外です。</p>
+          </fieldset>
+          <label>お名前（架空のお名前）<input type="text" name="name" autocomplete="off" required maxlength="60"></label>
+          <button class="btn" id="confirm-rsv" type="button" disabled>入力内容を確認する（デモ）</button>
+          <noscript><p class="hint">確認表示にはJavaScriptが必要です。入力内容は送信されません。</p></noscript>
+          <output name="result" aria-live="polite"></output>
+        </form>
       </div>
     </section>
   </main>
@@ -428,7 +539,7 @@
         <li><a href="https://unsplash.com/photos/K2nQUurKss8">スコーンセット</a> — 撮影：Alexander Schimmeck</li>
         <li><a href="https://unsplash.com/photos/lMSmhRDS0Ik">パン・オ・ショコラセット</a> — 撮影：Christopher Chung</li>
         <li><a href="https://unsplash.com/photos/4zG050fMarw">オートミールセット</a> — 撮影：K8</li>
-        <li><a href="https://unsplash.com/photos/uTNAyTrS1SQ">紙カップのラテと焼き菓子</a> — 撮影：Anna Wohnoutka</li>
+        <li><a href="https://unsplash.com/photos/BjJxLSr23oc">山型の食パン</a> — 撮影：Vicky Ng</li>
         <li><a href="https://unsplash.com/photos/X-V9r34NYnI">窓ぎわのベンチ席</a> — 撮影：Finn</li>
       </ul>
     </details>
@@ -436,15 +547,74 @@
 
   <nav class="sticky" aria-label="予約">
     <a class="sub" href="#menu">メニュー</a>
-    <a class="main" href="#reserve">今日の空席・予約</a>
+    <a class="main" href="#reserve">予約・取り置き（デモ）</a>
   </nav>
 
 <script>
-  // ponytail: one observer for all fade-ins; no library
-  const io = new IntersectionObserver(es => es.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-  }), { rootMargin: '0px 0px -10% 0px' });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  // ponytail: one observer for all fade-ins; no library. If it fails, show everything.
+  try {
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    }), { rootMargin: '0px 0px -10% 0px' });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  } catch (e) { document.documentElement.classList.remove('js'); }
+
+  // reservation demo: nothing is sent anywhere
+  const f = document.getElementById('rsv');
+  const fields = f.elements, out = fields.namedItem('result');
+  const seat = fields.namedItem('seat_slot'), people = fields.namedItem('people');
+  const clearResult = () => out.replaceChildren();
+  const setCapacity = () => {
+    const capacity = Number(seat.selectedOptions[0]?.dataset.capacity) || 0;
+    for (const option of people.options) option.disabled = Number(option.value) > capacity;
+    if (people.selectedOptions[0]?.disabled) people.value = '1';
+  };
+  const setKind = () => {
+    clearResult();
+    const pick = fields.namedItem('kind').value === 'pickup';
+    for (const [id, on] of [['f-seat', !pick], ['f-pickup', pick]]) { const s = document.getElementById(id); s.disabled = s.hidden = !on; }
+    setCapacity();
+  };
+  f.addEventListener('input', clearResult);
+  f.addEventListener('change', e => {
+    clearResult();
+    if (e.target.name === 'kind') setKind();
+    if (e.target.name === 'seat_slot') setCapacity();
+  });
+  document.querySelectorAll('[data-kind]').forEach(a => a.addEventListener('click', () => { fields.namedItem('kind').value = a.dataset.kind; setKind(); }));
+  f.addEventListener('submit', e => e.preventDefault());
+  setKind();
+  const confirm = document.getElementById('confirm-rsv');
+  confirm.addEventListener('click', () => {
+    clearResult();
+    const name = fields.namedItem('name');
+    name.value = name.value.trim();
+    if (!f.reportValidity()) return;
+    const d = new FormData(f), pick = d.get('kind') === 'pickup';
+    const add = (tag, text, cls) => { const el = document.createElement(tag); el.textContent = text; if (cls) el.className = cls; out.append(el); return el; };
+    const slot = fields.namedItem(pick ? 'pickup_slot' : 'seat_slot').selectedOptions[0];
+    if (!slot || slot.disabled || (!pick && (Number(d.get('people')) < 1 || Number(d.get('people')) > Number(slot.dataset.capacity)))) {
+      add('p', '選択できる枠と、その空席数以内の人数を選んでください。', 'stop'); return;
+    }
+    const goods = pick ? [...f.querySelectorAll('[data-price]')].filter(input => Number(input.value) > 0) : [];
+    if (pick && !goods.length) { add('p', '取り置きする商品の数を、1つ以上入れてください。', 'stop'); return; }
+    add('h3', '入力内容の確認（デモ）');
+    const ul = add('ul', '');
+    const yen = n => n.toLocaleString('ja-JP') + '円';
+    const rows = [slot.value.replace(/-/g, '/').replace('T', ' ') + (pick ? ' 受け取り' : ' ご来店'), d.get('name') + ' 様'];
+    if (pick) {
+      let total = 0;
+      goods.forEach(input => {
+        const quantity = Number(input.value), price = Number(input.dataset.price), subtotal = quantity * price;
+        total += subtotal;
+        rows.push(input.dataset.product + ' ' + quantity + input.dataset.unit + ' × ' + yen(price) + ' ＝ ' + yen(subtotal));
+      });
+      rows.push('税込合計：' + yen(total));
+    } else rows.push(d.get('people') + '名');
+    rows.forEach(r => { const li = document.createElement('li'); li.textContent = r; ul.append(li); });
+    add('p', '予約は成立していません。入力内容は送信されていません。', 'stop');
+  });
+  confirm.disabled = false;
 </script>
 </body>
 </html>

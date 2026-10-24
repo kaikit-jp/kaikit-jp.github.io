@@ -18,22 +18,24 @@
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans);
-    line-height: 1.9; letter-spacing: .03em; -webkit-font-smoothing: antialiased; word-break: normal; overflow-wrap: anywhere; }
+    line-height: 1.9; letter-spacing: .03em; -webkit-font-smoothing: antialiased; word-break: normal; line-break: strict; overflow-wrap: break-word; }
   img { display: block; width: 100%; height: 100%; object-fit: cover; }
   a { color: inherit; }
   h1, h2, h3 { font-family: var(--serif); font-weight: 700; line-height: 1.5; margin: 0; letter-spacing: .04em; word-break: auto-phrase; text-wrap: balance; }
-  p, li, dd { text-wrap: pretty; }
+  /* body text: phrase-aware wrapping instead of hand-placed nowrap spans */
+  p, li, dd, summary, figcaption { word-break: auto-phrase; text-wrap: pretty; }
+  .grid > *, .feature > * { min-width: 0; }
   .nw { white-space: nowrap; }
   .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
-  section { padding: 88px 0; }
+  section { padding: 64px 0; }
   .eyebrow { font-family: var(--serif); color: var(--gold-text); font-size: 13px; letter-spacing: .3em; display: block; margin-bottom: 12px; }
-  .heading { margin-bottom: 48px; }
+  .heading { margin-bottom: 40px; }
   .heading.center { text-align: center; }
   .heading h2 { font-size: clamp(24px, 4.6vw, 34px); }
   .heading p { margin: 10px 0 0; color: var(--sub); font-size: 15px; }
 
   /* sample notice */
-  .notice { background: var(--green-dark); color: var(--paper); font-size: 11px; text-align: center; padding: 8px 16px; letter-spacing: .06em; line-height: 1.6; }
+  .notice { background: var(--green-dark); color: var(--paper); font-size: 11px; text-align: center; padding: 8px 12px; letter-spacing: .04em; line-height: 1.6; }
 
   /* header */
   header.site { position: absolute; z-index: 10; left: 0; right: 0; padding: 20px 0; color: #fff; }
@@ -43,52 +45,65 @@
   .nav { display: none; gap: 28px; font-size: 14px; }
   .nav a { text-decoration: none; opacity: .9; }
   .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none;
-    background: var(--green); color: #fff; font-weight: 700; letter-spacing: .1em; border-radius: 99px;
+    background: var(--green); color: #fff; font: 700 16px/1.5 var(--sans); letter-spacing: .1em; border: 0; border-radius: 99px; cursor: pointer;
     padding: 16px 40px; min-height: 48px; transition: background .2s, transform .2s; }
   .btn:hover { background: var(--green-dark); transform: translateY(-2px); }
   :focus-visible { outline: 3px solid var(--green-dark); outline-offset: 3px; }
-  header.site :focus-visible, .hero :focus-visible, .cta :focus-visible, .notice :focus-visible { outline-color: #fff; }
+  header.site :focus-visible, .hero :focus-visible, .notice :focus-visible { outline-color: #fff; }
   header.site .btn { display: none; padding: 10px 22px; min-height: 44px; font-size: 14px; }
-  .btn.light { background: #fff; color: var(--green-dark); }
-  .btn.light:hover { background: var(--paper); }
 
   /* hero */
-  .hero { position: relative; min-height: 640px; height: 92svh; max-height: 900px; color: #fff; overflow: hidden; }
+  .hero { position: relative; color: #fff; overflow: hidden; }
   .hero > img { position: absolute; inset: 0; transform: scale(1.06); animation: drift 18s ease-out forwards; }
   .hero::after { content: ""; position: absolute; inset: 0;
     background: linear-gradient(180deg, rgba(30,24,16,.42) 0%, rgba(30,24,16,.25) 40%, rgba(30,24,16,.65) 100%); }
-  .hero .inner { position: relative; z-index: 1; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 72px; }
+  .hero .inner { position: relative; z-index: 1; min-height: 520px; display: flex; flex-direction: column; justify-content: center; padding-top: 132px; padding-bottom: 40px; }
   .hero h1 { font-size: clamp(32px, 8.4vw, 56px); text-shadow: 0 2px 16px rgba(0,0,0,.45); }
-  .hero p { margin: 20px 0 32px; font-size: 16px; text-shadow: 0 1px 10px rgba(0,0,0,.4); }
+  .hero p { margin: 20px 0 32px; font-size: 16px; text-shadow: 0 1px 10px rgba(0,0,0,.4); word-break: normal; }
+  .hero .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 24px; }
+  .hero .btn { padding: 16px 24px; }
+  .hero .to-menu { display: inline-flex; align-items: center; min-height: 44px; font-size: 15px; text-underline-offset: 5px; text-shadow: 0 1px 8px rgba(0,0,0,.5); }
   @keyframes drift { to { transform: scale(1); } }
 
-  /* concept */
-  .concept .grid { display: grid; gap: 40px; align-items: center; }
-  .concept .photo { aspect-ratio: 4 / 5; border-radius: 4px; overflow: hidden; }
-  .concept h2, .access h2 { font-size: clamp(24px, 5vw, 34px); margin-bottom: 24px; }
-  .concept p { color: var(--sub); margin: 0 0 16px; }
+  /* service overview before the price list */
+  .overview { padding: 32px 0; }
+  .overview h2 { font-size: clamp(22px, 4.6vw, 28px); margin-bottom: 20px; }
+  .overview dl { display: grid; gap: 16px; margin: 0; }
+  .overview dt { color: var(--gold-text); font-size: 14px; font-weight: 700; }
+  .overview dd { margin: 4px 0 0; }
+  .page-links { display: flex; flex-wrap: wrap; gap: 4px 24px; margin-top: 20px; font-size: 14px; }
+  .page-links a { display: inline-flex; align-items: center; min-height: 44px; text-underline-offset: 4px; }
 
-  /* worries: heading left, ruled list right */
-  .worries { background: var(--paper-2); }
-  .worries .grid { display: grid; gap: 32px; }
-  .worries h2 { font-size: clamp(24px, 4.6vw, 34px); }
-  .worries ul { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--line); }
-  .worries li { padding: 18px 0 18px 30px; border-bottom: 1px solid var(--line); position: relative; }
-  .worries li::before { content: ""; position: absolute; left: 0; top: 50%; width: 14px; height: 1px; background: var(--gold); }
+  /* concept */
+  .concept .grid { display: grid; gap: 36px; align-items: center; }
+  .concept .photo { aspect-ratio: 3 / 2; border-radius: 4px; overflow: hidden; }
+  .concept h2, .access h2 { font-size: clamp(24px, 5vw, 34px); margin-bottom: 24px; }
+  .concept p { color: var(--sub); margin: 0; }
 
   /* features */
-  .feature { display: grid; gap: 28px; margin-bottom: 72px; align-items: center; }
+  .feature { display: grid; gap: 28px; margin-bottom: 64px; align-items: center; }
   .feature:last-child { margin-bottom: 0; }
   .feature .photo { aspect-ratio: 3 / 2; border-radius: 4px; overflow: hidden; }
   .feature .photo img { filter: saturate(.85) sepia(.12); }
   .feature .photo img.dim { filter: saturate(.85) sepia(.22) brightness(.93); }
+  .feature figure { margin: 0; }
+  .feature figcaption { font-size: 13px; color: var(--sub); margin-top: 8px; }
   .feature .num { font-family: var(--serif); font-size: 15px; letter-spacing: .2em; color: var(--gold-text); }
   .feature h3 { font-size: clamp(21px, 4vw, 26px); margin: 8px 0 14px; }
   .feature p { color: var(--sub); margin: 0; }
+  .staff { display: flex; gap: 16px; align-items: flex-start; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line); }
+  .staff .initial { flex: none; width: 52px; height: 52px; border-radius: 50%; background: var(--green); color: #fff; display: grid; place-items: center;
+    font-family: var(--serif); font-size: 22px; font-weight: 700; }
+  .staff p { font-size: 15px; }
+  .staff b { display: block; color: var(--ink); }
 
-  /* menu: one price list, not cards */
+  /* menu: service facts + one price list */
   .menu { background: var(--paper-2); }
-  .prices { list-style: none; margin: 0; padding: 8px 24px; background: #fff; border-radius: 4px; }
+  .facts { margin: 0 0 24px; display: grid; gap: 0; border-top: 1px solid var(--line); }
+  .facts div { display: grid; grid-template-columns: 1fr; gap: 4px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .facts dt { font-weight: 700; }
+  .facts dd { margin: 0; color: var(--sub); font-size: 15px; }
+  .prices { list-style: none; margin: 0; padding: 8px 16px; background: #fff; border-radius: 4px; }
   .prices li { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; align-items: baseline; padding: 22px 0; border-bottom: 1px solid var(--line); }
   .prices li:last-child { border-bottom: 0; }
   .prices .name { grid-column: 1 / -1; }
@@ -103,12 +118,11 @@
   .first small { display: block; font-family: var(--sans); font-size: 14px; color: var(--sub); margin-top: 6px; }
   .menu .more { text-align: center; margin: 32px 0 0; }
 
-  /* voices: quotes on rules, no cards */
-  .voices .cards { display: grid; gap: 32px; align-items: start; }
-  .voice { border-top: 1px solid var(--gold); padding-top: 20px; margin: 0; }
-  .voice p { margin: 0 0 12px; font-family: var(--serif); font-size: 17px; line-height: 1.9; }
-  .voice .who { font-size: 13px; color: var(--sub); }
-  .voices .note { font-size: 13px; color: var(--sub); margin: 32px 0 0; text-align: center; }
+  /* usage ideas, without fictional testimonials */
+  .occasions .cards { display: grid; gap: 28px; align-items: start; }
+  .occasion { border-top: 1px solid var(--gold); padding-top: 20px; }
+  .occasion h3 { font-size: 20px; margin-bottom: 12px; }
+  .occasion p { margin: 0; color: var(--sub); }
 
   /* flow: numbers joined by a line */
   .flow { background: var(--paper-2); }
@@ -121,7 +135,7 @@
   .flow p { margin: 0; color: var(--sub); font-size: 15px; }
 
   /* faq */
-  .faq { padding-bottom: 56px; }
+  .faq { padding-bottom: 48px; }
   .faq .grid { display: grid; gap: 8px; }
   details { border-bottom: 1px solid var(--line); }
   details:first-child { border-top: 1px solid var(--line); }
@@ -133,82 +147,109 @@
   details p { margin: 0 0 22px; padding-left: 36px; color: var(--sub); }
 
   /* access */
-  .access { padding-top: 56px; }
+  .access { padding-top: 48px; }
   .access .grid { display: grid; gap: 32px; }
-  .access dl { margin: 0; display: grid; grid-template-columns: 5em 1fr; gap: 12px 16px; }
+  .access dl { margin: 0; display: grid; grid-template-columns: 1fr; gap: 4px; }
   .access dt { font-weight: 700; }
   .access dd { margin: 0; color: var(--sub); }
+  .access dd + dt { margin-top: 12px; }
   .access .route { margin: 24px 0 0; color: var(--sub); font-size: 15px; border-left: 2px solid var(--gold); padding-left: 16px; }
   .map { margin: 0; }
   .map svg { display: block; width: 100%; height: auto; border-radius: 4px; }
   .map figcaption { font-size: 13px; color: var(--sub); margin-top: 8px; }
 
-  /* final cta */
-  .cta { background: var(--green-dark); color: #fff; text-align: center; }
+  /* final cta + reservation demo */
+  .cta { background: var(--green-dark); color: #fff; }
+  .cta .head { text-align: center; }
   .cta h2 { font-size: clamp(24px, 5vw, 34px); }
-  .cta p { margin: 16px 0 32px; opacity: .92; }
-  .cta .sub { font-size: 13px; margin: 12px 0 0; }
-  .cta .note { font-size: 13px; margin: 4px 0 0; opacity: .85; scroll-margin-top: 45vh; }
+  .cta .head p { margin: 16px 0 32px; opacity: .92; }
+  .demo { max-width: 600px; margin: 0 auto; background: var(--paper); color: var(--ink); border-radius: 6px; padding: 28px 20px; }
+  .demo .label { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px 12px; margin: 0 0 20px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+  .demo .label b { font-family: var(--serif); font-size: 20px; }
+  .demo .label span { font-size: 13px; font-weight: 700; color: var(--gold-text); border: 1px solid var(--gold); border-radius: 99px; padding: 0 10px; }
+  .demo fieldset { border: 0; margin: 0 0 20px; padding: 0; min-width: 0; }
+  .demo legend, .demo .field > label:not(.opt) { font-weight: 700; margin-bottom: 8px; display: block; padding: 0; }
+  .demo .opts { display: grid; gap: 8px; }
+  .demo .opt { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; min-height: 48px; padding: 8px 14px; background: #fff; border: 1px solid var(--line); border-radius: 4px; cursor: pointer; }
+  .demo .opt:has(input:checked) { border-color: var(--green); box-shadow: inset 0 0 0 1px var(--green); }
+  .demo .opt small { margin-left: auto; color: var(--sub); font-size: 14px; white-space: nowrap; }
+  .demo input[type=radio], .demo input[type=checkbox] { accent-color: var(--green); width: 20px; height: 20px; margin: 0; flex: none; }
+  .demo .field { margin: 0 0 20px; }
+  .demo select { font: inherit; width: 100%; min-height: 48px; padding: 8px 12px; border: 1px solid #a89c8b; border-radius: 4px; background: #fff; color: var(--ink); }
+  .demo .hint { font-size: 13px; color: var(--sub); margin: 6px 0 0; }
+  .demo .btn { width: 100%; margin-top: 4px; }
+  .demo .btn:disabled { opacity: .6; cursor: default; transform: none; }
+  .demo .msg { margin: 20px 0 0; padding: 16px; border: 1px solid var(--line); font-weight: 700; color: var(--green-dark); white-space: pre-line; }
+  .demo .msg:empty { margin: 0; padding: 0; border: 0; }
+  .cta .after { text-align: center; font-size: 13px; margin: 20px 0 0; opacity: .9; }
 
   footer { text-align: center; padding: 40px 20px 120px; font-size: 13px; color: var(--sub); }
   footer .logo { color: var(--ink); display: inline-block; margin-bottom: 12px; }
   footer .credit { margin-top: 4px; }
 
   /* mobile sticky bar */
-  .sticky { position: fixed; z-index: 20; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: 1fr 1.6fr; gap: 8px;
+  .sticky { position: fixed; z-index: 20; left: 0; right: 0; bottom: 0; display: none; grid-template-columns: 1fr 1.6fr; gap: 8px;
     padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); background: rgba(246,241,233,.95); backdrop-filter: blur(8px);
     border-top: 1px solid var(--line); transition: transform .3s, visibility .3s; }
-  .js .sticky:not(.show) { transform: translateY(110%); visibility: hidden; }
+  .sticky-ready .sticky { display: grid; }
+  .sticky:not(.show) { transform: translateY(110%); visibility: hidden; }
   .sticky a { text-align: center; text-decoration: none; font-weight: 700; border-radius: 99px; padding: 12px 0; font-size: 14px; }
   .sticky .sub { border: 1px solid var(--green); color: var(--green); }
   .sticky .web { background: var(--green); color: #fff; }
 
-  /* reveal on scroll (only when JS runs) */
-  .js .reveal { opacity: 0; transform: translateY(24px); transition: opacity .9s ease, transform .9s ease; }
-  .js .reveal.in { opacity: 1; transform: none; }
+  /* activate only after observer setup succeeds */
+  .reveal-ready .reveal { opacity: 0; transform: translateY(24px); transition: opacity .9s ease, transform .9s ease; }
+  .reveal-ready .reveal.in { opacity: 1; transform: none; }
 
   @media (min-width: 900px) {
-    section { padding: 112px 0; }
+    section { padding: 104px 0; }
     .nav { display: flex; }
     header.site .btn { display: inline-flex; }
-    .hero .inner { flex-direction: row; justify-content: space-between; align-items: center; padding-bottom: 0; }
+    .hero { min-height: 640px; height: 92svh; max-height: 900px; }
+    .hero .inner { height: 100%; min-height: 0; flex-direction: row; justify-content: space-between; align-items: center; padding-top: 0; padding-bottom: 0; }
     .hero h1 { writing-mode: vertical-rl; white-space: nowrap; font-size: clamp(40px, 4.2vw, 54px); letter-spacing: .2em; order: 2; margin-right: 6%; }
     .hero .copy { order: 1; align-self: flex-end; padding-bottom: 96px; max-width: 440px; }
+    .overview dl { grid-template-columns: repeat(3, 1fr); gap: 32px; }
     .concept .grid { grid-template-columns: 5fr 6fr; gap: 80px; }
-    .worries .grid { grid-template-columns: 4fr 7fr; gap: 64px; align-items: start; }
+    .concept .photo { aspect-ratio: 4 / 5; }
     .feature { grid-template-columns: 6fr 5fr; gap: 56px; }
     .feature:nth-child(even) { grid-template-columns: 5fr 6fr; }
-    .feature:nth-child(even) .photo { order: 2; }
+    .feature:nth-child(even) > .photo, .feature:nth-child(even) > figure { order: 2; }
+    .facts { grid-template-columns: repeat(3, 1fr); gap: 0 32px; border-top: 0; }
+    .facts div { grid-template-columns: 1fr; gap: 4px; border-top: 1px solid var(--line); border-bottom: 0; padding: 16px 0 0; }
+    .facts { margin-bottom: 32px; }
     .prices { padding: 8px 40px; }
     .prices li { grid-template-columns: 1fr 5em 11em; }
     .prices .name { grid-column: auto; }
-    .voices .cards { grid-template-columns: 5fr 4fr 6fr; gap: 48px; }
+    .occasions .cards { grid-template-columns: repeat(2, 1fr); gap: 48px; }
     .flow ol { grid-template-columns: repeat(4, 1fr); gap: 32px; }
     .flow li { padding-left: 0; padding-top: 60px; }
     .flow li:not(:last-child)::after { left: 52px; right: -20px; top: 20px; bottom: auto; border-left: 0; border-top: 1px solid var(--gold); }
     .faq .grid { grid-template-columns: 4fr 8fr; gap: 64px; align-items: start; }
     .access .grid { grid-template-columns: 5fr 6fr; gap: 64px; align-items: center; }
-    .sticky { display: none; }
+    .access dl { grid-template-columns: 5em 1fr; gap: 12px 16px; }
+    .access dd + dt { margin-top: 0; }
+    .demo { padding: 36px 40px; }
+    .sticky-ready .sticky { display: none; }
     footer { padding-bottom: 40px; }
   }
   @media (prefers-reduced-motion: reduce) {
     .hero > img { animation: none; transform: none; }
-    .js .reveal { opacity: 1; transform: none; transition: none; }
+    .reveal-ready .reveal { opacity: 1; transform: none; transition: none; }
     .sticky { transition: none; }
     html { scroll-behavior: auto; }
     .btn:hover { transform: none; }
   }
 </style>
-<script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
-  <div class="notice">制作サンプル｜店舗・料金・住所・お客様の声は架空です</div>
+  <div class="notice">制作サンプル｜店舗・人物・サービス・料金は架空の設定／予約はデモです</div>
 
   <header class="site">
     <div class="wrap">
       <a class="logo" href="#">こもれび<small>RELAXATION SALON</small></a>
       <nav class="nav" aria-label="ページ内"><a href="#features">特徴</a><a href="#menu">メニュー</a><a href="#faq">よくある質問</a><a href="#access">アクセス</a></nav>
-      <a class="btn" href="#reserve-note">空き状況を見る</a>
+      <a class="btn" href="#reserve">予約デモを見る</a>
     </div>
   </header>
 
@@ -218,78 +259,82 @@
       <div class="wrap inner">
         <h1>木もれ日の中で、<br>ほどける六十分。</h1>
         <div class="copy">
-          <p>椎の木台駅から歩いて3分。<br>平日は21時まで受付、1日5名まで。<br>毎回同じ担当がお迎えします。</p>
-          <a class="btn" href="#reserve-note">空き状況を見る</a>
+          <p>着衣で受ける、<span class="nw">オイル不使用の</span><span class="nw">ボディケア。</span>椎の木台駅から歩いて3分。毎回同じ担当がお迎えします。</p>
+          <div class="actions"><a class="btn" href="#reserve">予約デモを見る</a><a class="to-menu" href="#menu">メニューと料金</a></div>
         </div>
       </div>
     </div>
 
-    <section class="concept">
-      <div class="wrap grid">
-        <div class="photo reveal"><img src="https://images.unsplash.com/photo-1613578519724-22fdb5d06388?w=900&q=70&auto=format&fit=crop" alt="日差しの入る窓辺" loading="lazy"></div>
-        <div class="reveal">
-          <span class="eyebrow">CONCEPT</span>
-          <h2>話しかけすぎず、<br>放っておきすぎず。</h2>
-          <p><span class="nw">仕事に、</span><span class="nw">家のことに。</span><span class="nw">気づけば</span><span class="nw">一日じゅう力が入っている。</span><span class="nw">こもれびは、そんな毎日の合間に、</span><span class="nw">ゆっくり力を抜くためのサロンです。</span></p>
-          <p><span class="nw">昼は窓からの光、</span><span class="nw">夜は葉影を映した灯りで。</span><br><span class="nw">会話は、</span><span class="nw">あなたが話したいときだけ。</span></p>
-        </div>
-      </div>
-    </section>
-
-    <section class="worries">
-      <div class="wrap grid">
-        <h2 class="reveal">たとえば、<br>こんな夜に。</h2>
-        <div class="reveal">
-          <ul>
-            <li><span class="nw">仕事のあと、</span><span class="nw">まっすぐ帰る前に</span><span class="nw">ひと息つきたい</span></li>
-            <li><span class="nw">にぎやかなお店だと、</span><span class="nw">かえって気をつかってしまう</span></li>
-            <li><span class="nw">寝る前まで、</span><span class="nw">気持ちが仕事から</span><span class="nw">切り替わらない</span></li>
-            <li><span class="nw">毎回ちがう人に、</span><span class="nw">一から説明するのが面倒</span></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section id="features">
+    <section class="overview" aria-labelledby="overview-title">
       <div class="wrap">
-        <div class="heading center reveal"><h2><span class="nw">静かに過ごすための</span><span class="nw">決めごと</span></h2></div>
-        <div class="feature reveal">
-          <div class="photo"><img class="dim" src="https://images.unsplash.com/photo-1787651343620-8d5303006ecb?w=1000&q=70&auto=format&fit=crop&rect=0.28,0.5,0.72,0.32" alt="扉の向こうに見える、窓辺の個室" loading="lazy"></div>
-          <div><div class="num">01 —</div><h3>お迎えは1日5名まで</h3><p><span class="nw">ほかのお客様と</span><span class="nw">顔を合わせないよう、</span><span class="nw">ご予約の間を</span><span class="nw">30分あけています。</span><span class="nw">お部屋はひとつだけです。</span></p></div>
-        </div>
-        <div class="feature reveal">
-          <div class="photo"><img src="https://images.unsplash.com/photo-1526235591527-15084c256bad?w=1000&q=70&auto=format&fit=crop" alt="灯りに照らされた壁に映る、葉の影" loading="lazy"></div>
-          <div><div class="num">02 —</div><h3>平日は夜21時まで受付</h3><p><span class="nw">仕事帰りに、</span><span class="nw">そのまま寄れる時間まで</span><span class="nw">開けています。</span><span class="nw">夜は明かりを落とし、</span><span class="nw">壁に葉の影を</span><span class="nw">映しています。</span></p></div>
-        </div>
-        <div class="feature reveal">
-          <div class="photo"><img src="https://images.unsplash.com/photo-1483546416237-76fd26bbcdd1?w=1000&q=70&auto=format&fit=crop" alt="木の机の上の、開いたノートと鉛筆" loading="lazy"></div>
-          <div><div class="num">03 —</div><h3>担当はずっと同じ人</h3><p><span class="nw">前回の強さの好みや、</span><span class="nw">時間をかけた所を</span><span class="nw">記録しておきます。</span><span class="nw">2回目からは、</span><span class="nw">説明なしで</span><span class="nw">「いつもの」から</span><span class="nw">始められます。</span></p></div>
-        </div>
+        <h2 id="overview-title">手をそっと添える、<span class="nw">休息の時間。</span></h2>
+        <dl>
+          <div><dt>受け方</dt><dd>服の上から手のひらをそっと添えるケア。ベッドで仰向け、または横向きで受けます。</dd></div>
+          <div><dt>代表コース</dt><dd>定番 <span class="nw">60分</span>・<span class="nw">6,600円</span>（税込）。肩まわり・腕・手・脚・足を順にケアします。</dd></div>
+          <div><dt>滞在目安</dt><dd>定番コースは<span class="nw">約80分</span>。ケアの時間に、着替え・確認・会計の約20分を加えた目安です。</dd></div>
+        </dl>
+        <nav class="page-links" aria-label="ページ内のご案内"><a href="#menu">料金</a><a href="#features">お店の特徴</a><a href="#faq">よくある質問</a><a href="#access">アクセス</a></nav>
       </div>
     </section>
 
     <section class="menu" id="menu">
       <div class="wrap">
         <div class="heading reveal"><h2>メニューと料金</h2><p>料金はすべて税込です。</p></div>
+        <dl class="facts reveal">
+          <div><dt>受け方</dt><dd>お店の上下の着替えを着て、ベッドで仰向け、または横向きに。衣服の上から手のひらをそっと添えます。</dd></div>
+          <div><dt>ケアの範囲</dt><dd>休息を目的とした軽いタッチケアです。オイルや機器は使いません。揉む・強く押す・関節を動かす行為は行いません。</dd></div>
+          <div><dt>ご滞在</dt><dd>表の時間はケアの時間です。着替え・確認・会計に約20分を見込み、滞在目安は30分コースで約50分、60分で約80分、90分で約110分です。</dd></div>
+        </dl>
         <ul class="prices reveal">
-          <li><div class="name"><h3>ショートコース</h3><p>買い物や用事の合間に。</p></div><span class="time">30分</span><span class="price">3,850<small>円</small></span></li>
-          <li><div class="name"><h3>定番コース</h3><span class="tag">迷ったらこれ</span><p>はじめての方は、まずこのコースから。</p></div><span class="time">60分</span><span class="price">6,600<small>円</small></span></li>
-          <li><div class="name"><h3>ゆったりコース</h3><p>気になる所に時間をかけたい方に。</p></div><span class="time">90分</span><span class="price">9,350<small>円</small></span></li>
+          <li><div class="name"><h3>ショートコース</h3><p>「腕・手」または「脚・足」から選び、手を添える位置を変えながらケアします。</p></div><span class="time">30分</span><span class="price">3,850<small>円</small></span></li>
+          <li><div class="name"><h3>定番コース</h3><span class="tag">迷ったらこれ</span><p>肩まわり・腕・手・脚・足に、順に手を添える基本のコース。触れてほしくない所は省けます。</p></div><span class="time">60分</span><span class="price">6,600<small>円</small></span></li>
+          <li><div class="name"><h3>ゆったりコース</h3><p>定番の内容に、ご希望の場所で静かに手を添える30分を加えます。</p></div><span class="time">90分</span><span class="price">9,350<small>円</small></span></li>
         </ul>
-        <div class="first reveal">初回は、どのコースも<span class="nw"><b>1,000円</b>引き</span><small><span class="nw">例）60分 6,600円 → </span><span class="nw">初回 5,600円（税込）</span></small></div>
-        <p class="more reveal"><a class="btn" href="#reserve-note">空き状況を見る</a></p>
+        <div class="first reveal">初回は、どのコースも<span class="nw"><b>1,000円</b>引き</span><small>例）<span class="nw">60分</span> <span class="nw">6,600円</span> → 初回 <span class="nw">5,600円</span>（税込）<br>はじめてご来店の方が対象です（お一人さま1回）。</small></div>
+        <p class="more reveal"><a class="btn" href="#reserve">予約デモを見る</a></p>
       </div>
     </section>
 
-    <section class="voices">
-      <div class="wrap">
-        <div class="heading center reveal"><h2>お客様の声</h2></div>
-        <div class="cards reveal">
-          <figure class="voice"><p><span class="nw">「予約の時間</span><span class="nw">ぴったりに始まるので、</span><span class="nw">帰りの電車が</span><span class="nw">読めます。」</span></p><figcaption class="who">30代・会社員</figcaption></figure>
-          <figure class="voice"><p><span class="nw">「お昼休みに</span><span class="nw">30分だけ。</span><span class="nw">午後の仕事の前に、</span><span class="nw">気持ちを</span><span class="nw">切り替えています。」</span></p><figcaption class="who">40代・自営業</figcaption></figure>
-          <figure class="voice"><p><span class="nw">「黙っていたい日は、</span><span class="nw">そっとしておいてくれます。</span><span class="nw">話したい日は、</span><span class="nw">ゆっくり聞いてくれます。」</span></p><figcaption class="who">50代・パート</figcaption></figure>
+    <section class="concept">
+      <div class="wrap grid">
+        <div class="photo reveal"><img src="https://images.unsplash.com/photo-1613578519724-22fdb5d06388?w=1000&q=70&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1613578519724-22fdb5d06388?w=600&q=70&auto=format&fit=crop 600w, https://images.unsplash.com/photo-1613578519724-22fdb5d06388?w=1000&q=70&auto=format&fit=crop 1000w" sizes="(min-width: 900px) 460px, 100vw" alt="日差しの入る窓辺" loading="lazy"></div>
+        <div class="reveal">
+          <span class="eyebrow">CONCEPT</span>
+          <h2>話しかけすぎず、<br>放っておきすぎず。</h2>
+          <p>仕事帰りや用事の合間に、静かに休むための小さなサロンです。会話は、あなたが話したいときだけ。こちらからは、最初の確認と途中の触れ方の確認、終わりの合図に声をおかけします。</p>
         </div>
-        <p class="note"><span class="nw">※架空の文章です。</span><span class="nw">実際の制作では、</span><span class="nw">掲載の許可をいただいた</span><span class="nw">本物の声だけを載せます。</span></p>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="wrap">
+        <div class="heading center reveal"><h2>静かに過ごすための決めごと</h2></div>
+        <div class="feature reveal">
+          <div class="photo"><img class="dim" src="https://images.unsplash.com/photo-1787651343620-8d5303006ecb?w=1000&q=70&auto=format&fit=crop&rect=0.28,0.5,0.72,0.32" srcset="https://images.unsplash.com/photo-1787651343620-8d5303006ecb?w=600&q=70&auto=format&fit=crop&rect=0.28,0.5,0.72,0.32 600w, https://images.unsplash.com/photo-1787651343620-8d5303006ecb?w=1000&q=70&auto=format&fit=crop&rect=0.28,0.5,0.72,0.32 1000w" sizes="(min-width: 900px) 560px, 100vw" alt="窓辺に置かれた、枕とシーツを整えたベッド" loading="lazy"></div>
+          <div><div class="num">01 —</div><h3>お迎えは1日5名まで</h3><p>ほかのお客様と顔を合わせないよう、ご予約の間を30分あけています。お部屋はひとつだけです。</p></div>
+        </div>
+        <div class="feature reveal">
+          <div class="photo"><img src="https://images.unsplash.com/photo-1769146108350-8e99eea80bc1?w=1000&q=70&auto=format&fit=crop&rect=0,0.25,0.75,0.375" srcset="https://images.unsplash.com/photo-1769146108350-8e99eea80bc1?w=600&q=70&auto=format&fit=crop&rect=0,0.25,0.75,0.375 600w, https://images.unsplash.com/photo-1769146108350-8e99eea80bc1?w=1000&q=70&auto=format&fit=crop&rect=0,0.25,0.75,0.375 1000w" sizes="(min-width: 900px) 560px, 100vw" alt="夜の壁をやわらかく照らす、布のシェードのランプ" loading="lazy"></div>
+          <div><div class="num">02 —</div><h3>平日の最終受付は<span class="nw">21:00</span></h3><p>定休日の水曜を除き、仕事帰りに寄れる時間まで受け付けています。夜は部屋の明かりを落とし、小さな灯りだけにしています。</p></div>
+        </div>
+        <div class="feature reveal">
+          <figure><div class="photo"><img src="https://images.unsplash.com/photo-1642437832852-4f6192df4548?w=1000&q=70&auto=format&fit=crop&rect=0,0.42,1,0.5" srcset="https://images.unsplash.com/photo-1642437832852-4f6192df4548?w=600&q=70&auto=format&fit=crop&rect=0,0.42,1,0.5 600w, https://images.unsplash.com/photo-1642437832852-4f6192df4548?w=1000&q=70&auto=format&fit=crop&rect=0,0.42,1,0.5 1000w" sizes="(min-width: 900px) 560px, 100vw" alt="木の机で、紙に書きとめる手元（記録のイメージ）" loading="lazy"></div><figcaption>記録のイメージ。店主本人の写真ではありません。</figcaption></figure>
+          <div>
+            <div class="num">03 —</div><h3>担当はずっと同じ人</h3>
+            <p>こもれびは、店主の浅井がひとりで営んでいます。触れ方の好み、時間をかけた所、会話をしたいかどうかを書きとめ、次回も確認してから始めます。</p>
+            <div class="staff"><span class="initial" aria-hidden="true">浅</span><p><b>店主　浅井（架空の人物）</b>予約のやりとりからお見送りまで、自分で見届けたいと思い、ひとりで営む形にしました。静かに休みたい気持ちを大切に、触れ方や姿勢の希望を言いやすい時間をつくります。</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="occasions">
+      <div class="wrap">
+        <div class="heading center reveal"><h2>予定に合わせた過ごし方</h2></div>
+        <div class="cards reveal">
+          <div class="occasion"><h3>用事の合間に</h3><p>腕・手か脚・足に絞るショートコース。ケアは<span class="nw">30分</span>、着替えから会計までの滞在目安は<span class="nw">約50分</span>です。</p></div>
+          <div class="occasion"><h3>仕事帰りに</h3><p>定番コースはケア<span class="nw">60分</span>、滞在目安は<span class="nw">約80分</span>。会話を控えて過ごしたいときは、最初の確認でお伝えください。</p></div>
+        </div>
       </div>
     </section>
 
@@ -297,10 +342,10 @@
       <div class="wrap">
         <div class="heading reveal"><h2>ご予約からの流れ</h2></div>
         <ol class="reveal">
-          <li><h3>Webで予約</h3><p><span class="nw">24時間、</span><span class="nw">空いている時間を</span><span class="nw">その場で選べます。</span></p></li>
-          <li><h3>お好みの確認</h3><p><span class="nw">強さの好みと、</span><span class="nw">時間をかけたい所を</span><span class="nw">5分ほど。</span></p></li>
-          <li><h3>ボディケア</h3><p><span class="nw">強さを変えたいときは、</span><span class="nw">いつでも</span><span class="nw">声をかけてください。</span></p></li>
-          <li><h3>お会計</h3><p><span class="nw">現金・カード・QR決済に</span><span class="nw">対応しています。</span></p></li>
+          <li><h3>コースと日時を選ぶ</h3><p>このページでは、予約デモで選択内容と税込合計を確認できます。</p></li>
+          <li><h3>お着替えと確認</h3><p>着替えたあと、触れ方の好みとケアする場所を約5分で確認します。</p></li>
+          <li><h3>ボディケア</h3><p>触れ方や姿勢は途中でも相談できます。終わる5分前に、ひと声おかけします。</p></li>
+          <li><h3>お会計</h3><p>現金・カード・QR決済に対応しています。</p></li>
         </ol>
       </div>
     </section>
@@ -309,11 +354,11 @@
       <div class="wrap grid">
         <div class="heading reveal"><h2>よくある質問</h2></div>
         <div class="list reveal">
-          <details><summary>着替えは必要ですか？</summary><p><span class="nw">お店でお着替えを</span><span class="nw">ご用意しています。</span><span class="nw">お仕事帰りの服装のまま</span><span class="nw">お越しください。</span></p></details>
-          <details><summary>男性も利用できますか？</summary><p>はい、どなたでもご利用いただけます。</p></details>
-          <details><summary>キャンセルはできますか？</summary><p><span class="nw">前日までのご連絡で、</span><span class="nw">キャンセル料はかかりません。</span><span class="nw">当日のキャンセルは、</span><span class="nw">料金の50%を</span><span class="nw">頂いています。</span></p></details>
-          <details><summary>治療やケガの相談はできますか？</summary><p><span class="nw">こもれびは</span><span class="nw">リラクゼーションサロンで、</span><span class="nw">治療を目的とした</span><span class="nw">お店ではありません。</span><span class="nw">通院中の方は、</span><span class="nw">医師にご相談のうえ</span><span class="nw">お越しください。</span></p></details>
-          <details><summary>駐車場はありますか？</summary><p><span class="nw">専用の駐車場はありません。</span><span class="nw">近くのコインパーキングを</span><span class="nw">ご利用ください。</span></p></details>
+          <details><summary>予約の時間に遅れたら？</summary><p>次の方のお時間があるため、終わりの時刻はずらせません。遅れた分だけ短くなり、料金は変わりません。遅れそうなときは、予約完了メールの連絡先へお知らせください。</p></details>
+          <details><summary>男性も利用できますか？</summary><p>性別を問わずご利用いただけます。</p></details>
+          <details><summary>キャンセルはできますか？</summary><p>前日までなら、予約完了メールのリンクから手続きでき、キャンセル料はかかりません。当日のキャンセル料は、ご予約時の税込合計（初回割引の対象なら適用後）の50%です。このページのデモでは、予約やキャンセルの手続きは行えません。</p></details>
+          <details><summary>治療やケガの相談はできますか？</summary><p>こもれびは休息を目的としたリラクゼーションサロンです。診断・治療やケガへの対応は行いません。痛みやケガのある方、通院中の方は、利用前に医師へご相談ください。</p></details>
+          <details><summary>駐車場はありますか？</summary><p>専用の駐車場はありません。近くのコインパーキングをご利用ください。</p></details>
         </div>
       </div>
     </section>
@@ -323,12 +368,12 @@
         <div class="reveal">
           <h2>アクセス</h2>
           <dl>
-            <dt>住所</dt><dd>椎の木台2-4-1 <span class="nw">森田ビル2F（架空）</span></dd>
+            <dt>住所</dt><dd>椎の木台2-4-1 森田ビル<span class="nw">2F</span>（架空）</dd>
             <dt>最寄り</dt><dd>椎の木台駅 東口から徒歩3分</dd>
-            <dt>営業時間</dt><dd><span class="nw">平日 11:00〜21:00</span><span class="nw">（最終受付）</span><br><span class="nw">土日祝 10:00〜18:00</span><span class="nw">（最終受付）</span></dd>
+            <dt>営業時間</dt><dd>平日 <span class="nw">11:00〜23:00</span>（最終受付 <span class="nw">21:00</span>）<br>土日祝 <span class="nw">10:00〜20:00</span>（最終受付 <span class="nw">18:00</span>）</dd>
             <dt>定休日</dt><dd>毎週水曜日</dd>
           </dl>
-          <p class="route"><span class="nw">東口を出て右へ。</span><span class="nw">大通りを2分ほど歩き、</span><span class="nw">花屋の角を左へ。</span><span class="nw">左手のビルの2階です。</span></p>
+          <p class="route">東口を出て右へ。大通りを2分ほど歩き、花屋の角を左へ。左手のビルの2階です。</p>
         </div>
         <figure class="map reveal">
           <svg viewBox="0 0 480 360" role="img" aria-labelledby="map-t">
@@ -361,12 +406,53 @@
     </section>
 
     <section class="cta" id="reserve">
-      <div class="wrap reveal">
-        <h2>仕事帰りの六十分を、<br>ここで。</h2>
-        <p>キャンセルは前日まで無料です。</p>
-        <a class="btn light" href="#reserve-note">空き状況を見る</a>
-        <p class="sub">24時間受付</p>
-        <p class="note" id="reserve-note">※サンプルのため、予約ページにはつながりません</p>
+      <div class="wrap">
+        <div class="head reveal">
+          <h2>仕事帰りの六十分を、<br>ここで。</h2>
+          <p>キャンセルは前日まで無料です。</p>
+        </div>
+        <div class="demo" id="demo" role="group" aria-labelledby="demo-title" aria-describedby="demo-note">
+          <p class="label"><b id="demo-title">予約デモ</b><span>送信されません</span></p>
+          <fieldset>
+            <legend>コース</legend>
+            <div class="opts">
+              <label class="opt"><input type="radio" name="course" value="short-30" data-label="ショートコース 30分" data-price="3850" data-stay="50" required>ショート <span class="nw">30分</span><small>3,850円</small></label>
+              <label class="opt"><input type="radio" name="course" value="standard-60" data-label="定番コース 60分" data-price="6600" data-stay="80" checked>定番 <span class="nw">60分</span><small>6,600円</small></label>
+              <label class="opt"><input type="radio" name="course" value="long-90" data-label="ゆったりコース 90分" data-price="9350" data-stay="110">ゆったり <span class="nw">90分</span><small>9,350円</small></label>
+            </div>
+            <p class="hint">コース欄は割引前の税込料金です。初回割引後の合計は、確認ボタンで表示します。</p>
+          </fieldset>
+          <div class="field">
+            <label for="demo-date">日付</label>
+            <select id="demo-date" name="date" required aria-describedby="demo-slots-note">
+              <option value="" selected disabled>日付を選択</option>
+              <option value="2026-11-02">2026年11月2日（月）</option>
+              <option value="2026-11-05">2026年11月5日（木）</option>
+              <option value="2026-11-06">2026年11月6日（金）</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="demo-time">開始時刻</label>
+            <select id="demo-time" name="time" required aria-describedby="demo-slots-note">
+              <option value="" selected disabled>時刻を選択</option>
+              <option value="11:00">11:00</option>
+              <option value="13:30" disabled>13:30（予約済みの例）</option>
+              <option value="16:00">16:00</option>
+              <option value="18:30" disabled>18:30（予約済みの例）</option>
+              <option value="21:00">21:00</option>
+            </select>
+            <p class="hint" id="demo-slots-note">固定した架空の平日・時刻候補です。どの日も同じ空き枠の設定で、実際の空き状況とは連動していません。</p>
+          </div>
+          <div class="field">
+            <label class="opt"><input type="checkbox" name="first_visit" value="yes"><span>はじめて利用する</span><small>初回1,000円引き</small></label>
+            <p class="hint">初回来店の方が対象です（お一人さま1回）。</p>
+          </div>
+          <button class="btn" id="demo-confirm" type="button" disabled>選択内容を確認する（デモ）</button>
+          <p class="msg" id="demo-msg" role="status" aria-atomic="true"></p>
+          <p class="hint" id="demo-note">この入力欄は見本です。確認しても、どこにも送信されません。予約・決済は行われません。</p>
+          <noscript><p class="hint">JavaScriptを有効にすると選択内容を確認できます。無効のままでも入力内容は送信されません。</p></noscript>
+        </div>
+        <p class="after">画面内で、コース・日時・割引・税込合計を確認するデモです。</p>
       </div>
     </section>
   </main>
@@ -379,25 +465,70 @@
       ヒーロー https://unsplash.com/photos/8oW6gov8-7c
       コンセプト https://unsplash.com/photos/2vKgG0pSKkM
       特徴01 https://unsplash.com/photos/JnsuyfJrxQw （洗面台のロゴが入らないよう rect で切り出し）
-      特徴02 https://unsplash.com/photos/57kTxx2-Qjs
-      特徴03 https://unsplash.com/photos/g3O5ZtRk2E4 -->
-
+      特徴02 https://unsplash.com/photos/ACEF1ZioKC0 （@thamyn、rect で切り出し）
+      特徴03 https://unsplash.com/photos/S4YNfBXYLVM （@zachccamp、rect で切り出し） -->
   </footer>
 
-  <nav class="sticky" aria-label="予約">
+  <nav class="sticky" aria-label="料金と予約デモ">
     <a class="sub" href="#menu">料金を見る</a>
-    <a class="web" href="#reserve-note">空き状況を見る</a>
+    <a class="web" href="#reserve">予約デモを見る</a>
   </nav>
 
 <script>
-  // ponytail: one observer for all fade-ins; no library
-  const io = new IntersectionObserver(es => es.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-  }), { rootMargin: '0px 0px -10% 0px' });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-  // sticky bar appears once the hero (with its own button) is off screen
-  const bar = document.querySelector('.sticky');
-  new IntersectionObserver(([e]) => bar.classList.toggle('show', !e.isIntersecting)).observe(document.querySelector('.hero'));
+  // No form or submit control: selections stay on this page even without JavaScript.
+  const demo = document.getElementById('demo');
+  const message = document.getElementById('demo-msg');
+  const confirmButton = document.getElementById('demo-confirm');
+  const clearConfirmation = () => { message.textContent = ''; };
+  demo.addEventListener('input', clearConfirmation);
+  demo.addEventListener('change', clearConfirmation);
+  confirmButton.addEventListener('click', () => {
+    clearConfirmation();
+    if (![...demo.querySelectorAll('input, select')].every(field => field.reportValidity())) return;
+    const course = demo.querySelector('input[name="course"]:checked');
+    const date = document.getElementById('demo-date');
+    const time = document.getElementById('demo-time');
+    const firstVisit = demo.querySelector('input[name="first_visit"]').checked;
+    const price = Number(course.dataset.price);
+    const discount = firstVisit ? 1000 : 0;
+    const yen = amount => amount.toLocaleString('ja-JP') + '円';
+    message.textContent = [
+      '選択内容（デモ）',
+      course.dataset.label,
+      date.selectedOptions[0].textContent + ' ' + time.value + '開始',
+      '滞在目安：約' + course.dataset.stay + '分',
+      'コース料金：' + yen(price) + '（税込）',
+      firstVisit ? '初回割引：−' + yen(discount) + '（初回来店・お一人さま1回）' : '初回割引：適用なし',
+      '合計：' + yen(price - discount) + '（税込）',
+      '予約は成立していません。'
+    ].join('\n');
+  });
+  confirmButton.disabled = false;
+
+  if (window.IntersectionObserver) {
+    try {
+      const io = new IntersectionObserver(es => es.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      }), { rootMargin: '0px 0px -10% 0px' });
+      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+      document.documentElement.classList.add('reveal-ready');
+    } catch {
+      document.documentElement.classList.remove('reveal-ready');
+    }
+    // Hide the sticky bar while the hero or the reservation demo is visible.
+    try {
+      const bar = document.querySelector('.sticky'), seen = new Map();
+      const so = new IntersectionObserver(es => {
+        es.forEach(e => seen.set(e.target, e.isIntersecting));
+        bar.classList.toggle('show', ![...seen.values()].some(Boolean));
+      });
+      so.observe(document.querySelector('.hero'));
+      so.observe(document.getElementById('reserve'));
+      document.documentElement.classList.add('sticky-ready');
+    } catch {
+      document.documentElement.classList.remove('sticky-ready');
+    }
+  }
 </script>
 </body>
 </html>
